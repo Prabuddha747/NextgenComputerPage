@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { formatINR } from "@/lib/format";
 import { buildWhatsAppLink } from "@/data/business";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
   const onMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty("--mx", `${((e.clientX - rect.left) / rect.width) * 100}%`);
@@ -34,7 +34,7 @@ export function ProductCard({ product }: { product: Product }) {
       />
       <Link href={`/product/${product.slug}`} className="block">
         <div className="relative">
-          <ProductArt product={product} className="aspect-[4/3] w-full" />
+          <ProductArt product={product} className="aspect-[4/3] w-full" priority={priority} />
           {product.badges && product.badges.length > 0 && (
             <div className="absolute left-3 top-3 flex gap-1.5">
               {product.badges.map((badge) => (

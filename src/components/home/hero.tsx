@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { Star, Sparkles } from "lucide-react";
-import { Server } from "lucide-react";
 import { motion } from "framer-motion";
 import { gsap, ensureGsapPlugins } from "@/lib/gsap";
 import { Button } from "@/components/ui/button";
@@ -17,8 +17,9 @@ export function Hero() {
   useGSAP(
     () => {
       ensureGsapPlugins();
-      gsap.to(".hero-art", {
-        y: -60,
+      gsap.to(".hero-bg", {
+        y: 70,
+        scale: 1.08,
         ease: "none",
         scrollTrigger: {
           trigger: root.current,
@@ -43,25 +44,32 @@ export function Hero() {
   );
 
   return (
-    <section ref={root} className="pt-10 sm:pt-14">
+    <section ref={root} className="pt-4 sm:pt-6">
       <Container>
-        <div className="relative overflow-hidden rounded-[2.5rem] border border-border bg-surface px-6 py-16 sm:px-14 sm:py-24">
+        <div className="relative min-h-[78vh] overflow-hidden rounded-[2.5rem] border border-border">
+          <div className="hero-bg absolute inset-0 scale-105">
+            <Image
+              src="https://images.unsplash.com/photo-1756576630180-653cbd594433"
+              alt="Custom-built RGB gaming PC"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
           <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(60% 60% at 15% 10%, var(--accent) 0%, transparent 60%), radial-gradient(50% 50% at 100% 100%, var(--accent) 0%, transparent 55%)",
-              opacity: 0.14,
-            }}
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/20"
           />
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
 
-          <div className="relative grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
+          <div className="relative flex min-h-[78vh] flex-col justify-center px-6 py-16 sm:px-14 sm:py-24">
+            <div className="max-w-xl">
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-background/60 px-3.5 py-1.5 text-xs font-medium text-muted"
+                className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur"
               >
                 <Sparkles className="h-3.5 w-3.5 text-accent" />
                 {business.yearsExperience}+ Years in Patna
@@ -71,7 +79,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.05 }}
-                className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl"
+                className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
               >
                 Built for gamers. <br />
                 Trusted by <span className="text-accent">Patna</span>.
@@ -81,7 +89,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="mt-6 max-w-md text-base text-muted sm:text-lg"
+                className="mt-6 max-w-md text-base text-white/80 sm:text-lg"
               >
                 Laptops, custom gaming PCs, repair, CCTV and networking — from Dell to Apple,
                 sold and serviced from Dak Bunglow Road for over {business.yearsExperience} years.
@@ -100,40 +108,32 @@ export function Hero() {
                 </Magnetic>
                 <Button
                   href={buildWhatsAppLink("Hi, I'd like to know more about your products/services.")}
-                  variant="secondary"
+                  variant="onImage"
                   size="lg"
                 >
                   WhatsApp Us
                 </Button>
               </motion.div>
 
-              <div className="mt-10 flex items-center gap-2 text-sm text-muted">
+              <div className="mt-10 flex items-center gap-2 text-sm text-white/80">
                 <div className="flex text-accent">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-current" />
                   ))}
                 </div>
-                <span className="font-semibold text-foreground">{business.rating}</span>
+                <span className="font-semibold text-white">{business.rating}</span>
                 <span>· {business.reviewCount.toLocaleString()}+ reviews</span>
               </div>
             </div>
+          </div>
 
-            <div className="relative hidden aspect-square items-center justify-center lg:flex">
-              <div className="hero-art relative flex h-[80%] w-[80%] items-center justify-center rounded-[2rem] bg-gradient-to-br from-accent/20 to-transparent">
-                <Server
-                  className="h-1/2 w-1/2 text-accent drop-shadow-[0_0_60px_rgba(34,211,238,0.35)]"
-                  strokeWidth={1}
-                />
-              </div>
-              <div className="hero-chip absolute left-2 top-8 rounded-2xl border border-border bg-background/80 px-4 py-3 text-xs shadow-lg backdrop-blur">
-                <p className="font-semibold text-foreground">RTX 4070 Ti Super</p>
-                <p className="text-muted">In stock, ready to build</p>
-              </div>
-              <div className="hero-chip absolute bottom-10 right-0 rounded-2xl border border-border bg-background/80 px-4 py-3 text-xs shadow-lg backdrop-blur">
-                <p className="font-semibold text-foreground">3-Year Warranty</p>
-                <p className="text-muted">On every custom build</p>
-              </div>
-            </div>
+          <div className="hero-chip absolute right-8 top-10 hidden rounded-2xl border border-white/15 bg-black/40 px-4 py-3 text-xs shadow-lg backdrop-blur lg:block">
+            <p className="font-semibold text-white">RTX 4070 Ti Super</p>
+            <p className="text-white/70">In stock, ready to build</p>
+          </div>
+          <div className="hero-chip absolute bottom-12 right-8 hidden rounded-2xl border border-white/15 bg-black/40 px-4 py-3 text-xs shadow-lg backdrop-blur lg:block">
+            <p className="font-semibold text-white">3-Year Warranty</p>
+            <p className="text-white/70">On every custom build</p>
           </div>
         </div>
       </Container>

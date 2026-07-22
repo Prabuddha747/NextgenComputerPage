@@ -51,14 +51,18 @@ export function AccessoriesShowcase() {
         />
         <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 pb-6 sm:-mx-8 sm:px-8">
           {accessories.map((product, i) => (
-            <Link
+            <div
               key={product.slug}
-              href={`/product/${product.slug}`}
               style={{ rotate: `${tilts[i % tilts.length]}deg` }}
               className="accessory-card group relative w-64 shrink-0 snap-center rounded-3xl border border-border bg-background shadow-xl transition-transform duration-300 hover:!rotate-0 hover:scale-[1.03] sm:w-72"
             >
-              <ProductArt product={product} className="aspect-[3/4] w-full rounded-3xl" />
-              <div className="absolute inset-x-0 bottom-0 rounded-b-3xl bg-gradient-to-t from-black/80 to-transparent p-5 pt-12">
+              <Link
+                href={`/product/${product.slug}`}
+                aria-label={product.name}
+                className="absolute inset-0 z-0 rounded-3xl"
+              />
+              <ProductArt product={product} className="pointer-events-none aspect-[3/4] w-full rounded-3xl" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 rounded-b-3xl bg-gradient-to-t from-black/80 to-transparent p-5 pt-12">
                 <p className="text-sm font-semibold text-white">{product.name}</p>
                 <div className="mt-1 flex items-center justify-between">
                   <span className="text-xs text-white/70">{formatINR(product.price)}</span>
@@ -66,14 +70,13 @@ export function AccessoriesShowcase() {
                     href={buildWhatsAppLink(`Hi, I'm interested in the ${product.name}.`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="flex h-7 w-7 items-center justify-center rounded-full bg-accent text-accent-foreground"
+                    className="pointer-events-auto relative z-10 flex h-7 w-7 items-center justify-center rounded-full bg-accent text-accent-foreground"
                   >
                     <MessageCircle className="h-3.5 w-3.5" />
                   </a>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

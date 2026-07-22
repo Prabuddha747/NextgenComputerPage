@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { ProductGrid } from "@/components/product/product-grid";
+import { CatalogView } from "@/components/product/catalog-view";
 import { getProductsByCategory } from "@/data/products";
 
 export const metadata: Metadata = {
   title: "Gaming PCs",
   description:
-    "Custom and prebuilt gaming PCs in Patna, benchmarked in-store with up to 3-year on-site warranty.",
+    "Custom and prebuilt gaming PCs in Patna, benchmarked in-store with up to 3-year on-site warranty. Filter by brand and budget, or build your own from scratch.",
 };
 
 export default function GamingPcsPage() {
@@ -20,7 +20,7 @@ export default function GamingPcsPage() {
         <SectionHeading
           eyebrow="Gaming PCs"
           title="Prebuilt rigs, benchmarked in-store"
-          description="Or configure your own from scratch and get a quote on WhatsApp."
+          description="Every system is assembled, stress-tested, and benchmarked at our Dak Bunglow Road workshop before it reaches you — not shipped sealed from a warehouse. Filter by brand and budget below, or configure your own build from scratch."
         />
         <Link
           href="/configurator"
@@ -30,7 +30,7 @@ export default function GamingPcsPage() {
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
-      <ProductGrid products={pcs} />
+      <CatalogView products={pcs} activeCategory="/gaming-pcs" />
     </Section>
   );
 }

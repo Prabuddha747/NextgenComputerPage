@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CheckCircle2 } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { DuotonePhoto } from "@/components/ui/duotone-photo";
 import { buildWhatsAppLink } from "@/data/business";
 import { serviceDetails } from "@/data/services-detail";
 
@@ -27,7 +28,10 @@ export default function ServicesPage() {
             id={service.slug}
             className="scroll-mt-24 rounded-3xl border border-border bg-surface p-8 sm:p-10"
           >
-            <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+            <div className={service.photo ? "grid gap-8 lg:grid-cols-[0.9fr_1.1fr_1fr]" : "grid gap-8 lg:grid-cols-[1.2fr_1fr]"}>
+              {service.photo && (
+                <DuotonePhoto src={service.photo} alt={service.title} className="aspect-[4/3] w-full" />
+              )}
               <div>
                 <h2 className="font-display text-2xl font-semibold text-foreground">{service.title}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">

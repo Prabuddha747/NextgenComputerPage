@@ -3,50 +3,66 @@ import type { Product } from "@/data/products";
 export interface NavLink {
   label: string;
   href: string;
-  icon: Product["icon"];
-  description?: string;
 }
 
 export interface NavColumn {
   title: string;
+  icon: Product["icon"];
   links: NavLink[];
 }
 
 export const shopMegaMenu: NavColumn[] = [
   {
     title: "Gaming PCs",
+    icon: "tower",
     links: [
-      { label: "All Gaming PCs", href: "/gaming-pcs", icon: "tower" },
-      { label: "Build Your Own", href: "/configurator", icon: "cpu" },
+      { label: "All Gaming PCs", href: "/gaming-pcs" },
+      { label: "Build Your Own", href: "/configurator" },
+      { label: "Corsair ONE PCs", href: "/gaming-pcs" },
     ],
   },
   {
     title: "Laptops",
+    icon: "laptop",
     links: [
-      { label: "All Laptops", href: "/laptops", icon: "laptop" },
-      { label: "Dell", href: "/laptops?brand=Dell", icon: "laptop" },
-      { label: "HP", href: "/laptops?brand=HP", icon: "laptop" },
-      { label: "Apple", href: "/laptops?brand=Apple", icon: "laptop" },
+      { label: "All Laptops", href: "/laptops" },
+      { label: "Dell", href: "/laptops?brand=Dell" },
+      { label: "HP", href: "/laptops?brand=HP" },
+      { label: "Lenovo", href: "/laptops?brand=Lenovo" },
+      { label: "Apple", href: "/laptops?brand=Apple" },
     ],
   },
   {
     title: "Accessories",
+    icon: "keyboard",
     links: [
-      { label: "Keyboards & Mice", href: "/accessories", icon: "keyboard" },
-      { label: "Monitors", href: "/accessories", icon: "monitor" },
-      { label: "Cooling", href: "/accessories", icon: "cpu" },
+      { label: "Keyboards", href: "/accessories" },
+      { label: "Mice", href: "/accessories" },
+      { label: "Monitors", href: "/accessories" },
+      { label: "Cooling", href: "/accessories" },
+      { label: "Headsets", href: "/accessories" },
+    ],
+  },
+  {
+    title: "Services",
+    icon: "router",
+    links: [
+      { label: "Laptop & Desktop Repair", href: "/repair" },
+      { label: "CCTV Installation", href: "/services#cctv" },
+      { label: "Networking", href: "/services#networking" },
+      { label: "Enterprise Solutions", href: "/services#enterprise" },
     ],
   },
 ];
 
-export const primaryNav = [
+export const primaryNav: NavLink[] = [
   { label: "Repair", href: "/repair" },
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
-export const allMobileLinks: NavLink[] = [
+export const allMobileLinks: (NavLink & { icon: Product["icon"] })[] = [
   { label: "Gaming PCs", href: "/gaming-pcs", icon: "tower" },
   { label: "Configurator", href: "/configurator", icon: "cpu" },
   { label: "Laptops", href: "/laptops", icon: "laptop" },

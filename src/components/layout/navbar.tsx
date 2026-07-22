@@ -9,7 +9,7 @@ import { MegaMenu } from "@/components/layout/mega-menu";
 import { MobileDrawer } from "@/components/layout/mobile-drawer";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Button } from "@/components/ui/button";
-import { buildWhatsAppLink } from "@/data/business";
+import { business, buildWhatsAppLink } from "@/data/business";
 import { cn } from "@/lib/cn";
 
 export function Navbar() {
@@ -26,39 +26,42 @@ export function Navbar() {
 
   return (
     <>
+      <div className="hidden bg-accent px-4 py-2 text-center text-xs font-medium text-accent-foreground sm:block">
+        {business.yearsExperience}+ years in Patna · {business.rating}★ from {business.reviewCount.toLocaleString()}+ reviews
+      </div>
+
       <header
+        onMouseLeave={() => setShopOpen(false)}
         className={cn(
-          "sticky top-0 z-30 w-full border-b transition-colors duration-300",
+          "sticky top-0 z-30 w-full border-b transition-colors duration-300 relative",
           scrolled
-            ? "border-border bg-background/80 backdrop-blur-md"
-            : "border-transparent bg-transparent"
+            ? "border-border bg-background/85 backdrop-blur-md"
+            : "border-transparent bg-background"
         )}
       >
-        <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 sm:px-8">
+        <div className="mx-auto flex h-18 max-w-[1680px] items-center justify-between px-4 sm:px-6 lg:px-10">
           <Link href="/" className="font-display text-lg font-bold tracking-tight text-foreground">
             Next<span className="text-accent">Gen</span> Computer
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex">
-            <div
-              className="relative"
+            <button
               onMouseEnter={() => setShopOpen(true)}
-              onMouseLeave={() => setShopOpen(false)}
+              className={cn(
+                "flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                shopOpen ? "text-accent" : "text-foreground/90 hover:text-accent"
+              )}
+              aria-expanded={shopOpen}
             >
-              <button
-                className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-foreground/90 hover:text-accent"
-                aria-expanded={shopOpen}
-              >
-                Shop
-                <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", shopOpen && "rotate-180")} />
-              </button>
-              <AnimatePresence>{shopOpen && <MegaMenu />}</AnimatePresence>
-            </div>
+              Shop
+              <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", shopOpen && "rotate-180")} />
+            </button>
 
             {primaryNav.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
+                onMouseEnter={() => setShopOpen(false)}
                 className="rounded-full px-4 py-2 text-sm font-medium text-foreground/90 hover:text-accent"
               >
                 {link.label}
@@ -84,6 +87,8 @@ export function Navbar() {
             </button>
           </div>
         </div>
+
+        <AnimatePresence>{shopOpen && <MegaMenu />}</AnimatePresence>
       </header>
 
       <MobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)} />

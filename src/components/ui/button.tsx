@@ -7,7 +7,7 @@ import { cn } from "@/lib/cn";
 
 const MotionLink = motion.create(Link);
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "onImage";
 type Size = "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
@@ -16,6 +16,7 @@ const variantClasses: Record<Variant, string> = {
   secondary:
     "bg-surface text-foreground border border-border hover:border-accent/60",
   ghost: "bg-transparent text-foreground hover:bg-surface",
+  onImage: "border border-white/25 bg-white/10 text-white backdrop-blur hover:border-accent/60",
 };
 
 const sizeClasses: Record<Size, string> = {

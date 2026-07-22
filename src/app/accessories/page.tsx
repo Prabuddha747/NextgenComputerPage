@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { ProductGrid } from "@/components/product/product-grid";
+import { CatalogView } from "@/components/product/catalog-view";
 import { getProductsByCategory } from "@/data/products";
 
 export const metadata: Metadata = {
   title: "Accessories",
   description:
-    "RGB keyboards, mice, monitors, and CPU coolers — accessories to complete your gaming or work setup.",
+    "RGB keyboards, mice, monitors, CPU coolers, and gaming chairs — accessories to complete your gaming or work setup.",
 };
 
 export default function AccessoriesPage() {
@@ -17,9 +17,9 @@ export default function AccessoriesPage() {
       <SectionHeading
         eyebrow="Accessories"
         title="Complete the setup"
-        description="Keyboards, mice, monitors, and cooling — the finishing touches for any build."
+        description="Keyboards, mice, monitors, cooling, and seating — the finishing touches for any build, all available to see and try in-store."
       />
-      <ProductGrid products={accessories} />
+      <CatalogView products={accessories} activeCategory="/accessories" />
     </Section>
   );
 }

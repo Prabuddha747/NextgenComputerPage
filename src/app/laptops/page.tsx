@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { LaptopCatalog } from "@/components/product/laptop-catalog";
+import { CatalogView } from "@/components/product/catalog-view";
 import { getProductsByCategory } from "@/data/products";
 
 export const metadata: Metadata = {
@@ -22,9 +22,9 @@ export default async function LaptopsPage({
       <SectionHeading
         eyebrow="Laptops"
         title="Every major brand, one showroom"
-        description="Student, business, and gaming laptops — filter by brand or message us for a personalised recommendation."
+        description="From a lightweight student laptop to a workstation-grade creator machine — every laptop here is demoed in-store before you buy, with genuine after-sales support behind it. Filter by brand or message us for a personalised recommendation."
       />
-      <LaptopCatalog products={laptops} initialBrand={brand} />
+      <CatalogView products={laptops} activeCategory="/laptops" initialBrand={brand} />
     </Section>
   );
 }

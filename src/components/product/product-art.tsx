@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Cpu,
   Headphones,
@@ -9,6 +10,7 @@ import {
   Router,
   Camera,
   Server,
+  Armchair,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
@@ -25,15 +27,42 @@ export const productIcons: Record<Product["icon"], LucideIcon> = {
   camera: Camera,
   router: Router,
   printer: Printer,
+  chair: Armchair,
 };
 
 export function ProductArt({
   product,
   className,
+  sizes = "(min-width: 1024px) 33vw, 100vw",
+  priority = false,
 }: {
-  product: Pick<Product, "icon" | "gradient" | "name">;
+  product: Pick<Product, "icon" | "gradient" | "name" | "photo">;
   className?: string;
+  sizes?: string;
+  priority?: boolean;
 }) {
+  if (product.photo) {
+    return (
+      <div className={cn("relative overflow-hidden rounded-2xl bg-surface-2", className)}>
+        <Image
+          src={product.photo}
+          alt={product.name}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className="object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(180deg, transparent 55%, ${product.gradient[1]}55 100%)`,
+          }}
+        />
+      </div>
+    );
+  }
+
   const Icon = productIcons[product.icon];
   return (
     <div

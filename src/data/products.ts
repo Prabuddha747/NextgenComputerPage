@@ -1,6 +1,19 @@
-// Product photography isn't available yet, so each product carries an icon + gradient
-// used by <ProductArt> as placeholder art. Swap in real photos by adding an `image` field
-// and rendering it instead — components are already structured around that seam.
+// Real product photography isn't available yet, so `photo` points at license-free Unsplash
+// stock (verified reachable, chosen for visual fit) as a stand-in. Swap each `photo` value
+// for real in-store photography whenever it's ready — <ProductArt> falls back to icon/gradient
+// art automatically if `photo` is omitted.
+
+const photos = {
+  pcOpenCaseCyan: "https://images.unsplash.com/photo-1756576630180-653cbd594433",
+  pcOpenCaseCorsair: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b",
+  laptopClean: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89",
+  keyboardRgb: "https://images.unsplash.com/photo-1766656533864-2314b462d439",
+  mouseRgb: "https://images.unsplash.com/photo-1616296425622-4560a2ad83de",
+  monitorCurved: "https://images.unsplash.com/photo-1540295373958-75c649d3275d",
+  headset: "https://images.unsplash.com/photo-1553775282-20af80779df7",
+  coolerAio: "https://images.unsplash.com/photo-1765824142326-8e9046b1f935",
+  gamingChair: "https://images.unsplash.com/photo-1636487658609-28282bb5a3a0",
+} as const;
 
 export type ProductCategory = "gaming-pc" | "laptop" | "accessory";
 
@@ -29,8 +42,9 @@ export interface Product {
   brand: string;
   name: string;
   tagline: string;
-  icon: "tower" | "laptop" | "keyboard" | "mouse" | "monitor" | "cpu" | "headphones" | "camera" | "router" | "printer";
+  icon: "tower" | "laptop" | "keyboard" | "mouse" | "monitor" | "cpu" | "headphones" | "camera" | "router" | "printer" | "chair";
   gradient: [string, string];
+  photo?: string;
   price: number;
   badges?: Badge[];
   specs: SpecLine[];
@@ -47,6 +61,7 @@ export const products: Product[] = [
     tagline: "4K-ready gaming and streaming rig",
     icon: "tower",
     gradient: ["#22d3ee", "#0f172a"],
+    photo: photos.pcOpenCaseCyan,
     price: 149999,
     badges: ["NEW", "BESTSELLER"],
     specs: [
@@ -108,6 +123,7 @@ export const products: Product[] = [
     tagline: "High refresh-rate esports machine",
     icon: "tower",
     gradient: ["#f43f5e", "#0f172a"],
+    photo: photos.pcOpenCaseCorsair,
     price: 118999,
     badges: ["NEW"],
     specs: [
@@ -145,6 +161,7 @@ export const products: Product[] = [
     tagline: "Small-form-factor liquid-cooled power",
     icon: "tower",
     gradient: ["#a3e635", "#0f172a"],
+    photo: photos.pcOpenCaseCyan,
     price: 349999,
     badges: ["SALE"],
     specs: [
@@ -163,6 +180,7 @@ export const products: Product[] = [
     name: "XPS 14 Plus",
     tagline: "OLED creator laptop",
     icon: "laptop",
+    photo: photos.laptopClean,
     gradient: ["#38bdf8", "#0f172a"],
     price: 164999,
     badges: ["NEW"],
@@ -181,6 +199,7 @@ export const products: Product[] = [
     name: "Victus 16",
     tagline: "Budget gaming laptop",
     icon: "laptop",
+    photo: photos.laptopClean,
     gradient: ["#818cf8", "#0f172a"],
     price: 74999,
     specs: [
@@ -198,6 +217,7 @@ export const products: Product[] = [
     name: "ThinkPad T14 Gen 5",
     tagline: "Business & enterprise workhorse",
     icon: "laptop",
+    photo: photos.laptopClean,
     gradient: ["#f97316", "#0f172a"],
     price: 89999,
     badges: ["BESTSELLER"],
@@ -217,6 +237,7 @@ export const products: Product[] = [
     name: "ROG Strix G16",
     tagline: "High-performance gaming laptop",
     icon: "laptop",
+    photo: photos.laptopClean,
     gradient: ["#e879f9", "#0f172a"],
     price: 134999,
     specs: [
@@ -234,6 +255,7 @@ export const products: Product[] = [
     name: "Swift Go 14",
     tagline: "Lightweight everyday laptop",
     icon: "laptop",
+    photo: photos.laptopClean,
     gradient: ["#4ade80", "#0f172a"],
     price: 54999,
     specs: [
@@ -251,6 +273,7 @@ export const products: Product[] = [
     name: "Katana 15",
     tagline: "Balanced gaming + productivity",
     icon: "laptop",
+    photo: photos.laptopClean,
     gradient: ["#f87171", "#0f172a"],
     price: 89999,
     specs: [
@@ -268,6 +291,7 @@ export const products: Product[] = [
     name: "MacBook Air 13\" M3",
     tagline: "Silent, all-day, effortless",
     icon: "laptop",
+    photo: photos.laptopClean,
     gradient: ["#e5e7eb", "#0f172a"],
     price: 114900,
     badges: ["BESTSELLER"],
@@ -287,6 +311,7 @@ export const products: Product[] = [
     tagline: "Hot-swappable, per-key RGB",
     icon: "keyboard",
     gradient: ["#22d3ee", "#a855f7"],
+    photo: photos.keyboardRgb,
     price: 4499,
     badges: ["NEW"],
     specs: [
@@ -304,6 +329,7 @@ export const products: Product[] = [
     tagline: "26,000 DPI, sub-60g",
     icon: "mouse",
     gradient: ["#f43f5e", "#f97316"],
+    photo: photos.mouseRgb,
     price: 2999,
     specs: [
       { label: "Sensor", value: "26,000 DPI optical" },
@@ -320,6 +346,7 @@ export const products: Product[] = [
     tagline: "240mm liquid cooling, RGB pump",
     icon: "cpu",
     gradient: ["#38bdf8", "#22d3ee"],
+    photo: photos.coolerAio,
     price: 5999,
     specs: [
       { label: "Radiator", value: "240mm" },
@@ -336,6 +363,7 @@ export const products: Product[] = [
     tagline: "Immersive curved gaming display",
     icon: "monitor",
     gradient: ["#a855f7", "#22d3ee"],
+    photo: photos.monitorCurved,
     price: 18999,
     badges: ["SALE"],
     specs: [
@@ -353,6 +381,7 @@ export const products: Product[] = [
     tagline: "50mm drivers, dual wireless",
     icon: "headphones",
     gradient: ["#fb7185", "#22d3ee"],
+    photo: photos.headset,
     price: 3499,
     specs: [
       { label: "Drivers", value: "50mm" },
@@ -360,6 +389,24 @@ export const products: Product[] = [
       { label: "Battery", value: "Up to 80 hrs" },
     ],
     description: "Long-session comfort with clear comms for squad play.",
+  },
+  {
+    slug: "racer-pro-gaming-chair",
+    category: "accessory",
+    brand: "Next Gen Gear",
+    name: "Racer Pro Gaming Chair",
+    tagline: "Ergonomic racing-style seat with lumbar support",
+    icon: "chair",
+    gradient: ["#f43f5e", "#0f172a"],
+    photo: photos.gamingChair,
+    price: 12999,
+    badges: ["NEW"],
+    specs: [
+      { label: "Recline", value: "Up to 165°" },
+      { label: "Support", value: "Adjustable lumbar + headrest pillow" },
+      { label: "Armrests", value: "4D adjustable" },
+    ],
+    description: "The seat every multi-hour build or gaming session ends up needing — tested on our own showroom floor.",
   },
 ];
 
