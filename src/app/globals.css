@@ -64,6 +64,16 @@ body {
   animation: marquee 28s linear infinite;
 }
 
+@keyframes rgb-glow-spin {
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.rgb-glow {
+  animation: rgb-glow-spin 4s linear infinite;
+}
+
 .no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
