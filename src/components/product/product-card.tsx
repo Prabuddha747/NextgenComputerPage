@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { MouseEvent } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import type { Product } from "@/data/products";
@@ -10,12 +11,27 @@ import { formatINR } from "@/lib/format";
 import { buildWhatsAppLink } from "@/data/business";
 
 export function ProductCard({ product }: { product: Product }) {
+  const onMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--mx", `${((e.clientX - rect.left) / rect.width) * 100}%`);
+    e.currentTarget.style.setProperty("--my", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+  };
+
   return (
     <motion.div
+      onMouseMove={onMouseMove}
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface"
     >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background: "radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), var(--accent), transparent 70%)",
+          mixBlendMode: "overlay",
+        }}
+      />
       <Link href={`/product/${product.slug}`} className="block">
         <div className="relative">
           <ProductArt product={product} className="aspect-[4/3] w-full" />

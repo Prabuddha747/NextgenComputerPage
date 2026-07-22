@@ -7,6 +7,7 @@ import { Server } from "lucide-react";
 import { motion } from "framer-motion";
 import { gsap, ensureGsapPlugins } from "@/lib/gsap";
 import { Button } from "@/components/ui/button";
+import { Magnetic } from "@/components/ui/magnetic";
 import { Container } from "@/components/ui/container";
 import { business, buildWhatsAppLink } from "@/data/business";
 
@@ -92,9 +93,11 @@ export function Hero() {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="mt-9 flex flex-wrap items-center gap-4"
               >
-                <Button href="/gaming-pcs" size="lg">
-                  Explore Gaming PCs
-                </Button>
+                <Magnetic>
+                  <Button href="/gaming-pcs" size="lg">
+                    Explore Gaming PCs
+                  </Button>
+                </Magnetic>
                 <Button
                   href={buildWhatsAppLink("Hi, I'd like to know more about your products/services.")}
                   variant="secondary"
