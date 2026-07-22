@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu } from "lucide-react";
 import { primaryNav } from "@/data/nav";
 import { MegaMenu } from "@/components/layout/mega-menu";

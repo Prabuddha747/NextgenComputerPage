@@ -59,6 +59,22 @@ export const products: Product[] = [
       "Built and stress-tested in-store for 4K gaming and creator workloads, with a 3-year on-site warranty from Next Gen Computer.",
     configurable: [
       {
+        key: "cpu",
+        title: "Processor",
+        options: [
+          { label: "Intel Core i7-14700K", detail: "20 cores, up to 5.6GHz", priceDelta: 0 },
+          { label: "Intel Core i9-14900K", detail: "24 cores, up to 6.0GHz", priceDelta: 18000 },
+        ],
+      },
+      {
+        key: "gpu",
+        title: "Graphics",
+        options: [
+          { label: "RTX 4070 Ti Super", detail: "16GB, 4K-ready", priceDelta: 0 },
+          { label: "RTX 4080 Super", detail: "16GB, elite 4K performance", priceDelta: 42000 },
+        ],
+      },
+      {
         key: "ram",
         title: "Memory",
         options: [

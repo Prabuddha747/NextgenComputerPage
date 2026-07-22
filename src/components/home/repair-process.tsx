@@ -1,17 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, FileCheck, Wrench, PackageCheck } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { buildWhatsAppLink } from "@/data/business";
-
-const steps = [
-  { icon: Search, title: "Diagnose", description: "Free initial diagnosis, usually within the hour." },
-  { icon: FileCheck, title: "Quote", description: "Transparent quote before any work begins." },
-  { icon: Wrench, title: "Repair", description: "Genuine parts, most repairs done same-day." },
-  { icon: PackageCheck, title: "Pickup", description: "Collect in-store or request doorstep delivery." },
-];
+import { repairSteps as steps } from "@/data/repair-steps";
 
 export function RepairProcess() {
   return (
