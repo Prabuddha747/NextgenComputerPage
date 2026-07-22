@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 import { Container } from "@/components/ui/container";
 
 export function Section({
@@ -14,7 +14,7 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={cn("py-20 sm:py-28", className)}>
+    <section id={id} className={clsx("py-20 sm:py-28", className)}>
       <Container className={containerClassName}>{children}</Container>
     </section>
   );

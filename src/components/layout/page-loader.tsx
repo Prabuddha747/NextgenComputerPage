@@ -1,21 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 
-const SESSION_KEY = "ngc-intro-played";
 const DURATION_MS = 1700;
 
-function PageLoaderClient() {
-  const [visible, setVisible] = useState(() => !sessionStorage.getItem(SESSION_KEY));
+export function PageLoader() {
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    if (!visible) return;
-    sessionStorage.setItem(SESSION_KEY, "1");
     const timer = setTimeout(() => setVisible(false), DURATION_MS);
     return () => clearTimeout(timer);
-  }, [visible]);
+  }, []);
 
   return (
     <AnimatePresence>
@@ -62,7 +58,3 @@ function PageLoaderClient() {
     </AnimatePresence>
   );
 }
-
-// Rendered client-only: the "already seen this session?" check reads sessionStorage,
-// which doesn't exist during SSR, so this must never be part of the server-rendered HTML.
-export const PageLoader = dynamic(() => Promise.resolve(PageLoaderClient), { ssr: false });

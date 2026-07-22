@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { Cpu, Wrench, Camera, Router, Building2, ShoppingBag } from "lucide-react";
-import { gsap, ScrollTrigger, ensureGsapPlugins } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { business } from "@/data/business";
 
@@ -14,7 +14,6 @@ export function ServicesGrid() {
 
   useGSAP(
     () => {
-      ensureGsapPlugins();
       ScrollTrigger.batch(".service-card", {
         start: "top 85%",
         onEnter: (batch) =>

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 import type { Badge as BadgeKind } from "@/data/products";
 
 const styles: Record<BadgeKind, string> = {
@@ -10,7 +10,7 @@ const styles: Record<BadgeKind, string> = {
 export function Badge({ kind }: { kind: BadgeKind }) {
   return (
     <span
-      className={cn(
+      className={clsx(
         "inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-semibold tracking-wide",
         styles[kind]
       )}

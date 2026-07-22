@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import { MessageCircle } from "lucide-react";
-import { gsap, ensureGsapPlugins } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { ProductArt } from "@/components/product/product-art";
 import { getProductsByCategory } from "@/data/products";
@@ -19,7 +19,6 @@ export function AccessoriesShowcase() {
 
   useGSAP(
     () => {
-      ensureGsapPlugins();
       gsap.fromTo(
         ".accessory-card",
         { opacity: 0, y: 60, rotate: (i: number) => tilts[i % tilts.length] * 2.2 },

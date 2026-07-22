@@ -13,7 +13,7 @@ import {
   Armchair,
   type LucideIcon,
 } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 import type { Product } from "@/data/products";
 
 export const productIcons: Record<Product["icon"], LucideIcon> = {
@@ -43,7 +43,7 @@ export function ProductArt({
 }) {
   if (product.photo) {
     return (
-      <div className={cn("relative overflow-hidden rounded-2xl bg-surface-2", className)}>
+      <div className={clsx("relative overflow-hidden rounded-2xl bg-surface-2", className)}>
         <Image
           src={product.photo}
           alt={product.name}
@@ -66,7 +66,7 @@ export function ProductArt({
   const Icon = productIcons[product.icon];
   return (
     <div
-      className={cn("relative flex items-center justify-center overflow-hidden rounded-2xl", className)}
+      className={clsx("relative flex items-center justify-center overflow-hidden rounded-2xl", className)}
       style={{
         background: `radial-gradient(120% 120% at 20% 15%, ${product.gradient[0]}33, transparent 60%), radial-gradient(120% 120% at 80% 85%, ${product.gradient[1]}, var(--surface))`,
       }}

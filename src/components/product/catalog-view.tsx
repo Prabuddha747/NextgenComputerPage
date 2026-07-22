@@ -6,7 +6,7 @@ import { SlidersHorizontal, X } from "lucide-react";
 import type { Product } from "@/data/products";
 import { ProductGrid } from "@/components/product/product-grid";
 import { priceBands } from "@/lib/price-bands";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 
 const categoryLinks = [
   { label: "Gaming PCs", href: "/gaming-pcs" },
@@ -53,7 +53,7 @@ export function CatalogView({
             <li key={link.href}>
               <a
                 href={link.href}
-                className={cn(
+                className={clsx(
                   "block rounded-lg px-2.5 py-1.5 -mx-2.5 text-sm font-medium",
                   link.href === activeCategory ? "text-accent" : "text-foreground/90 hover:text-accent"
                 )}

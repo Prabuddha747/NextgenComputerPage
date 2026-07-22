@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 
 const MotionLink = motion.create(Link);
 
-type Variant = "primary" | "secondary" | "ghost" | "onImage";
+type Variant = "primary" | "secondary" | "onImage";
 type Size = "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
@@ -15,7 +15,6 @@ const variantClasses: Record<Variant, string> = {
     "bg-accent text-accent-foreground shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_8px_24px_-8px_var(--accent)] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_10px_32px_-6px_var(--accent)]",
   secondary:
     "bg-surface text-foreground border border-border hover:border-accent/60",
-  ghost: "bg-transparent text-foreground hover:bg-surface",
   onImage: "border border-white/25 bg-white/10 text-white backdrop-blur hover:border-accent/60",
 };
 
@@ -45,7 +44,7 @@ export function Button({
   className,
   children,
 }: ButtonProps) {
-  const classes = cn(
+  const classes = clsx(
     "inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap transition-shadow duration-200",
     variantClasses[variant],
     sizeClasses[size],

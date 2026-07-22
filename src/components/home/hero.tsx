@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { Star, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import { gsap, ensureGsapPlugins } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/ui/magnetic";
 import { Container } from "@/components/ui/container";
@@ -16,7 +16,6 @@ export function Hero() {
 
   useGSAP(
     () => {
-      ensureGsapPlugins();
       gsap.to(".hero-bg", {
         y: 70,
         scale: 1.08,

@@ -6,7 +6,7 @@ import { Check, MessageCircle } from "lucide-react";
 import type { ConfigGroup, Product } from "@/data/products";
 import { formatINR } from "@/lib/format";
 import { buildWhatsAppLink } from "@/data/business";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 
 export function SpecSelector({
   product,
@@ -48,7 +48,7 @@ export function SpecSelector({
                   <button
                     key={option.label}
                     onClick={() => setSelection((s) => ({ ...s, [group.key]: i }))}
-                    className={cn(
+                    className={clsx(
                       "flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-3.5 text-left transition-colors",
                       isSelected
                         ? "border-accent bg-accent/10 shadow-[0_0_0_1px_var(--accent)]"
@@ -57,7 +57,7 @@ export function SpecSelector({
                   >
                     <span className="flex items-center gap-3">
                       <span
-                        className={cn(
+                        className={clsx(
                           "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border",
                           isSelected ? "border-accent bg-accent text-accent-foreground" : "border-border"
                         )}

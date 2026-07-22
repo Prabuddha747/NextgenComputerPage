@@ -10,7 +10,7 @@ import { MobileDrawer } from "@/components/layout/mobile-drawer";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { business, buildWhatsAppLink } from "@/data/business";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -32,7 +32,7 @@ export function Navbar() {
 
       <header
         onMouseLeave={() => setShopOpen(false)}
-        className={cn(
+        className={clsx(
           "sticky top-0 z-30 w-full border-b transition-colors duration-300 relative",
           scrolled
             ? "border-border bg-background/85 backdrop-blur-md"
@@ -47,14 +47,14 @@ export function Navbar() {
           <nav className="hidden items-center gap-1 md:flex">
             <button
               onMouseEnter={() => setShopOpen(true)}
-              className={cn(
+              className={clsx(
                 "flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors",
                 shopOpen ? "text-accent" : "text-foreground/90 hover:text-accent"
               )}
               aria-expanded={shopOpen}
             >
               Shop
-              <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", shopOpen && "rotate-180")} />
+              <ChevronDown className={clsx("h-3.5 w-3.5 transition-transform", shopOpen && "rotate-180")} />
             </button>
 
             {primaryNav.map((link) => (

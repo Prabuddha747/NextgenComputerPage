@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { faqs } from "@/data/faq";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
@@ -25,7 +25,7 @@ export function Faq() {
               >
                 <span className="font-medium text-foreground">{item.question}</span>
                 <Plus
-                  className={cn(
+                  className={clsx(
                     "h-4 w-4 shrink-0 text-accent transition-transform duration-300",
                     isOpen && "rotate-45"
                   )}

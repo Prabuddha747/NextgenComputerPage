@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import { clsx } from "clsx";
 
 export function Container({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn("mx-auto w-full max-w-[1680px] px-4 sm:px-6 lg:px-10", className)}>{children}</div>
+    <div className={clsx("mx-auto w-full max-w-[1680px] px-4 sm:px-6 lg:px-10", className)}>{children}</div>
   );
 }
