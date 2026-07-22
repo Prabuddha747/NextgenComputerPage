@@ -1,0 +1,69 @@
+import { Clock, MapPin, Building2 } from "lucide-react";
+import { Section, SectionHeading } from "@/components/ui/section";
+import { Button } from "@/components/ui/button";
+import { business, buildWhatsAppLink } from "@/data/business";
+
+export function LocationCta() {
+  return (
+    <Section>
+      <div className="grid gap-10 rounded-3xl border border-border bg-surface p-8 sm:p-12 lg:grid-cols-2 lg:items-center">
+        <div>
+          <SectionHeading
+            eyebrow="Visit us"
+            title="Come see it in person"
+            description="Walk in for hands-on demos, in-store diagnostics, or just to talk through what you need."
+          />
+
+          <div className="space-y-4 text-sm">
+            <div className="flex items-start gap-3">
+              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+              <div>
+                <p className="font-medium text-foreground">{business.address.line1}</p>
+                <p className="text-muted">
+                  {business.address.city}, {business.address.state}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Clock className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+              <div>
+                {business.hours.map((h) => (
+                  <p key={h.days} className="text-muted">
+                    <span className="font-medium text-foreground">{h.days}:</span> {h.time}
+                  </p>
+                ))}
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Building2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+              <p className="text-muted">
+                Schools, colleges, and corporate offices — ask about bulk pricing and AMC support.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Button href={business.address.mapsUrl} variant="primary">
+              Get Directions
+            </Button>
+            <Button
+              href={buildWhatsAppLink("Hi, I'd like to discuss a bulk/corporate order.")}
+              variant="secondary"
+            >
+              Corporate Enquiry
+            </Button>
+          </div>
+        </div>
+
+        <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border">
+          <iframe
+            title="Next Gen Computer location"
+            src="https://maps.google.com/maps?q=Dak%20Bunglow%20Road%2C%20Patna&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            className="h-full w-full grayscale invert-0 dark:invert dark:contrast-[0.9] dark:hue-rotate-180"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </Section>
+  );
+}
