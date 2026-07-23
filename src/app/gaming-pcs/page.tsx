@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 export default async function GamingPcsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ brand?: string; price?: string; sort?: string }>;
+  searchParams: Promise<{ brand?: string; price?: string; sort?: string; q?: string }>;
 }) {
-  const { brand, price, sort } = await searchParams;
+  const { brand, price, sort, q } = await searchParams;
   const pcs = getProductsByCategory("gaming-pc");
 
   return (
@@ -41,6 +41,8 @@ export default async function GamingPcsPage({
         initialBrand={brand}
         initialBands={price}
         initialSort={sort}
+        initialQuery={q}
+        showSearchBar
       />
     </Section>
   );

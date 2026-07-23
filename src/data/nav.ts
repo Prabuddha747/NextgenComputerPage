@@ -41,7 +41,14 @@ export const shopMegaMenu: NavColumn[] = [
     title: "Accessories",
     icon: "keyboard",
     photo: "https://images.unsplash.com/photo-1766656533864-2314b462d439",
-    links: [{ label: "All Accessories", href: "/accessories" }],
+    links: [
+      { label: "All Accessories", href: "/accessories" },
+      { label: "Keyboards", href: "/accessories?q=keyboard" },
+      { label: "Mice", href: "/accessories?q=mouse" },
+      { label: "Monitors", href: "/accessories?q=monitor" },
+      { label: "Cooling", href: "/accessories?q=cooling" },
+      { label: "Headsets", href: "/accessories?q=headset" },
+    ],
   },
   {
     title: "Gaming Essentials",

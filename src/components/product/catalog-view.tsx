@@ -57,8 +57,8 @@ export function CatalogView({
   initialBands?: string;
   initialSort?: string;
   initialQuery?: string;
-  /** Renders a prominent full-width search bar above the filters/grid — used on
-   * /shop and /laptops, where searching by name/brand is the more common path in. */
+  /** Renders a search bar above the filters/grid — on every catalog page, so
+   * there's always a way to navigate when a category has many products. */
   showSearchBar?: boolean;
 }) {
   const router = useRouter();
@@ -245,7 +245,7 @@ export function CatalogView({
   return (
     <div>
       {showSearchBar && (
-        <div className="relative mx-auto mb-8 max-w-md">
+        <div className="relative mx-auto mb-8 max-w-xl">
           <Search className="pointer-events-none absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-muted" />
           <input
             type="search"

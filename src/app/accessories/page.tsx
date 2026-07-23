@@ -31,6 +31,7 @@ export default async function AccessoriesPage({
         initialBands={price}
         initialSort={sort}
         initialQuery={q}
+        showSearchBar
       />
     </Section>
   );
