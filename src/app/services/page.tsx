@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ArrowUpRight, Clock, Gem, Headphones, ShieldCheck } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
@@ -32,7 +33,7 @@ export default function ServicesPage() {
               "radial-gradient(50% 50% at 50% 50%, rgba(168,85,247,0.18), rgba(147,51,234,0.08) 55%, transparent 75%)",
           }}
         />
-        <div className="relative flex flex-col gap-8 border-b border-border pb-10 lg:flex-row lg:items-end lg:justify-between">
+        <div className="relative grid gap-10 border-b border-border pb-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
               Services <span className="h-1 w-1 rounded-full bg-accent" />
@@ -42,9 +43,26 @@ export default function ServicesPage() {
               Technology, Installed <br />
               Professionally<span className="text-accent">.</span>
             </h1>
+            <div className="mt-6 max-w-xs border-l-2 border-accent/50 pl-4 text-sm text-muted">
+              Enterprise networking. CCTV infrastructure. Bulk IT procurement. AMC support.
+            </div>
           </div>
-          <div className="max-w-xs border-l-2 border-accent/50 pl-4 text-sm text-muted lg:mb-2">
-            Enterprise networking. CCTV infrastructure. Bulk IT procurement. AMC support.
+
+          <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-border">
+            <Image
+              src="https://images.unsplash.com/photo-1644987708868-1a97a5341ec3"
+              alt=""
+              fill
+              priority
+              sizes="(min-width: 1024px) 40vw, 90vw"
+              className="object-cover grayscale contrast-[1.1]"
+            />
+            <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40" />
+            <div
+              aria-hidden
+              className="absolute inset-x-0 bottom-0 h-2/3"
+              style={{ background: "radial-gradient(60% 100% at 50% 100%, rgba(168,85,247,0.4), transparent 70%)" }}
+            />
           </div>
         </div>
       </Section>

@@ -17,6 +17,18 @@ export const metadata: Metadata = {
 
 const satisfactionScore = Math.round((business.rating / 5) * 100);
 
+// Real Unsplash photos (license-free stock, site's usual sourcing convention) —
+// CCTV/Networking/Enterprise reuse the exact same photos as the Services page
+// for consistency, since they're literally the same services.
+const SERVICE_PHOTOS: Record<string, string> = {
+  "Laptop & Desktop Sales": "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89",
+  "Laptop & Desktop Repair": "https://images.unsplash.com/photo-1644987708868-1a97a5341ec3",
+  "Gaming PCs & Custom Builds": "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b",
+  "CCTV Installation": "https://images.unsplash.com/photo-1643123182527-3bd30840e7ed",
+  "Networking": "https://images.unsplash.com/photo-1750711731797-25c3f2551ff8",
+  "Enterprise Solutions": "https://images.unsplash.com/photo-1695668548342-c0c1ad479aee",
+};
+
 const values = [
   {
     title: "26+ years of expertise",
@@ -106,10 +118,21 @@ export default function AboutPage() {
             {business.services.map((service) => (
               <div
                 key={service.title}
-                className="w-60 shrink-0 rounded-2xl border border-border bg-surface p-5"
+                className="w-60 shrink-0 overflow-hidden rounded-2xl border border-border bg-surface"
               >
-                <p className="font-display font-semibold text-foreground">{service.title}</p>
-                <p className="mt-1.5 text-xs text-muted">{service.description}</p>
+                <div className="relative aspect-4/3 w-full">
+                  <Image
+                    src={SERVICE_PHOTOS[service.title]}
+                    alt={service.title}
+                    fill
+                    sizes="240px"
+                    className="object-cover grayscale-[0.3] contrast-[1.05]"
+                  />
+                </div>
+                <div className="p-5">
+                  <p className="font-display font-semibold text-foreground">{service.title}</p>
+                  <p className="mt-1.5 text-xs text-muted">{service.description}</p>
+                </div>
               </div>
             ))}
           </div>
