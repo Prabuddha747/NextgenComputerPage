@@ -38,20 +38,23 @@ export function Navbar() {
 
   return (
     <>
-      <div className="hidden bg-accent px-4 py-2 text-center text-xs font-medium text-accent-foreground sm:block">
+      <div className="hidden bg-accent-secondary px-4 py-2 text-center text-xs font-medium text-white sm:block">
         {business.yearsExperience}+ years in Patna · {business.rating}★ from {business.reviewCount.toLocaleString()}+ reviews
       </div>
 
       {/* Same glass-blurred bar on every page, always — it used to switch to a
           flat bg-background before the user scrolled 12px, which read as an
-          inconsistent navbar depending on how tall/short the page was. */}
+          inconsistent navbar depending on how tall/short the page was. Every
+          accent highlight in here uses --accent-secondary (violet), the site's
+          second glow color, not the site-wide teal — a deliberate navbar-only
+          theme choice, kept consistent across every element in this bar. */}
       <header
         onMouseLeave={() => setShopOpen(false)}
         className="sticky top-0 z-30 relative w-full border-b border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-xl"
       >
         <div className="mx-auto flex h-18 max-w-[1680px] items-center justify-between px-4 sm:px-6 lg:px-10">
           <Link href="/" className="font-display text-lg font-bold tracking-tight text-foreground">
-            Next<span className="text-accent">Gen</span> Computer
+            Next<span className="text-accent-secondary">Gen</span> Computer
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex">
@@ -60,7 +63,7 @@ export function Navbar() {
               onMouseEnter={() => setShopOpen(true)}
               className={clsx(
                 "relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                shopOpen || shopActive ? "text-accent" : "text-foreground/90 hover:text-accent"
+                shopOpen || shopActive ? "text-accent-secondary" : "text-foreground/90 hover:text-accent-secondary"
               )}
               aria-expanded={shopOpen}
               aria-current={shopActive ? "page" : undefined}
@@ -70,7 +73,7 @@ export function Navbar() {
               {shopActive && (
                 <motion.span
                   layoutId="navbar-active-underline"
-                  className="absolute inset-x-4 -bottom-[1px] h-0.5 rounded-full bg-accent"
+                  className="absolute inset-x-4 -bottom-[1px] h-0.5 rounded-full bg-accent-secondary"
                 />
               )}
             </Link>
@@ -85,14 +88,14 @@ export function Navbar() {
                   aria-current={active ? "page" : undefined}
                   className={clsx(
                     "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                    active ? "text-accent" : "text-foreground/90 hover:text-accent"
+                    active ? "text-accent-secondary" : "text-foreground/90 hover:text-accent-secondary"
                   )}
                 >
                   {link.label}
                   {active && (
                     <motion.span
                       layoutId="navbar-active-underline"
-                      className="absolute inset-x-4 -bottom-[1px] h-0.5 rounded-full bg-accent"
+                      className="absolute inset-x-4 -bottom-[1px] h-0.5 rounded-full bg-accent-secondary"
                     />
                   )}
                 </Link>
@@ -104,18 +107,18 @@ export function Navbar() {
             <button
               aria-label="Search products"
               onClick={() => setSearchOpen((v) => !v)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-border hover:border-accent/60"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border hover:border-accent-secondary/60"
             >
               <Search className="h-4.5 w-4.5" />
             </button>
             <button
               aria-label="Open enquiry basket"
               onClick={() => setBasketOpen(true)}
-              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border hover:border-accent/60"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border hover:border-accent-secondary/60"
             >
               <ShoppingBag className="h-4.5 w-4.5" />
               {items.length > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
+                <span className="absolute -right-1 -top-1 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-accent-secondary text-[10px] font-bold text-white">
                   {items.length}
                 </span>
               )}

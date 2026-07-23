@@ -43,7 +43,7 @@ export default function AboutPage() {
     <>
       <Section className="pt-10">
         <div className="relative overflow-hidden rounded-3xl border border-border">
-          <div className="relative aspect-[4/5] sm:aspect-[7/6]">
+          <div className="relative aspect-4/5 sm:aspect-3/4">
             <Image
               src="/owner-office.png"
               alt="Founder of Next Gen Computer at the Dak Bunglow Road store"
@@ -155,7 +155,7 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border">
+          <div className="relative aspect-3/5 overflow-hidden rounded-3xl border border-border">
             <Image
               src="/owner-portrait.png"
               alt={`${business.founderName}, founder of Next Gen Computer`}
