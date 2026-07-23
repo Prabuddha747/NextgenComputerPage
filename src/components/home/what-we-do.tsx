@@ -1,7 +1,7 @@
 import { Cpu, Wrench, Camera, Router, Building2, ShoppingBag } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { OrbitShowcase } from "@/components/home/orbit-showcase";
+import { ScrollReel } from "@/components/home/scroll-reel";
 import { business, buildWhatsAppLink } from "@/data/business";
 import { repairSteps } from "@/data/repair-steps";
 
@@ -16,8 +16,8 @@ export function WhatWeDo() {
         description="From a single laptop repair to a fully custom gaming build — sales and service, under one roof."
       />
 
-      <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-        <div className="order-2 lg:order-1">
+      <div className="grid gap-12 lg:grid-cols-2">
+        <div className="order-2 lg:order-1 lg:sticky lg:top-24 lg:self-start">
           <ul className="space-y-5">
             {business.services.map((service, i) => {
               const Icon = icons[i % icons.length];
@@ -44,7 +44,7 @@ export function WhatWeDo() {
         </div>
 
         <div className="order-1 lg:order-2">
-          <OrbitShowcase />
+          <ScrollReel />
         </div>
       </div>
 
