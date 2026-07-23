@@ -4,6 +4,7 @@ import { Quote, Star } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { RadialProgress } from "@/components/ui/radial-progress";
+import { WhoWeAreCard } from "@/components/about/who-we-are-card";
 import { TrustBar } from "@/components/home/trust-bar";
 import { business, buildWhatsAppLink } from "@/data/business";
 import { testimonials } from "@/data/testimonials";
@@ -80,17 +81,8 @@ export default function AboutPage() {
       </Section>
 
       <Section className="pt-0">
-        <div className="grid gap-5 lg:grid-cols-3">
-          <div className="flex flex-col justify-between rounded-3xl border border-border bg-surface p-8">
-            <div>
-              <p className="font-display text-2xl font-bold text-foreground">Next Gen Computer</p>
-              <p className="mt-3 text-sm text-muted">
-                Sales, service, and IT infrastructure — one team, one address, for {business.yearsExperience}+
-                years.
-              </p>
-            </div>
-            <p className="mt-8 text-xs text-muted">{business.address.line1}, {business.address.city}</p>
-          </div>
+        <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr_1fr]">
+          <WhoWeAreCard />
 
           <div className="rounded-3xl border border-border bg-surface p-8">
             <RadialProgress
@@ -150,7 +142,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section>
+      <Section id="why-choose-us">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHeading eyebrow="Why choose us" title="What 26 years actually buys you" />
