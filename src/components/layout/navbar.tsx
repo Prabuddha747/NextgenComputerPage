@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, ShoppingBag } from "lucide-react";
 import { primaryNav } from "@/data/nav";
 import { MegaMenu } from "@/components/layout/mega-menu";
@@ -14,12 +15,16 @@ import { Button } from "@/components/ui/button";
 import { business, buildWhatsAppLink } from "@/data/business";
 import { clsx } from "clsx";
 
+const SHOP_ROUTES = ["/shop", "/gaming-pcs", "/laptops", "/accessories", "/configurator", "/product"];
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [basketOpen, setBasketOpen] = useState(false);
   const { items } = useBasket();
+  const pathname = usePathname();
+  const shopActive = SHOP_ROUTES.some((route) => pathname.startsWith(route));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -53,25 +58,45 @@ export function Navbar() {
               href="/shop"
               onMouseEnter={() => setShopOpen(true)}
               className={clsx(
-                "flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                shopOpen ? "text-accent" : "text-foreground/90 hover:text-accent"
+                "relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                shopOpen || shopActive ? "text-accent" : "text-foreground/90 hover:text-accent"
               )}
               aria-expanded={shopOpen}
+              aria-current={shopActive ? "page" : undefined}
             >
               Shop
               <ChevronDown className={clsx("h-3.5 w-3.5 transition-transform", shopOpen && "rotate-180")} />
+              {shopActive && (
+                <motion.span
+                  layoutId="navbar-active-underline"
+                  className="absolute inset-x-4 -bottom-[1px] h-0.5 rounded-full bg-accent"
+                />
+              )}
             </Link>
 
-            {primaryNav.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onMouseEnter={() => setShopOpen(false)}
-                className="rounded-full px-4 py-2 text-sm font-medium text-foreground/90 hover:text-accent"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {primaryNav.map((link) => {
+              const active = pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onMouseEnter={() => setShopOpen(false)}
+                  aria-current={active ? "page" : undefined}
+                  className={clsx(
+                    "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                    active ? "text-accent" : "text-foreground/90 hover:text-accent"
+                  )}
+                >
+                  {link.label}
+                  {active && (
+                    <motion.span
+                      layoutId="navbar-active-underline"
+                      className="absolute inset-x-4 -bottom-[1px] h-0.5 rounded-full bg-accent"
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-3">
