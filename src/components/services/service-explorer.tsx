@@ -10,12 +10,12 @@ import { serviceDetails } from "@/data/services-detail";
 import { clsx } from "clsx";
 
 // Real Unsplash photos (site's usual license-free-stock convention), tinted
-// teal/violet — the same glow language as the atmosphere blobs and the RGB
+// violet — the same glow language as the atmosphere blobs and the RGB
 // owner-photo ring — rather than a literal custom illustration we can't produce.
 const GLOW_TINTS = [
-  "rgba(62,216,195,0.4)", // teal — CCTV
-  "rgba(62,216,195,0.4)", // teal — networking
-  "rgba(167,139,250,0.4)", // violet — enterprise/IT
+  "rgba(168,85,247,0.4)", // violet — CCTV
+  "rgba(168,85,247,0.4)", // violet — networking
+  "rgba(147,51,234,0.4)", // deeper violet — enterprise/IT
 ];
 
 function ServiceVisual({ photo, glow }: { photo: string; glow: string }) {

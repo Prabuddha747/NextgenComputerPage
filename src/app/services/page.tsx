@@ -22,14 +22,14 @@ export default function ServicesPage() {
   return (
     <>
       <Section className="relative overflow-hidden pb-0 pt-14">
-        {/* Page-local glow, not a change to the shared .atmosphere layer — same
-            teal/violet language as the homepage, scoped to this hero only. */}
+        {/* Page-local glow, not a change to the shared .atmosphere layer —
+            same violet accent as the rest of the site, scoped to this hero only. */}
         <div
           aria-hidden
           className="pointer-events-none absolute -right-1/4 -top-1/3 hidden h-[140%] w-[70%] dark:block"
           style={{
             background:
-              "radial-gradient(50% 50% at 50% 50%, rgba(167,139,250,0.16), rgba(62,216,195,0.08) 55%, transparent 75%)",
+              "radial-gradient(50% 50% at 50% 50%, rgba(168,85,247,0.18), rgba(147,51,234,0.08) 55%, transparent 75%)",
           }}
         />
         <div className="relative flex flex-col gap-8 border-b border-border pb-10 lg:flex-row lg:items-end lg:justify-between">

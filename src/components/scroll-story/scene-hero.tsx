@@ -23,7 +23,7 @@ export function SceneHero() {
             className="max-w-lg"
           >
             <p className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-accent" />
+              <Sparkles className="h-3.5 w-3.5 text-white" />
               {heroContent.eyebrow}
             </p>
 
@@ -45,7 +45,7 @@ export function SceneHero() {
             </div>
 
             <div className="mt-10 flex items-center gap-2 text-sm text-white/80">
-              <div className="flex text-accent">
+              <div className="flex text-white">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-current" />
                 ))}

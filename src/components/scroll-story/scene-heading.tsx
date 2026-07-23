@@ -16,7 +16,7 @@ export function SceneHeading({
   return (
     <div className="mb-10 max-w-2xl">
       {eyebrow && (
-        <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-accent [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
+        <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-white/90 [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
           {eyebrow}
         </p>
       )}

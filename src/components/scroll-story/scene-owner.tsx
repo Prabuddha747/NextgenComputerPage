@@ -22,7 +22,7 @@ export function SceneOwner() {
         <Container>
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/90 [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
                 Behind the counter
               </p>
               <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.7)] sm:text-4xl">
