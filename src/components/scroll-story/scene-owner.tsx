@@ -22,12 +22,14 @@ export function SceneOwner() {
         <Container>
           <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Behind the counter</p>
-              <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
+                Behind the counter
+              </p>
+              <h2 className="mt-4 font-serif text-3xl font-bold leading-tight tracking-tight text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.7)] sm:text-4xl">
                 {business.founderName} has been building, repairing, and arguing over spec sheets on{" "}
                 {business.address.line1} for {business.yearsExperience} years.
               </h2>
-              <p className="mt-6 font-serif text-xl italic leading-snug text-foreground/90 sm:text-2xl">
+              <p className="mt-6 font-serif text-xl italic leading-snug text-white/90 [text-shadow:0_2px_16px_rgba(0,0,0,0.6)] sm:text-2xl">
                 &ldquo;Every build that leaves this store, I&apos;d put in my own home.&rdquo;
               </p>
               <Button href={buildWhatsAppLink("Hi, I'd like to know more about Next Gen Computer.")} className="mt-8">
@@ -37,8 +39,8 @@ export function SceneOwner() {
               <FanDeck progress={progress} className="mt-12 grid grid-cols-2 gap-4">
                 {proofPoints.map((point, i) => (
                   <FanCard key={point.label} index={i} count={proofPoints.length} className="glass-card p-6">
-                    <p className="font-serif text-2xl font-semibold text-foreground">{point.label}</p>
-                    <p className="mt-1.5 text-sm text-muted">{point.sub}</p>
+                    <p className="font-serif text-2xl font-bold text-white">{point.label}</p>
+                    <p className="mt-1.5 text-sm text-white/70">{point.sub}</p>
                   </FanCard>
                 ))}
               </FanDeck>

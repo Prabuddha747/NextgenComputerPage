@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Clock, MapPin, Building2 } from "lucide-react";
-import { Section, SectionHeading } from "@/components/ui/section";
+import { Section } from "@/components/ui/section";
+import { SceneHeading } from "@/components/scroll-story/scene-heading";
 import { Button } from "@/components/ui/button";
 import { business, buildWhatsAppLink } from "@/data/business";
 
@@ -20,7 +21,7 @@ export function SceneVisitUs() {
         className="glass-card grid gap-10 p-8 sm:p-12 lg:grid-cols-2 lg:items-center"
       >
         <div>
-          <SectionHeading
+          <SceneHeading
             eyebrow="Visit us"
             title="Come see it in person"
             description="Walk in for hands-on demos, in-store diagnostics, or just to talk through what you need."
@@ -30,8 +31,8 @@ export function SceneVisitUs() {
             <div className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
               <div>
-                <p className="font-medium text-foreground">{business.address.line1}</p>
-                <p className="text-muted">
+                <p className="font-semibold text-white">{business.address.line1}</p>
+                <p className="text-white/70">
                   {business.address.city}, {business.address.state}
                 </p>
               </div>
@@ -40,15 +41,15 @@ export function SceneVisitUs() {
               <Clock className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
               <div>
                 {business.hours.map((h) => (
-                  <p key={h.days} className="text-muted">
-                    <span className="font-medium text-foreground">{h.days}:</span> {h.time}
+                  <p key={h.days} className="text-white/70">
+                    <span className="font-semibold text-white">{h.days}:</span> {h.time}
                   </p>
                 ))}
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Building2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-              <p className="text-muted">
+              <p className="text-white/70">
                 Schools, colleges, and corporate offices — ask about bulk pricing and AMC support.
               </p>
             </div>

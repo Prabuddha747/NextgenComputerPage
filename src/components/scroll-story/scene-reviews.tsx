@@ -4,7 +4,7 @@ import { Quote, Star } from "lucide-react";
 import { PinnedScene } from "@/components/scroll-story/pinned-scene";
 import { FanDeck } from "@/components/scroll-story/fan-deck";
 import { FanCard } from "@/components/scroll-story/fan-card";
-import { SectionHeading } from "@/components/ui/section";
+import { SceneHeading } from "@/components/scroll-story/scene-heading";
 import { Container } from "@/components/ui/container";
 import { testimonials } from "@/data/testimonials";
 import { business } from "@/data/business";
@@ -20,7 +20,7 @@ export function SceneReviews() {
     <PinnedScene heightVh={140}>
       {(progress) => (
         <Container>
-          <SectionHeading
+          <SceneHeading
             eyebrow="Reviews"
             title="What Patna says about us"
             description={`${business.rating}★ average across ${business.reviewCount.toLocaleString()}+ Google reviews.`}
@@ -47,7 +47,7 @@ export function SceneReviews() {
                     <Star key={s} className="h-3.5 w-3.5 fill-current" />
                   ))}
                 </div>
-                <blockquote className="relative mt-3 text-sm leading-relaxed text-foreground/90">
+                <blockquote className="relative mt-3 text-sm leading-relaxed text-white/90">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
                 <div className="relative mt-5 flex items-center gap-3 border-t border-border pt-4">
@@ -57,8 +57,8 @@ export function SceneReviews() {
                     {initials(t.name)}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-foreground">{t.name}</p>
-                    <p className="text-xs text-muted">{t.context}</p>
+                    <p className="text-sm font-bold text-white">{t.name}</p>
+                    <p className="text-xs text-white/70">{t.context}</p>
                   </div>
                 </div>
               </FanCard>
