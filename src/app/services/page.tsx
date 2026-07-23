@@ -7,16 +7,16 @@ import { ServiceExplorer } from "@/components/services/service-explorer";
 import { buildWhatsAppLink } from "@/data/business";
 
 export const metadata: Metadata = {
-  title: "Services — CCTV, Networking & Enterprise Solutions",
+  title: "Services — Custom Builds, Upgrades & Gaming Setups",
   description:
-    "CCTV installation, networking, and enterprise IT solutions in Patna — bulk procurement, AMC support, and installation for homes, schools and offices.",
+    "Custom gaming PC builds, component upgrades, and gaming peripherals in Patna — every build benchmarked in-store, genuine parts only.",
 };
 
 const trustPoints = [
-  { icon: ShieldCheck, title: "Enterprise Grade", description: "Solutions built for reliability and scale." },
-  { icon: Headphones, title: "Expert Support", description: "Experienced technicians for every install." },
-  { icon: Gem, title: "Quality Assured", description: "Genuine components and installations." },
-  { icon: Clock, title: "After Installation", description: "Ongoing maintenance & dedicated support." },
+  { icon: ShieldCheck, title: "Benchmarked Builds", description: "Every system stress-tested before delivery." },
+  { icon: Headphones, title: "Expert Support", description: "Experienced technicians for every build." },
+  { icon: Gem, title: "Genuine Parts", description: "No greymarket components, ever." },
+  { icon: Clock, title: "After the Sale", description: "Warranty and support don't stop at pickup." },
 ];
 
 export default function ServicesPage() {
@@ -44,7 +44,7 @@ export default function ServicesPage() {
               Professionally<span className="text-accent">.</span>
             </h1>
             <div className="mt-6 max-w-xs border-l-2 border-accent/50 pl-4 text-sm text-muted">
-              Enterprise networking. CCTV infrastructure. Bulk IT procurement. AMC support.
+              Custom gaming PCs. Component upgrades. Genuine peripherals.
             </div>
           </div>
 
@@ -79,10 +79,10 @@ export default function ServicesPage() {
             <span className="h-px w-8 bg-accent/40" />
           </p>
           <h2 className="mx-auto max-w-xl font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
-            Let&apos;s build your technology ecosystem<span className="text-accent">.</span>
+            Let&apos;s build your next rig<span className="text-accent">.</span>
           </h2>
           <Button
-            href={buildWhatsAppLink("Hi, I'd like to talk about a CCTV/networking/enterprise IT project.")}
+            href={buildWhatsAppLink("Hi, I'd like to talk about a custom PC build or upgrade.")}
             variant="secondary"
             className="mt-8"
           >

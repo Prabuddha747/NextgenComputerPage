@@ -1,52 +1,52 @@
-import { Camera, Router, Server } from "lucide-react";
+import { Cpu, Keyboard, Server } from "lucide-react";
 
 export const serviceDetails = [
   {
-    slug: "cctv",
-    category: "Surveillance solutions",
-    title: "CCTV Infrastructure",
-    icon: Camera,
-    photo: "https://images.unsplash.com/photo-1643123182527-3bd30840e7ed",
-    useCases: ["Commercial Spaces", "Residential Buildings", "Warehouses", "Schools & Institutions"],
-    description:
-      "Site survey, camera selection, and professional installation for homes, shops, and offices — with remote viewing set up on your phone before we leave.",
-    points: [
-      "Free on-site survey and camera placement plan",
-      "HD & night-vision dome / bullet cameras",
-      "DVR/NVR setup with cloud or local storage",
-      "Mobile app configuration for remote viewing",
-    ],
-  },
-  {
-    slug: "networking",
-    category: "Network solutions",
-    title: "Enterprise Networking",
-    icon: Router,
-    photo: "https://images.unsplash.com/photo-1750711731797-25c3f2551ff8",
-    useCases: ["Structured Cabling", "Router & Switch Setup", "Secure Connectivity", "Wi-Fi Solutions"],
-    description:
-      "Wired and Wi-Fi networking for homes, offices, and campuses — from a single router to structured cabling across a building.",
-    points: [
-      "Router, switch, and access point setup",
-      "Structured cabling for offices and campuses",
-      "Wi-Fi coverage planning for large spaces",
-      "Network security and guest-network setup",
-    ],
-  },
-  {
-    slug: "enterprise",
-    category: "Enterprise solutions",
-    title: "IT Infrastructure Solutions",
+    slug: "gaming-builds",
+    category: "Build solutions",
+    title: "Custom Gaming PC Builds",
     icon: Server,
-    photo: "https://images.unsplash.com/photo-1695668548342-c0c1ad479aee",
-    useCases: ["Server & Storage Solutions", "Data Center Setup", "System Integration", "IT Support & Maintenance"],
+    photo: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b",
+    useCases: ["4K Gaming Rigs", "Esports & Competitive PCs", "Streaming Setups", "Budget to Enthusiast"],
     description:
-      "Bulk procurement and ongoing IT support for schools, colleges, government offices, and corporate clients.",
+      "Prebuilt rigs or a fully custom configuration — every build assembled, stress-tested, and benchmarked at our Dak Bunglow Road workshop before it reaches you.",
     points: [
-      "Bulk laptop/desktop procurement with custom quotes",
-      "Annual Maintenance Contracts (AMC)",
-      "Computer lab setup for schools & colleges",
-      "Dedicated account support for repeat orders",
+      "Choose your own CPU, GPU, RAM, storage, and cooling",
+      "Every build benchmarked before it leaves the store",
+      "Cable management and RGB tuning included",
+      "Instant quote from the online configurator",
+    ],
+  },
+  {
+    slug: "upgrades",
+    category: "Upgrade solutions",
+    title: "PC Upgrades & Component Installation",
+    icon: Cpu,
+    photo: "https://images.unsplash.com/photo-1644987708868-1a97a5341ec3",
+    useCases: ["Graphics Card Upgrades", "RAM & Storage Expansion", "CPU & Cooler Swaps", "Power Supply Upgrades"],
+    description:
+      "Bring an older PC back to life — genuine components only, and every upgrade benchmarked afterward so you can see the difference.",
+    points: [
+      "Genuine GPUs, RAM, storage, and cooling only",
+      "Compatibility checked before you buy anything",
+      "Most upgrades installed same-day",
+      "Re-benchmarked after the upgrade, before pickup",
+    ],
+  },
+  {
+    slug: "peripherals",
+    category: "Peripheral solutions",
+    title: "Gaming Setup & Peripherals",
+    icon: Keyboard,
+    photo: "https://images.unsplash.com/photo-1766656533864-2314b462d439",
+    useCases: ["Mechanical Keyboards", "Gaming Mice", "Curved Monitors", "Cooling & Seating"],
+    description:
+      "Keyboards, mice, monitors, cooling, and seating — the finishing touches for any gaming or work setup, all available to try in-store.",
+    points: [
+      "Demo units in-store — try before you buy",
+      "RGB and ergonomic options for every budget",
+      "Genuine warranty on every accessory",
+      "Bundle pricing when paired with a new build",
     ],
   },
 ];
