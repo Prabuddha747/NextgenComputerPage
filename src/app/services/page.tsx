@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ServiceExplorer } from "@/components/services/service-explorer";
 import { Reveal } from "@/components/ui/reveal";
+import { glowOverlayStyle } from "@/lib/glow";
 import { buildWhatsAppLink } from "@/data/business";
 
 export const metadata: Metadata = {
@@ -59,11 +60,7 @@ export default function ServicesPage() {
               className="object-cover grayscale contrast-[1.1]"
             />
             <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40" />
-            <div
-              aria-hidden
-              className="absolute inset-x-0 bottom-0 h-2/3"
-              style={{ background: "radial-gradient(60% 100% at 50% 100%, rgba(168,85,247,0.4), transparent 70%)" }}
-            />
+            <div aria-hidden className="absolute inset-x-0 bottom-0 h-2/3" style={glowOverlayStyle("rgba(168,85,247,0.4)")} />
           </div>
         </div>
       </Section>

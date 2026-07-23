@@ -80,56 +80,61 @@ export function CatalogView({
   const [query, setQuery] = useState(initialQuery ?? "");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  // Filters are shareable/bookmarkable — every change replaces the URL query string
-  // (no scroll, no history entry per click) alongside the local state that drives the grid.
-  const syncUrl = (next: {
-    brands: string[];
-    categories: string[];
-    bandIndexes: number[];
-    sort: SortValue;
-    query: string;
+  // Filters are shareable/bookmarkable — every change replaces the URL query
+  // string (no scroll, no history entry per click) alongside whichever bit of
+  // local state actually changed. One updater instead of five near-identical
+  // toggle/change handlers — each just supplies the one field it's touching,
+  // the rest fall back to current state.
+  const updateFilters = (partial: {
+    brands?: string[];
+    categories?: string[];
+    bandIndexes?: number[];
+    sort?: SortValue;
+    query?: string;
   }) => {
+    const next = {
+      brands: partial.brands ?? selectedBrands,
+      categories: partial.categories ?? selectedCategories,
+      bandIndexes: partial.bandIndexes ?? selectedBandIndexes,
+      sort: partial.sort ?? sort,
+      query: partial.query ?? query,
+    };
+    if (partial.brands) setSelectedBrands(partial.brands);
+    if (partial.categories) setSelectedCategories(partial.categories);
+    if (partial.bandIndexes) setSelectedBandIndexes(partial.bandIndexes);
+    if (partial.sort) setSort(partial.sort);
+    if (partial.query !== undefined) setQuery(partial.query);
+
     const params = new URLSearchParams();
     if (next.brands.length) params.set("brand", next.brands.join("|"));
     if (next.categories.length) params.set("category", next.categories.join("|"));
     if (next.bandIndexes.length) params.set("price", next.bandIndexes.join("|"));
     if (next.sort !== "featured") params.set("sort", next.sort);
     if (next.query.trim()) params.set("q", next.query.trim());
-    const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    const search = params.toString();
+    router.replace(search ? `${pathname}?${search}` : pathname, { scroll: false });
   };
 
-  const toggleBrand = (value: string) => {
-    const next = selectedBrands.includes(value) ? selectedBrands.filter((v) => v !== value) : [...selectedBrands, value];
-    setSelectedBrands(next);
-    syncUrl({ brands: next, categories: selectedCategories, bandIndexes: selectedBandIndexes, sort, query });
-  };
+  const toggleBrand = (value: string) =>
+    updateFilters({ brands: selectedBrands.includes(value) ? selectedBrands.filter((v) => v !== value) : [...selectedBrands, value] });
 
-  const toggleCategory = (value: string) => {
-    const next = selectedCategories.includes(value)
-      ? selectedCategories.filter((v) => v !== value)
-      : [...selectedCategories, value];
-    setSelectedCategories(next);
-    syncUrl({ brands: selectedBrands, categories: next, bandIndexes: selectedBandIndexes, sort, query });
-  };
+  const toggleCategory = (value: string) =>
+    updateFilters({
+      categories: selectedCategories.includes(value)
+        ? selectedCategories.filter((v) => v !== value)
+        : [...selectedCategories, value],
+    });
 
-  const toggleBand = (index: number) => {
-    const next = selectedBandIndexes.includes(index)
-      ? selectedBandIndexes.filter((v) => v !== index)
-      : [...selectedBandIndexes, index];
-    setSelectedBandIndexes(next);
-    syncUrl({ brands: selectedBrands, categories: selectedCategories, bandIndexes: next, sort, query });
-  };
+  const toggleBand = (index: number) =>
+    updateFilters({
+      bandIndexes: selectedBandIndexes.includes(index)
+        ? selectedBandIndexes.filter((v) => v !== index)
+        : [...selectedBandIndexes, index],
+    });
 
-  const changeSort = (value: SortValue) => {
-    setSort(value);
-    syncUrl({ brands: selectedBrands, categories: selectedCategories, bandIndexes: selectedBandIndexes, sort: value, query });
-  };
+  const changeSort = (value: SortValue) => updateFilters({ sort: value });
 
-  const changeQuery = (value: string) => {
-    setQuery(value);
-    syncUrl({ brands: selectedBrands, categories: selectedCategories, bandIndexes: selectedBandIndexes, sort, query: value });
-  };
+  const changeQuery = (value: string) => updateFilters({ query: value });
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

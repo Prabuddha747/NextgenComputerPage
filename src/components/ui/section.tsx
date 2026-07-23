@@ -20,7 +20,7 @@ export function Section({
   );
 }
 
-export function Eyebrow({ children }: { children: ReactNode }) {
+function Eyebrow({ children }: { children: ReactNode }) {
   return (
     <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent">{children}</p>
   );

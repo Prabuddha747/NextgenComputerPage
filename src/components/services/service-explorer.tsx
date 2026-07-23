@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { buildWhatsAppLink } from "@/data/business";
 import { serviceDetails } from "@/data/services-detail";
+import { glowOverlayStyle } from "@/lib/glow";
 import { clsx } from "clsx";
 
 // Real Unsplash photos (site's usual license-free-stock convention), tinted
@@ -24,11 +25,7 @@ function ServiceVisual({ photo, glow }: { photo: string; glow: string }) {
     <div className="relative ml-auto aspect-[4/3] w-full max-w-sm overflow-hidden rounded-2xl border border-border">
       <Image src={photo} alt="" fill sizes="(min-width: 1024px) 25vw, 90vw" className="object-cover grayscale contrast-[1.1]" />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/50" />
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-2/3"
-        style={{ background: `radial-gradient(60% 100% at 50% 100%, ${glow}, transparent 70%)` }}
-      />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-2/3" style={glowOverlayStyle(glow)} />
     </div>
   );
 }

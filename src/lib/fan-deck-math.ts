@@ -12,12 +12,6 @@ export interface FanCardTransform {
 
 export type FanVariant = "mobile" | "tablet" | "desktop";
 
-const VARIANT_CONFIG: Record<FanVariant, { maxAngle: number; spacing: number }> = {
-  desktop: { maxAngle: 15, spacing: 100 },
-  tablet: { maxAngle: 8, spacing: 60 }, // ~40% less arc/spread than desktop
-  mobile: { maxAngle: 0, spacing: 0 }, // vertical fade+rise only, no arc
-};
-
 function restingAngle(index: number, count: number, maxAngle: number): number {
   if (count <= 1 || maxAngle === 0) return 0;
   const mid = (count - 1) / 2;
@@ -41,22 +35,19 @@ function easeOutExpo(t: number): number {
  * @param progress overall scene scroll progress, 0..1
  * @param index this card's position in the deck, 0-based
  * @param count total cards in the deck
- * @param variant responsive mode — mobile drops rotation/spread entirely
+ * @param variant responsive mode — only affects the vertical rise distance here;
+ *   every caller sets its own maxAngle/spacing explicitly (see `overrides`)
+ * @param overrides maxAngle/spacing this deck settles to, plus an optional
+ *   transient enterOffset kick
  */
 export function getCardTransform(
   progress: number,
   index: number,
   count: number,
   variant: FanVariant = "desktop",
-  overrides?: { maxAngle?: number; spacing?: number; enterOffset?: number }
+  overrides: { maxAngle: number; spacing: number; enterOffset?: number }
 ): FanCardTransform {
-  const base = VARIANT_CONFIG[variant];
-  const maxAngle = overrides?.maxAngle ?? base.maxAngle;
-  const spacing = overrides?.spacing ?? base.spacing;
-  // Transient-only horizontal kick (e.g. alternating left/right per card in a
-  // masonry grid) that decays to 0 as the card settles — unlike `spread`, it
-  // never becomes a permanent resting offset.
-  const enterOffset = overrides?.enterOffset ?? 0;
+  const { maxAngle, spacing, enterOffset = 0 } = overrides;
 
   // Staggered start: card i begins animating slightly after card i-1.
   const startOffset = index / (count + 2);
