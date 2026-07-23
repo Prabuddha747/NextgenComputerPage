@@ -53,7 +53,7 @@ export function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => 
                       onClick={onClose}
                       className="flex items-center gap-3 rounded-xl px-3 py-3 text-base font-medium text-foreground hover:bg-surface"
                     >
-                      <Icon className="h-[18px] w-[18px] text-accent-secondary" strokeWidth={1.5} />
+                      <Icon className="h-[18px] w-[18px] text-foreground/80" strokeWidth={1.5} />
                       {link.label}
                     </Link>
                   </motion.li>

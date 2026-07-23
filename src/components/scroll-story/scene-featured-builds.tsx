@@ -21,7 +21,7 @@ export function SceneFeaturedBuilds() {
               // Same fan physics as every other deck, but settles nearly flat —
               // commerce cards need to end up scannable, not mid-tilt.
               <FanCard key={product.slug} index={i} count={pcs.length} maxAngle={4} spacing={0}>
-                <ProductCard product={product} priority={i === 0} />
+                <ProductCard product={product} priority={i === 0} dark />
               </FanCard>
             ))}
           </FanDeck>

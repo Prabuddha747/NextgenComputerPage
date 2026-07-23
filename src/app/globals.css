@@ -22,9 +22,6 @@
      business get a cool silver, accessories keep the brass "sale" tone. No
      fabricated "creator" accent — we don't carry a product line that maps to one. */
   --accent-business: #d6d9e0;
-  /* Navbar-only accent — kept off the site-wide teal deliberately. A vivid,
-     saturated violet rather than a washed-out pastel one. */
-  --accent-secondary: #a855f7;
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.07);
   --ease-premium: cubic-bezier(0.19, 1, 0.22, 1);
@@ -44,7 +41,6 @@
   --success: #059669;
 
   --accent-business: #52525b;
-  --accent-secondary: #9333ea;
   --glass-bg: rgba(0, 0, 0, 0.02);
   --glass-border: rgba(0, 0, 0, 0.08);
   --ease-premium: cubic-bezier(0.19, 1, 0.22, 1);
@@ -62,7 +58,6 @@
   --color-sale: var(--sale);
   --color-success: var(--success);
   --color-accent-business: var(--accent-business);
-  --color-accent-secondary: var(--accent-secondary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-jetbrains-mono);
   --font-display: var(--font-space-grotesk);

@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { AddToBasketButton } from "@/components/basket/add-to-basket-button";
 import { formatINR } from "@/lib/format";
 import { buildWhatsAppLink } from "@/data/business";
+import { clsx } from "clsx";
 
 // Tech Aurora category accents: gaming stays the site's cyan, laptops/business
 // get a cool silver, accessories keep the amber "sale" tone.
@@ -19,7 +20,18 @@ const CATEGORY_ACCENT: Record<Product["category"], string> = {
   accessory: "var(--sale)",
 };
 
-export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
+export function ProductCard({
+  product,
+  priority = false,
+  dark = false,
+}: {
+  product: Product;
+  priority?: boolean;
+  /** Use the darker scene glass instead of the default light one — for cards
+   * floating directly over the homepage's build video, where the normal
+   * near-white 3% tint left text unreadable against a bright frame. */
+  dark?: boolean;
+}) {
   const accent = CATEGORY_ACCENT[product.category];
 
   const onMouseMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -34,7 +46,10 @@ export function ProductCard({ product, priority = false }: { product: Product; p
       whileHover={{ y: -6, scale: 1.02 }}
       transition={{ duration: 0.7, ease: [0.19, 1, 0.22, 1] }}
       style={{ "--card-accent": accent } as CSSProperties}
-      className="group glass-card relative flex flex-col overflow-hidden transition-shadow duration-700 hover:shadow-[0_0_0_1px_var(--card-accent),0_24px_90px_-20px_var(--card-accent)]"
+      className={clsx(
+        "group relative flex flex-col overflow-hidden transition-shadow duration-700 hover:shadow-[0_0_0_1px_var(--card-accent),0_24px_90px_-20px_var(--card-accent)]",
+        dark ? "glass-card-scene" : "glass-card"
+      )}
     >
       <div
         aria-hidden
