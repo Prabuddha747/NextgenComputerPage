@@ -45,7 +45,7 @@ export default function AboutPage() {
         <div className="relative overflow-hidden rounded-3xl border border-border">
           <div className="relative aspect-[4/5] sm:aspect-[7/6]">
             <Image
-              src="/owner-wide.jpg"
+              src="/owner-office.png"
               alt="Founder of Next Gen Computer at the Dak Bunglow Road store"
               fill
               priority
@@ -157,8 +157,8 @@ export default function AboutPage() {
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border">
             <Image
-              src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b"
-              alt="A custom gaming PC build at Next Gen Computer"
+              src="/owner-portrait.png"
+              alt={`${business.founderName}, founder of Next Gen Computer`}
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
