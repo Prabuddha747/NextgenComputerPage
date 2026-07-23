@@ -42,40 +42,38 @@ export default function AboutPage() {
   return (
     <>
       <Section className="pt-10">
-        <div className="relative overflow-hidden rounded-3xl border border-border">
-          <div className="relative aspect-4/5">
-            <Image
-              src="/owner-office.png"
-              alt="Founder of Next Gen Computer at the Dak Bunglow Road store"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">About us</p>
+            <h1 className="mt-4 font-display text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
+              {business.yearsExperience}+ years of trust, built one repeat customer at a time.
+            </h1>
+            <p className="mt-6 max-w-md text-base text-muted sm:text-lg">
+              Next Gen Computer started as a small shop on Dak Bunglow Road and grew into the city&apos;s trusted
+              destination for laptops, gaming PCs, repair, and IT services — without ever moving away from the
+              street that built it.
+            </p>
+            <Button href={buildWhatsAppLink("Hi, I'd like to know more about Next Gen Computer.")} className="mt-8">
+              WhatsApp Us
+            </Button>
           </div>
 
-          <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-10">
-            <div className="max-w-sm">
-              <p className="inline-flex w-fit items-center rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur">
-                {business.yearsExperience}+ Years in Patna
-              </p>
-              <p className="mt-4 text-sm text-white/85 sm:text-base">
-                Next Gen Computer started as a small shop on Dak Bunglow Road and grew into the city&apos;s trusted
-                destination for laptops, gaming PCs, repair, and IT services — without ever moving away from the
-                street that built it.
-              </p>
-              <Button
-                href={buildWhatsAppLink("Hi, I'd like to know more about Next Gen Computer.")}
-                className="mt-6"
-              >
-                WhatsApp Us
-              </Button>
+          {/* Same treatment as the founder photo on the homepage's Behind the
+              Counter scene — contained card with a soft glow ring, not a
+              full-bleed banner competing with the headline for attention. */}
+          <div className="relative mx-auto aspect-4/5 w-full max-w-md">
+            <div className="absolute -inset-0.75 rounded-4xl bg-linear-to-br from-accent via-[#a78bfa] to-[#c9a15a] opacity-70 blur-[3px]" />
+            <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] border border-black/40">
+              <Image
+                src="/owner-office.png"
+                alt="Founder of Next Gen Computer at the Dak Bunglow Road store"
+                fill
+                priority
+                sizes="(min-width: 1024px) 40vw, 90vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent" />
             </div>
-
-            <h1 className="-ml-1 font-display text-[16vw] font-black leading-[0.85] tracking-tight text-white/95 sm:-ml-2 sm:text-[9vw]">
-              About Us
-            </h1>
           </div>
         </div>
       </Section>
@@ -91,7 +89,7 @@ export default function AboutPage() {
             />
           </div>
 
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border lg:aspect-auto">
+          <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border lg:aspect-auto">
             <Image
               src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89"
               alt="A laptop ready for sale at Next Gen Computer"

@@ -23,7 +23,7 @@ export function MegaMenu() {
           const Icon = productIcons[column.icon];
           return (
             <div key={column.title}>
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/15 text-accent">
+              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-accent-secondary/15 text-accent-secondary">
                 <Icon className="h-5 w-5" strokeWidth={1.5} />
               </div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-foreground">
@@ -34,9 +34,9 @@ export function MegaMenu() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="group/link flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+                      className="group/link flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent-secondary"
                     >
-                      <Icon className="h-3.5 w-3.5 shrink-0 text-muted/60 group-hover/link:text-accent" strokeWidth={1.5} />
+                      <Icon className="h-3.5 w-3.5 shrink-0 text-muted/60 group-hover/link:text-accent-secondary" strokeWidth={1.5} />
                       {link.label}
                     </Link>
                   </li>
@@ -48,7 +48,7 @@ export function MegaMenu() {
 
         <Link href={`/product/${featured.slug}`} className="group block">
           <ProductArt product={featured} className="aspect-square w-full" />
-          <p className="mt-3 flex items-center gap-1 text-sm font-medium text-foreground group-hover:text-accent">
+          <p className="mt-3 flex items-center gap-1 text-sm font-medium text-foreground group-hover:text-accent-secondary">
             Explore the Configurator
             <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
           </p>

@@ -40,9 +40,7 @@ export default function ServicesPage() {
             </p>
             <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
               Technology, Installed <br />
-              <span className="font-serif italic">
-                Professionally<span className="text-accent">.</span>
-              </span>
+              Professionally<span className="text-accent">.</span>
             </h1>
           </div>
           <div className="max-w-xs border-l-2 border-accent/50 pl-4 text-sm text-muted lg:mb-2">
@@ -62,7 +60,7 @@ export default function ServicesPage() {
             Ready to build?
             <span className="h-px w-8 bg-accent/40" />
           </p>
-          <h2 className="mx-auto max-w-xl font-serif text-3xl italic leading-tight text-foreground sm:text-4xl">
+          <h2 className="mx-auto max-w-xl font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
             Let&apos;s build your technology ecosystem<span className="text-accent">.</span>
           </h2>
           <Button
