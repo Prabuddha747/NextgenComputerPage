@@ -3,6 +3,7 @@ import { ArrowUpRight, CheckCircle2, Clock, ShieldCheck, Wrench, Zap } from "luc
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { WhatsAppEnquiryForm } from "@/components/forms/whatsapp-enquiry-form";
+import { Reveal } from "@/components/ui/reveal";
 import { buildWhatsAppLink } from "@/data/business";
 import { repairSteps as steps } from "@/data/repair-steps";
 
@@ -54,7 +55,7 @@ export default function RepairPage() {
       <Section>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, i) => (
-            <div key={step.title} className="rounded-2xl border border-border bg-surface p-6">
+            <Reveal key={step.title} index={i} className="rounded-2xl border border-border bg-surface p-6">
               <div className="mb-4 flex items-center gap-3">
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-sm font-bold text-accent-foreground">
                   {i + 1}
@@ -63,7 +64,7 @@ export default function RepairPage() {
               </div>
               <h3 className="font-display text-base font-bold text-foreground">{step.title}</h3>
               <p className="mt-1.5 text-sm text-muted">{step.description}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -110,14 +111,14 @@ export default function RepairPage() {
         </div>
 
         <div className="mt-14 grid gap-8 rounded-3xl border border-border bg-surface p-8 sm:grid-cols-2 sm:p-10 lg:grid-cols-4">
-          {trustPoints.map((point) => (
-            <div key={point.title} className="flex items-start gap-3">
+          {trustPoints.map((point, i) => (
+            <Reveal key={point.title} index={i} className="flex items-start gap-3">
               <point.icon className="h-5 w-5 shrink-0 text-accent" strokeWidth={1.5} />
               <div>
                 <p className="text-sm font-semibold text-foreground">{point.title}</p>
                 <p className="mt-1 text-xs text-muted">{point.description}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>

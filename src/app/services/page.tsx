@@ -4,6 +4,7 @@ import { ArrowUpRight, Clock, Gem, Headphones, ShieldCheck } from "lucide-react"
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ServiceExplorer } from "@/components/services/service-explorer";
+import { Reveal } from "@/components/ui/reveal";
 import { buildWhatsAppLink } from "@/data/business";
 
 export const metadata: Metadata = {
@@ -92,14 +93,14 @@ export default function ServicesPage() {
         </div>
 
         <div className="mt-14 grid gap-8 rounded-3xl border border-border bg-surface p-8 sm:grid-cols-2 sm:p-10 lg:grid-cols-4">
-          {trustPoints.map((point) => (
-            <div key={point.title} className="flex items-start gap-3">
+          {trustPoints.map((point, i) => (
+            <Reveal key={point.title} index={i} className="flex items-start gap-3">
               <point.icon className="h-5 w-5 shrink-0 text-accent" strokeWidth={1.5} />
               <div>
                 <p className="text-sm font-semibold text-foreground">{point.title}</p>
                 <p className="mt-1 text-xs text-muted">{point.description}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>

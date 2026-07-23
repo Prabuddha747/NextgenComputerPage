@@ -1,5 +1,6 @@
 import type { Product } from "@/data/products";
 import { ProductCard } from "@/components/product/product-card";
+import { Reveal } from "@/components/ui/reveal";
 
 export function ProductGrid({ products }: { products: Product[] }) {
   if (products.length === 0) {
@@ -8,7 +9,9 @@ export function ProductGrid({ products }: { products: Product[] }) {
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
       {products.map((product, i) => (
-        <ProductCard key={product.slug} product={product} priority={i === 0} />
+        <Reveal key={product.slug} index={i % 6}>
+          <ProductCard product={product} priority={i === 0} />
+        </Reveal>
       ))}
     </div>
   );

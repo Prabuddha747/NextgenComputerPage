@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
 import { buildWhatsAppLink } from "@/data/business";
 import { serviceDetails } from "@/data/services-detail";
 import { clsx } from "clsx";
@@ -41,7 +42,7 @@ export function ServiceExplorer() {
         const isActive = active === i;
         return (
           <div key={service.slug} id={service.slug} className="scroll-mt-24 py-10 sm:py-12">
-            <div className="grid gap-8 sm:grid-cols-[auto_1fr] sm:gap-10">
+            <Reveal index={i} className="grid gap-8 sm:grid-cols-[auto_1fr] sm:gap-10">
               {/* Number + connector rail, decorative — echoes the reference's
                   numbered list without needing a literal illustration asset. */}
               <div className="hidden flex-col items-center sm:flex">
@@ -112,7 +113,7 @@ export function ServiceExplorer() {
 
                 <ServiceVisual photo={service.photo} glow={GLOW_TINTS[i % GLOW_TINTS.length]} />
               </div>
-            </div>
+            </Reveal>
           </div>
         );
       })}

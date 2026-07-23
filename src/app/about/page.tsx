@@ -4,6 +4,7 @@ import { Quote, Star } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { RadialProgress } from "@/components/ui/radial-progress";
+import { Reveal } from "@/components/ui/reveal";
 import { WhoWeAreCard } from "@/components/about/who-we-are-card";
 import { TrustBar } from "@/components/home/trust-bar";
 import { business, buildWhatsAppLink } from "@/data/business";
@@ -100,14 +101,17 @@ export default function AboutPage() {
             <WhoWeAreCard />
           </div>
 
-          <div className="rounded-3xl border border-border bg-surface p-8">
+          <Reveal index={1} className="rounded-3xl border border-border bg-surface p-8">
             <RadialProgress
               value={yearsProgress}
               sublabel={`${business.yearsExperience}+ years in Patna — headed to 30`}
             />
-          </div>
+          </Reveal>
 
-          <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border bg-white lg:aspect-auto">
+          <Reveal
+            index={2}
+            className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border bg-white lg:aspect-auto"
+          >
             <Image
               src="/nextgen-logo.png"
               alt="Next Gen Computer logo"
@@ -115,17 +119,14 @@ export default function AboutPage() {
               sizes="(min-width: 1024px) 33vw, 100vw"
               className="object-contain p-8"
             />
-          </div>
+          </Reveal>
         </div>
 
         <div className="mt-5">
           <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">What we do</p>
           <div className="no-scrollbar flex gap-4 overflow-x-auto pb-2">
-            {business.services.map((service) => (
-              <div
-                key={service.title}
-                className="w-60 shrink-0 overflow-hidden rounded-2xl border border-border bg-surface"
-              >
+            {business.services.map((service, i) => (
+              <Reveal key={service.title} index={i} className="w-60 shrink-0 overflow-hidden rounded-2xl border border-border bg-surface">
                 <div className="relative aspect-4/3 w-full">
                   <Image
                     src={SERVICE_PHOTOS[service.title]}
@@ -139,33 +140,33 @@ export default function AboutPage() {
                   <p className="font-display font-semibold text-foreground">{service.title}</p>
                   <p className="mt-1.5 text-xs text-muted">{service.description}</p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
 
         <div className="mt-5 grid gap-5 sm:grid-cols-3">
-          <div className="rounded-3xl border border-success/20 bg-success/10 p-6">
+          <Reveal index={0} className="rounded-3xl border border-success/20 bg-success/10 p-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-success">What we stock</p>
             <p className="mt-3 font-display text-lg font-semibold text-foreground">
               {business.brands.join(" · ")}
             </p>
             <p className="mt-2 text-sm text-muted">Every part genuine, every price explained upfront.</p>
-          </div>
-          <div className="rounded-3xl border border-accent/20 bg-accent/10 p-6">
+          </Reveal>
+          <Reveal index={1} className="rounded-3xl border border-accent/20 bg-accent/10 p-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-accent">Our reach</p>
             <p className="mt-3 font-display text-lg font-semibold text-foreground">
               {business.yearsExperience}+ years · {business.reviewCount.toLocaleString()}+ reviews
             </p>
             <p className="mt-2 text-sm text-muted">One shop, thousands of repeat customers.</p>
-          </div>
-          <div className="rounded-3xl border border-sale/20 bg-sale/10 p-6">
+          </Reveal>
+          <Reveal index={2} className="rounded-3xl border border-sale/20 bg-sale/10 p-6">
             <p className="text-xs font-semibold uppercase tracking-wider text-sale">Community</p>
             <p className="mt-3 font-display text-lg font-semibold text-foreground">
               Schools · Colleges · Corporate offices
             </p>
             <p className="mt-2 text-sm text-muted">Bulk orders and AMC support for institutions across Patna.</p>
-          </div>
+          </Reveal>
         </div>
       </Section>
 
@@ -174,11 +175,11 @@ export default function AboutPage() {
           <div>
             <SectionHeading eyebrow="Why choose us" title="What 26 years actually buys you" />
             <div className="grid gap-6 sm:grid-cols-2">
-              {values.map((value) => (
-                <div key={value.title}>
+              {values.map((value, i) => (
+                <Reveal key={value.title} index={i}>
                   <p className="font-display font-semibold text-foreground">{value.title}</p>
                   <p className="mt-1.5 text-sm text-muted">{value.description}</p>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -195,7 +196,7 @@ export default function AboutPage() {
       </Section>
 
       <Section className="pt-0">
-        <div className="rounded-3xl border border-border bg-surface p-8 sm:p-12">
+        <Reveal className="rounded-3xl border border-border bg-surface p-8 sm:p-12">
           <Quote className="h-9 w-9 text-accent/50" strokeWidth={1.5} />
           <blockquote className="mt-4 font-display text-xl font-medium text-foreground sm:text-2xl">
             &ldquo;{spotlight.quote}&rdquo;
@@ -211,11 +212,11 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       <Section className="pt-0">
-        <div className="rounded-3xl border border-border bg-accent/10 p-8 text-center sm:p-12">
+        <Reveal className="rounded-3xl border border-border bg-accent/10 p-8 text-center sm:p-12">
           <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
             Have a question, or want to just walk in?
           </h2>
@@ -228,7 +229,7 @@ export default function AboutPage() {
               Get Directions
             </Button>
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       <TrustBar />
