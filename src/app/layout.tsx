@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Geist, JetBrains_Mono, Space_Grotesk, Fraunces } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Navbar } from "@/components/layout/navbar";
@@ -13,14 +13,22 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
+});
+
+// Display serif — used sparingly (the "Meet Sanjeev" scene's H1/pull-quote only),
+// a placeholder pick pending a final brand type decision.
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -49,7 +57,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider

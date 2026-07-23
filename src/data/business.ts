@@ -4,6 +4,7 @@ export const PHONE_NUMBER = "+911234567890";
 
 export const business = {
   name: "Next Gen Computer",
+  founderName: "Sanjeev",
   tagline: "Patna's Trusted Tech Partner for 26+ Years",
   yearsExperience: 26,
   rating: 4.9,
