@@ -63,6 +63,7 @@ export const primaryNav: NavLink[] = [
 ];
 
 export const allMobileLinks: (NavLink & { icon: Product["icon"] })[] = [
+  { label: "Shop All", href: "/shop", icon: "monitor" },
   { label: "Gaming PCs", href: "/gaming-pcs", icon: "tower" },
   { label: "Configurator", href: "/configurator", icon: "cpu" },
   { label: "Laptops", href: "/laptops", icon: "laptop" },

@@ -46,17 +46,17 @@ export function ProductCard({ product, priority = false }: { product: Product; p
       </Link>
 
       <div className="flex flex-1 flex-col p-5">
-        <p className="text-xs font-medium uppercase tracking-wide text-muted">{product.brand}</p>
+        <p className="text-xs font-medium uppercase tracking-wider text-muted">{product.brand}</p>
         <Link href={`/product/${product.slug}`}>
-          <h3 className="mt-1 font-display text-lg font-semibold text-foreground group-hover:text-accent">
+          <h3 className="mt-1.5 font-display text-xl font-bold tracking-tight text-foreground group-hover:text-accent">
             {product.name}
           </h3>
         </Link>
         <p className="mt-1 text-sm text-muted">{product.tagline}</p>
 
         <ul className="mt-4 space-y-1 text-xs text-foreground/80">
-          {product.specs.slice(0, 3).map((spec) => (
-            <li key={spec.label} className="flex justify-between border-b border-border/60 py-1">
+          {product.specs.slice(0, 2).map((spec) => (
+            <li key={spec.label} className="flex justify-between border-b border-border/60 py-1.5">
               <span className="text-muted">{spec.label}</span>
               <span className="font-medium">{spec.value}</span>
             </li>
@@ -64,7 +64,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
         </ul>
 
         <div className="mt-5 flex items-center justify-between gap-3">
-          <p className="font-display text-lg font-semibold text-foreground">
+          <p className="font-display text-2xl font-bold text-foreground">
             {formatINR(product.price)}
           </p>
           <a

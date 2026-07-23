@@ -33,6 +33,7 @@ export const serviceDetails = [
     slug: "enterprise",
     title: "Enterprise Solutions",
     icon: Building2,
+    photo: "https://images.unsplash.com/photo-1758873268745-dd2cf0d677b5",
     description:
       "Bulk procurement and ongoing IT support for schools, colleges, government offices, and corporate clients.",
     points: [

@@ -34,8 +34,9 @@ export function MegaMenu() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted transition-colors hover:text-accent"
+                      className="group/link flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
                     >
+                      <Icon className="h-3.5 w-3.5 shrink-0 text-muted/60 group-hover/link:text-accent" strokeWidth={1.5} />
                       {link.label}
                     </Link>
                   </li>

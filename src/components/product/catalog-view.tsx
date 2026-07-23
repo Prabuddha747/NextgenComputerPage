@@ -9,10 +9,17 @@ import { priceBands } from "@/lib/price-bands";
 import { clsx } from "clsx";
 
 const categoryLinks = [
+  { label: "Shop All", href: "/shop" },
   { label: "Gaming PCs", href: "/gaming-pcs" },
   { label: "Laptops", href: "/laptops" },
   { label: "Accessories", href: "/accessories" },
 ];
+
+const CATEGORY_LABELS: Record<Product["category"], string> = {
+  "gaming-pc": "Gaming PCs",
+  laptop: "Laptops",
+  accessory: "Accessories",
+};
 
 export function CatalogView({
   products,
@@ -24,9 +31,11 @@ export function CatalogView({
   initialBrand?: string;
 }) {
   const brands = useMemo(() => Array.from(new Set(products.map((p) => p.brand))).sort(), [products]);
+  const categories = useMemo(() => Array.from(new Set(products.map((p) => p.category))), [products]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>(
     initialBrand && brands.includes(initialBrand) ? [initialBrand] : []
   );
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedBands, setSelectedBands] = useState<string[]>([]);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
@@ -36,13 +45,14 @@ export function CatalogView({
 
   const filtered = products.filter((p) => {
     const brandOk = selectedBrands.length === 0 || selectedBrands.includes(p.brand);
+    const categoryOk = selectedCategories.length === 0 || selectedCategories.includes(p.category);
     const bandOk =
       selectedBands.length === 0 ||
       priceBands.some((band) => selectedBands.includes(band.label) && band.test(p.price));
-    return brandOk && bandOk;
+    return brandOk && categoryOk && bandOk;
   });
 
-  const activeFilterCount = selectedBrands.length + selectedBands.length;
+  const activeFilterCount = selectedBrands.length + selectedCategories.length + selectedBands.length;
 
   const sidebarContent = (
     <div className="space-y-8">
@@ -64,6 +74,27 @@ export function CatalogView({
           ))}
         </ul>
       </div>
+
+      {categories.length > 1 && (
+        <div>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">Category</p>
+          <ul className="space-y-2.5">
+            {categories.map((category) => (
+              <li key={category}>
+                <label className="flex items-center gap-2.5 text-sm text-foreground/90">
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories.includes(category)}
+                    onChange={() => toggle(selectedCategories, category, setSelectedCategories)}
+                    className="h-4 w-4 rounded border-border accent-[var(--accent)]"
+                  />
+                  {CATEGORY_LABELS[category]}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {brands.length > 1 && (
         <div>
@@ -123,7 +154,12 @@ export function CatalogView({
           <p className="hidden text-sm text-muted lg:block">{filtered.length} products</p>
         </div>
 
-        <motion.div key={`${selectedBrands.join()}-${selectedBands.join()}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25 }}>
+        <motion.div
+          key={`${selectedBrands.join()}-${selectedCategories.join()}-${selectedBands.join()}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.25 }}
+        >
           <ProductGrid products={filtered} />
         </motion.div>
       </div>

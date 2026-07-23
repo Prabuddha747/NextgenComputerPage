@@ -31,14 +31,28 @@ const POSITIONS = [
   "items-center justify-end pr-6 sm:pr-16",
 ];
 
-// Only fades out at the very end, right before the section releases into whatever
-// follows — no entry effect, the reel is just there the moment you reach it.
-const EXIT_WINDOW = 0.08;
+// The reel is 4 source clips concatenated (laptop / build / detail / full setup),
+// cut hard against each other. Instead of masking the *section* start/end (which
+// just produced a dead black stretch), the puzzle-tile wipe now only plays for a
+// brief moment right at each internal cut, to hide the jump between clips.
+const TILE_COLS = 8;
+const TILE_ROWS = 5;
+const TILE_COUNT = TILE_COLS * TILE_ROWS;
+const CUT_POINTS = [37 / 145, 74 / 145, 111 / 145];
+const CUT_HALF_WINDOW = 0.02;
+const TILE_SPREAD = 0.75;
+
+function coverFor(reveal: number, order: number) {
+  const start = order * TILE_SPREAD;
+  const end = start + (1 - TILE_SPREAD);
+  const local = Math.min(1, Math.max(0, (reveal - start) / (end - start)));
+  return 1 - local;
+}
 
 export function ScrollReel() {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
+  const tileRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [ready, setReady] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeIndexRef = useRef(0);
@@ -94,9 +108,19 @@ export function ScrollReel() {
             setActiveIndex(index);
           }
 
-          if (stageRef.current) {
-            const exitFade = Math.min(1, (1 - progress) / EXIT_WINDOW);
-            stageRef.current.style.opacity = String(exitFade);
+          let nearestReveal = 1;
+          for (const cut of CUT_POINTS) {
+            const distance = Math.abs(progress - cut) / CUT_HALF_WINDOW;
+            nearestReveal = Math.min(nearestReveal, Math.min(1, distance));
+          }
+
+          for (let i = 0; i < TILE_COUNT; i++) {
+            const tile = tileRefs.current[i];
+            if (!tile) continue;
+            const col = i % TILE_COLS;
+            const row = Math.floor(i / TILE_COLS);
+            const order = (col + row) / (TILE_COLS - 1 + TILE_ROWS - 1);
+            tile.style.opacity = String(coverFor(nearestReveal, order));
           }
         },
       });
@@ -108,7 +132,7 @@ export function ScrollReel() {
 
   return (
     <div ref={wrapperRef} className="relative h-[520vh]">
-      <div ref={stageRef} className="sticky top-0 h-screen w-full overflow-hidden bg-black">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
         {/* eslint-disable-next-line @next/next/no-img-element -- src is swapped imperatively per scroll frame; next/image can't do that */}
         <img
           ref={imgRef}
@@ -119,6 +143,18 @@ export function ScrollReel() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/40" />
         {/* Constant vignette over the source footage's burned-in watermark corner */}
         <div className="absolute right-0 top-0 h-40 w-56 bg-gradient-to-bl from-black/80 to-transparent" />
+
+        <div className="pointer-events-none absolute inset-0 grid grid-cols-8 grid-rows-5">
+          {Array.from({ length: TILE_COUNT }).map((_, i) => (
+            <div
+              key={i}
+              ref={(el) => {
+                tileRefs.current[i] = el;
+              }}
+              className="bg-black opacity-0"
+            />
+          ))}
+        </div>
 
         <div className={clsx("pointer-events-none absolute inset-0 flex", POSITIONS[activeIndex % POSITIONS.length])}>
           <AnimatePresence mode="wait">

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Quote, Star } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { RadialProgress } from "@/components/ui/radial-progress";
 import { TrustBar } from "@/components/home/trust-bar";
 import { business, buildWhatsAppLink } from "@/data/business";
 import { testimonials } from "@/data/testimonials";
@@ -13,12 +14,7 @@ export const metadata: Metadata = {
     "26+ years of selling, building, and repairing computers in Patna — the story behind Next Gen Computer.",
 };
 
-const stats = [
-  { value: `${business.yearsExperience}+`, label: "Years in Patna" },
-  { value: `${business.rating}★`, label: "Average rating" },
-  { value: `${business.reviewCount.toLocaleString()}+`, label: "Customer reviews" },
-  { value: "100%", label: "Genuine parts" },
-];
+const satisfactionScore = Math.round((business.rating / 5) * 100);
 
 const values = [
   {
@@ -84,13 +80,73 @@ export default function AboutPage() {
       </Section>
 
       <Section className="pt-0">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="rounded-2xl border border-border bg-surface px-5 py-6 text-center">
-              <p className="font-display text-3xl font-bold text-accent sm:text-4xl">{stat.value}</p>
-              <p className="mt-1.5 text-xs text-muted sm:text-sm">{stat.label}</p>
+        <div className="grid gap-5 lg:grid-cols-3">
+          <div className="flex flex-col justify-between rounded-3xl border border-border bg-surface p-8">
+            <div>
+              <p className="font-display text-2xl font-bold text-foreground">Next Gen Computer</p>
+              <p className="mt-3 text-sm text-muted">
+                Sales, service, and IT infrastructure — one team, one address, for {business.yearsExperience}+
+                years.
+              </p>
             </div>
-          ))}
+            <p className="mt-8 text-xs text-muted">{business.address.line1}, {business.address.city}</p>
+          </div>
+
+          <div className="rounded-3xl border border-border bg-surface p-8">
+            <RadialProgress
+              value={satisfactionScore}
+              sublabel={`${business.rating}★ from ${business.reviewCount.toLocaleString()}+ reviews`}
+            />
+          </div>
+
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border lg:aspect-auto">
+            <Image
+              src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89"
+              alt="A laptop ready for sale at Next Gen Computer"
+              fill
+              sizes="(min-width: 1024px) 33vw, 100vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+
+        <div className="mt-5">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">What we do</p>
+          <div className="no-scrollbar flex gap-4 overflow-x-auto pb-2">
+            {business.services.map((service) => (
+              <div
+                key={service.title}
+                className="w-60 shrink-0 rounded-2xl border border-border bg-surface p-5"
+              >
+                <p className="font-display font-semibold text-foreground">{service.title}</p>
+                <p className="mt-1.5 text-xs text-muted">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 grid gap-5 sm:grid-cols-3">
+          <div className="rounded-3xl border border-success/20 bg-success/10 p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-success">What we stock</p>
+            <p className="mt-3 font-display text-lg font-semibold text-foreground">
+              {business.brands.join(" · ")}
+            </p>
+            <p className="mt-2 text-sm text-muted">Every part genuine, every price explained upfront.</p>
+          </div>
+          <div className="rounded-3xl border border-accent/20 bg-accent/10 p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent">Our reach</p>
+            <p className="mt-3 font-display text-lg font-semibold text-foreground">
+              {business.yearsExperience}+ years · {business.reviewCount.toLocaleString()}+ reviews
+            </p>
+            <p className="mt-2 text-sm text-muted">One shop, thousands of repeat customers.</p>
+          </div>
+          <div className="rounded-3xl border border-sale/20 bg-sale/10 p-6">
+            <p className="text-xs font-semibold uppercase tracking-wider text-sale">Community</p>
+            <p className="mt-3 font-display text-lg font-semibold text-foreground">
+              Schools · Colleges · Corporate offices
+            </p>
+            <p className="mt-2 text-sm text-muted">Bulk orders and AMC support for institutions across Patna.</p>
+          </div>
         </div>
       </Section>
 

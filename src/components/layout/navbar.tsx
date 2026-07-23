@@ -45,7 +45,8 @@ export function Navbar() {
           </Link>
 
           <nav className="hidden items-center gap-1 md:flex">
-            <button
+            <Link
+              href="/shop"
               onMouseEnter={() => setShopOpen(true)}
               className={clsx(
                 "flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition-colors",
@@ -55,7 +56,7 @@ export function Navbar() {
             >
               Shop
               <ChevronDown className={clsx("h-3.5 w-3.5 transition-transform", shopOpen && "rotate-180")} />
-            </button>
+            </Link>
 
             {primaryNav.map((link) => (
               <Link

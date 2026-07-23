@@ -23,14 +23,28 @@ export function ServiceExplorer() {
               className="flex w-full items-center gap-4 px-6 py-5 text-left sm:px-8"
               aria-expanded={isActive}
             >
-              <span
-                className={clsx(
-                  "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors",
-                  isActive ? "bg-accent text-accent-foreground" : "bg-accent/15 text-accent"
-                )}
-              >
-                <service.icon className="h-5 w-5" strokeWidth={1.75} />
-              </span>
+              {service.photo ? (
+                <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-xl">
+                  <DuotonePhoto src={service.photo} alt="" className="h-full w-full" sizes="56px" />
+                  <span
+                    className={clsx(
+                      "absolute inset-0 flex items-center justify-center transition-colors",
+                      isActive ? "bg-accent/70" : "bg-black/40"
+                    )}
+                  >
+                    <service.icon className="h-5 w-5 text-white" strokeWidth={1.75} />
+                  </span>
+                </span>
+              ) : (
+                <span
+                  className={clsx(
+                    "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl transition-colors",
+                    isActive ? "bg-accent text-accent-foreground" : "bg-accent/15 text-accent"
+                  )}
+                >
+                  <service.icon className="h-6 w-6" strokeWidth={1.75} />
+                </span>
+              )}
               <span className="min-w-0 flex-1">
                 <span className="block font-display text-lg font-semibold text-foreground">
                   {service.title}
