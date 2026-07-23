@@ -25,9 +25,12 @@ export function SceneReviews() {
             title="What Patna says about us"
             description={`${business.rating}★ average across ${business.reviewCount.toLocaleString()}+ Google reviews.`}
           />
-          {/* CSS-column masonry — genuinely irregular card heights (short vs long
-              quotes), not a uniform grid pretending to be a testimonials board. */}
-          <FanDeck progress={progress} className="columns-1 gap-5 sm:columns-2 lg:columns-3">
+          {/* A real two-column grid, not CSS-column masonry — masonry's auto-balance
+              interacted badly with this scene's fixed-height sticky container and
+              left almost everything piling into column one. Row-major grid flow
+              also gives us the mirror for free: even index left, odd index right,
+              which lines up exactly with the left/right entrance direction below. */}
+          <FanDeck progress={progress} className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             {testimonials.map((t, i) => (
               <FanCard
                 key={t.name}
@@ -36,7 +39,7 @@ export function SceneReviews() {
                 maxAngle={5}
                 spacing={0}
                 enterOffset={i % 2 === 0 ? -140 : 140}
-                className="glass-card relative mb-5 break-inside-avoid p-6"
+                className="glass-card relative p-6"
               >
                 <Quote className="absolute -right-2 -top-2 h-16 w-16 text-foreground/[0.04]" strokeWidth={1} />
                 <div className="relative flex text-accent">

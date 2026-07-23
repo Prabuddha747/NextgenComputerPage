@@ -17,7 +17,7 @@ export function SceneVisitUs() {
         whileInView={{ opacity: 1, filter: "blur(0px)" }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="grid gap-10 rounded-3xl border border-border bg-surface p-8 sm:p-12 lg:grid-cols-2 lg:items-center"
+        className="glass-card grid gap-10 p-8 sm:p-12 lg:grid-cols-2 lg:items-center"
       >
         <div>
           <SectionHeading
