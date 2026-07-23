@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, X } from "lucide-react";
 import type { Product } from "@/data/products";
 import { ProductGrid } from "@/components/product/product-grid";
 import { priceBands } from "@/lib/price-bands";
@@ -47,6 +47,8 @@ export function CatalogView({
   initialCategories,
   initialBands,
   initialSort,
+  initialQuery,
+  showSearchBar,
 }: {
   products: Product[];
   activeCategory: string;
@@ -54,6 +56,10 @@ export function CatalogView({
   initialCategories?: string;
   initialBands?: string;
   initialSort?: string;
+  initialQuery?: string;
+  /** Renders a prominent full-width search bar above the filters/grid — used on
+   * /shop and /laptops, where searching by name/brand is the more common path in. */
+  showSearchBar?: boolean;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -71,16 +77,24 @@ export function CatalogView({
   const [sort, setSort] = useState<SortValue>(() =>
     SORT_OPTIONS.some((o) => o.value === initialSort) ? (initialSort as SortValue) : "featured"
   );
+  const [query, setQuery] = useState(initialQuery ?? "");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   // Filters are shareable/bookmarkable — every change replaces the URL query string
   // (no scroll, no history entry per click) alongside the local state that drives the grid.
-  const syncUrl = (next: { brands: string[]; categories: string[]; bandIndexes: number[]; sort: SortValue }) => {
+  const syncUrl = (next: {
+    brands: string[];
+    categories: string[];
+    bandIndexes: number[];
+    sort: SortValue;
+    query: string;
+  }) => {
     const params = new URLSearchParams();
     if (next.brands.length) params.set("brand", next.brands.join("|"));
     if (next.categories.length) params.set("category", next.categories.join("|"));
     if (next.bandIndexes.length) params.set("price", next.bandIndexes.join("|"));
     if (next.sort !== "featured") params.set("sort", next.sort);
+    if (next.query.trim()) params.set("q", next.query.trim());
     const query = params.toString();
     router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
   };
@@ -88,7 +102,7 @@ export function CatalogView({
   const toggleBrand = (value: string) => {
     const next = selectedBrands.includes(value) ? selectedBrands.filter((v) => v !== value) : [...selectedBrands, value];
     setSelectedBrands(next);
-    syncUrl({ brands: next, categories: selectedCategories, bandIndexes: selectedBandIndexes, sort });
+    syncUrl({ brands: next, categories: selectedCategories, bandIndexes: selectedBandIndexes, sort, query });
   };
 
   const toggleCategory = (value: string) => {
@@ -96,7 +110,7 @@ export function CatalogView({
       ? selectedCategories.filter((v) => v !== value)
       : [...selectedCategories, value];
     setSelectedCategories(next);
-    syncUrl({ brands: selectedBrands, categories: next, bandIndexes: selectedBandIndexes, sort });
+    syncUrl({ brands: selectedBrands, categories: next, bandIndexes: selectedBandIndexes, sort, query });
   };
 
   const toggleBand = (index: number) => {
@@ -104,21 +118,32 @@ export function CatalogView({
       ? selectedBandIndexes.filter((v) => v !== index)
       : [...selectedBandIndexes, index];
     setSelectedBandIndexes(next);
-    syncUrl({ brands: selectedBrands, categories: selectedCategories, bandIndexes: next, sort });
+    syncUrl({ brands: selectedBrands, categories: selectedCategories, bandIndexes: next, sort, query });
   };
 
   const changeSort = (value: SortValue) => {
     setSort(value);
-    syncUrl({ brands: selectedBrands, categories: selectedCategories, bandIndexes: selectedBandIndexes, sort: value });
+    syncUrl({ brands: selectedBrands, categories: selectedCategories, bandIndexes: selectedBandIndexes, sort: value, query });
+  };
+
+  const changeQuery = (value: string) => {
+    setQuery(value);
+    syncUrl({ brands: selectedBrands, categories: selectedCategories, bandIndexes: selectedBandIndexes, sort, query: value });
   };
 
   const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
     const result = products.filter((p) => {
       const brandOk = selectedBrands.length === 0 || selectedBrands.includes(p.brand);
       const categoryOk = selectedCategories.length === 0 || selectedCategories.includes(p.category);
       const bandOk =
         selectedBandIndexes.length === 0 || selectedBandIndexes.some((i) => priceBands[i].test(p.price));
-      return brandOk && categoryOk && bandOk;
+      const queryOk =
+        q.length === 0 ||
+        p.name.toLowerCase().includes(q) ||
+        p.brand.toLowerCase().includes(q) ||
+        p.tagline.toLowerCase().includes(q);
+      return brandOk && categoryOk && bandOk && queryOk;
     });
 
     if (sort === "price-asc") return [...result].sort((a, b) => a.price - b.price);
@@ -129,7 +154,7 @@ export function CatalogView({
       return [...result].sort((a, b) => Number(b.badges?.includes("NEW")) - Number(a.badges?.includes("NEW")));
     }
     return result;
-  }, [products, selectedBrands, selectedCategories, selectedBandIndexes, sort]);
+  }, [products, selectedBrands, selectedCategories, selectedBandIndexes, sort, query]);
 
   const activeFilterCount = selectedBrands.length + selectedCategories.length + selectedBandIndexes.length;
 
@@ -218,77 +243,92 @@ export function CatalogView({
   );
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[220px_1fr]">
-      <aside className="hidden lg:block">{sidebarContent}</aside>
+    <div>
+      {showSearchBar && (
+        <div className="relative mb-8">
+          <Search className="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" />
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => changeQuery(e.target.value)}
+            placeholder="Search products by name or brand..."
+            className="glass-card h-16 w-full rounded-full pl-14 pr-6 text-base text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/60"
+          />
+        </div>
+      )}
 
-      <div>
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-          <button
-            onClick={() => setMobileFiltersOpen(true)}
-            className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium lg:hidden"
-          >
-            <SlidersHorizontal className="h-4 w-4" />
-            Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
-          </button>
-          <p className="hidden text-sm text-muted lg:block">{filtered.length} products</p>
+      <div className="grid gap-10 lg:grid-cols-[220px_1fr]">
+        <aside className="hidden lg:block">{sidebarContent}</aside>
 
-          <label className="ml-auto flex items-center gap-2 text-sm text-muted">
-            Sort by
-            <select
-              value={sort}
-              onChange={(e) => changeSort(e.target.value as SortValue)}
-              className="rounded-full border border-border bg-surface px-3 py-1.5 text-sm font-medium text-foreground"
+        <div>
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+            <button
+              onClick={() => setMobileFiltersOpen(true)}
+              className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium lg:hidden"
             >
-              {SORT_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </label>
+              <SlidersHorizontal className="h-4 w-4" />
+              Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
+            </button>
+            <p className="hidden text-sm text-muted lg:block">{filtered.length} products</p>
+
+            <label className="ml-auto flex items-center gap-2 text-sm text-muted">
+              Sort by
+              <select
+                value={sort}
+                onChange={(e) => changeSort(e.target.value as SortValue)}
+                className="rounded-full border border-border bg-surface px-3 py-1.5 text-sm font-medium text-foreground"
+              >
+                {SORT_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <motion.div
+            key={`${selectedBrands.join()}-${selectedCategories.join()}-${selectedBandIndexes.join()}-${sort}-${query}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.25 }}
+          >
+            <ProductGrid products={filtered} />
+          </motion.div>
         </div>
 
-        <motion.div
-          key={`${selectedBrands.join()}-${selectedCategories.join()}-${selectedBandIndexes.join()}-${sort}`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.25 }}
-        >
-          <ProductGrid products={filtered} />
-        </motion.div>
+        <AnimatePresence>
+          {mobileFiltersOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setMobileFiltersOpen(false)}
+                className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+              />
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "-100%" }}
+                transition={{ type: "spring", stiffness: 320, damping: 34 }}
+                className="fixed inset-y-0 left-0 z-50 w-[80%] max-w-xs overflow-y-auto bg-background p-6 lg:hidden"
+              >
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="font-display text-lg font-semibold">Filters</span>
+                  <button
+                    onClick={() => setMobileFiltersOpen(false)}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+                {sidebarContent}
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </div>
-
-      <AnimatePresence>
-        {mobileFiltersOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileFiltersOpen(false)}
-              className="fixed inset-0 z-40 bg-black/50 lg:hidden"
-            />
-            <motion.div
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "spring", stiffness: 320, damping: 34 }}
-              className="fixed inset-y-0 left-0 z-50 w-[80%] max-w-xs overflow-y-auto bg-background p-6 lg:hidden"
-            >
-              <div className="mb-6 flex items-center justify-between">
-                <span className="font-display text-lg font-semibold">Filters</span>
-                <button
-                  onClick={() => setMobileFiltersOpen(false)}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-border"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-              {sidebarContent}
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

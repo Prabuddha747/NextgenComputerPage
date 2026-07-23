@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 export default async function ShopAllPage({
   searchParams,
 }: {
-  searchParams: Promise<{ brand?: string; category?: string; price?: string; sort?: string }>;
+  searchParams: Promise<{ brand?: string; category?: string; price?: string; sort?: string; q?: string }>;
 }) {
-  const { brand, category, price, sort } = await searchParams;
+  const { brand, category, price, sort, q } = await searchParams;
 
   return (
     <Section className="pt-14">
@@ -30,6 +30,8 @@ export default async function ShopAllPage({
         initialCategories={category}
         initialBands={price}
         initialSort={sort}
+        initialQuery={q}
+        showSearchBar
       />
     </Section>
   );
