@@ -47,7 +47,7 @@ export default function RepairPage() {
 
       <div className="grid gap-12 lg:grid-cols-2">
         <div>
-          <h2 className="font-display text-xl font-semibold text-foreground">What we repair</h2>
+          <h2 className="font-display text-xl font-bold text-foreground">What we repair</h2>
           <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {covered.map((item) => (
               <li key={item} className="flex items-center gap-2.5 text-sm text-foreground/90">
@@ -59,7 +59,7 @@ export default function RepairPage() {
         </div>
 
         <div>
-          <h2 className="mb-5 font-display text-xl font-semibold text-foreground">Book a diagnosis</h2>
+          <h2 className="mb-5 font-display text-xl font-bold text-foreground">Book a diagnosis</h2>
           <WhatsAppEnquiryForm intro="Hi, I'd like to book a repair diagnosis." />
         </div>
       </div>

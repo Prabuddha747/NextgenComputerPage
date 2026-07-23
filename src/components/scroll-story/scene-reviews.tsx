@@ -39,7 +39,7 @@ export function SceneReviews() {
                 maxAngle={5}
                 spacing={0}
                 enterOffset={i % 2 === 0 ? -140 : 140}
-                className="glass-card relative p-6"
+                className="glass-card-scene relative p-6"
               >
                 <Quote className="absolute -right-2 -top-2 h-16 w-16 text-foreground/[0.04]" strokeWidth={1} />
                 <div className="relative flex text-accent">

@@ -43,7 +43,7 @@ export default function AboutPage() {
     <>
       <Section className="pt-10">
         <div className="relative overflow-hidden rounded-3xl border border-border">
-          <div className="relative aspect-4/5 sm:aspect-3/4">
+          <div className="relative aspect-4/5">
             <Image
               src="/owner-office.png"
               alt="Founder of Next Gen Computer at the Dak Bunglow Road store"
@@ -155,12 +155,12 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-          <div className="relative aspect-3/5 overflow-hidden rounded-3xl border border-border">
+          <div className="relative mx-auto aspect-4/5 w-full max-w-sm overflow-hidden rounded-3xl border border-border lg:mx-0 lg:ml-auto">
             <Image
               src="/owner-portrait.png"
               alt={`${business.founderName}, founder of Next Gen Computer`}
               fill
-              sizes="(min-width: 1024px) 45vw, 100vw"
+              sizes="(min-width: 1024px) 30vw, 60vw"
               className="object-cover"
             />
           </div>
@@ -189,7 +189,7 @@ export default function AboutPage() {
 
       <Section className="pt-0">
         <div className="rounded-3xl border border-border bg-accent/10 p-8 text-center sm:p-12">
-          <h2 className="font-display text-2xl font-semibold text-foreground sm:text-3xl">
+          <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
             Have a question, or want to just walk in?
           </h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-muted sm:text-base">

@@ -48,7 +48,7 @@ export default async function ProductPage({
 
         <div>
           <p className="text-sm font-medium uppercase tracking-wide text-muted">{product.brand}</p>
-          <h1 className="mt-1 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          <h1 className="mt-1 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             {product.name}
           </h1>
           <p className="mt-2 text-base text-muted">{product.tagline}</p>

@@ -22,9 +22,6 @@
      business get a cool silver, accessories keep the brass "sale" tone. No
      fabricated "creator" accent — we don't carry a product line that maps to one. */
   --accent-business: #d6d9e0;
-  /* Second glow color already used sparingly elsewhere (owner-photo RGB ring,
-     Services' enterprise-card glow) — now the navbar's dedicated accent too. */
-  --accent-secondary: #a78bfa;
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.07);
   --ease-premium: cubic-bezier(0.19, 1, 0.22, 1);
@@ -44,7 +41,6 @@
   --success: #059669;
 
   --accent-business: #52525b;
-  --accent-secondary: #7c3aed;
   --glass-bg: rgba(0, 0, 0, 0.02);
   --glass-border: rgba(0, 0, 0, 0.08);
   --ease-premium: cubic-bezier(0.19, 1, 0.22, 1);
@@ -62,7 +58,6 @@
   --color-sale: var(--sale);
   --color-success: var(--success);
   --color-accent-business: var(--accent-business);
-  --color-accent-secondary: var(--accent-secondary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-jetbrains-mono);
   --font-display: var(--font-space-grotesk);
@@ -123,6 +118,19 @@ body {
 
 .light .glass-card {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+/* Darker glass for cards that float directly over the homepage's build video —
+   .glass-card's normal near-white 3% tint left white text hard to read against
+   a bright/busy frame. Same blur, same see-through backdrop, just a genuinely
+   dark tinted background instead of a light frosted one. */
+.glass-card-scene {
+  border-radius: 28px;
+  border: 1px solid var(--glass-border);
+  background: rgba(6, 6, 8, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
 }
 
 /* Light-sweep hover: a diagonal highlight translates across on hover. */

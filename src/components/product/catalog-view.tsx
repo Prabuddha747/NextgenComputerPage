@@ -245,14 +245,14 @@ export function CatalogView({
   return (
     <div>
       {showSearchBar && (
-        <div className="relative mb-8">
-          <Search className="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" />
+        <div className="relative mx-auto mb-8 max-w-md">
+          <Search className="pointer-events-none absolute left-4 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-muted" />
           <input
             type="search"
             value={query}
             onChange={(e) => changeQuery(e.target.value)}
             placeholder="Search products by name or brand..."
-            className="glass-card h-16 w-full rounded-full pl-14 pr-6 text-base text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/60"
+            className="glass-card h-12 w-full rounded-xl pl-11 pr-4 text-sm text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/60"
           />
         </div>
       )}

@@ -20,8 +20,8 @@ const GLOW_TINTS = [
 
 function ServiceVisual({ photo, glow }: { photo: string; glow: string }) {
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border">
-      <Image src={photo} alt="" fill sizes="(min-width: 1024px) 40vw, 90vw" className="object-cover grayscale contrast-[1.1]" />
+    <div className="relative ml-auto aspect-[4/3] w-full max-w-sm overflow-hidden rounded-2xl border border-border">
+      <Image src={photo} alt="" fill sizes="(min-width: 1024px) 25vw, 90vw" className="object-cover grayscale contrast-[1.1]" />
       <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/50" />
       <div
         aria-hidden
@@ -52,10 +52,10 @@ export function ServiceExplorer() {
                 <span className="-mt-1 h-1.5 w-1.5 rounded-full bg-accent" />
               </div>
 
-              <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+              <div className="grid gap-6 lg:grid-cols-[1.3fr_0.8fr] lg:items-center">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">{service.category}</p>
-                  <h3 className="mt-3 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+                  <h3 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                     {service.title}
                   </h3>
 

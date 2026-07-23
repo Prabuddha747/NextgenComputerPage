@@ -38,7 +38,7 @@ export function SceneOwner() {
 
               <FanDeck progress={progress} className="mt-12 grid grid-cols-2 gap-4">
                 {proofPoints.map((point, i) => (
-                  <FanCard key={point.label} index={i} count={proofPoints.length} className="glass-card p-6">
+                  <FanCard key={point.label} index={i} count={proofPoints.length} className="glass-card-scene p-6">
                     <p className="font-display text-2xl font-bold text-white">{point.label}</p>
                     <p className="mt-1.5 text-sm text-white/70">{point.sub}</p>
                   </FanCard>
