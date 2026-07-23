@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { LocationCta } from "@/components/home/location-cta";
 import { WhatsAppEnquiryForm } from "@/components/forms/whatsapp-enquiry-form";
+import { Faq } from "@/components/home/faq";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -23,6 +24,7 @@ export default function ContactPage() {
           />
         </div>
       </Section>
+      <Faq />
       <LocationCta />
     </>
   );
