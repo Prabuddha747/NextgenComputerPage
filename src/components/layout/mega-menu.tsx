@@ -19,7 +19,7 @@ export function MegaMenu({ onNavigate }: { onNavigate: () => void }) {
       transition={{ duration: 0.18, ease: "easeOut" }}
       className="absolute inset-x-0 top-full z-30 border-b border-border bg-surface shadow-2xl"
     >
-      <div className="mx-auto grid max-w-[1680px] grid-cols-5 gap-8 px-4 py-10 sm:px-6 lg:px-10">
+      <div className="mx-auto grid max-w-[1680px] grid-cols-3 gap-8 px-4 py-10 sm:px-6 lg:grid-cols-5 lg:px-10">
         {shopMegaMenu.map((column) => {
           const Icon = productIcons[column.icon];
           return (

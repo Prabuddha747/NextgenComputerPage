@@ -95,8 +95,10 @@ export default function AboutPage() {
       </Section>
 
       <Section className="pt-0">
-        <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr_1fr]">
-          <WhoWeAreCard />
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
+          <div className="md:col-span-2 lg:col-span-1">
+            <WhoWeAreCard />
+          </div>
 
           <div className="rounded-3xl border border-border bg-surface p-8">
             <RadialProgress

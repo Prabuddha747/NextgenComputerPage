@@ -47,17 +47,19 @@ export function BuildReelBackground({ progress }: { progress: MotionValue<number
           re-extracting from the original (lower-quality) source. Sized in vw/clamp,
           not fixed Tailwind spacing — the video scales with viewport width via
           object-cover, so a fixed-px badge falls behind on larger screens exactly
-          the way the first attempt did. */}
+          the way the first attempt did. Hardcoded dark background + white text
+          regardless of site theme — the video itself is always dark, so a
+          theme-token bg-background turns into a glaring white patch in light mode. */}
       <div
         aria-hidden
-        className="absolute left-0 top-0 flex items-center justify-center rounded-br-xl bg-background"
+        className="absolute left-0 top-0 flex items-center justify-center rounded-br-xl bg-[#0a0a0c]"
         style={{
           width: "clamp(160px, 18vw, 320px)",
           height: "clamp(56px, 7vw, 110px)",
         }}
       >
         <span
-          className="font-display font-bold tracking-tight text-foreground"
+          className="font-display font-bold tracking-tight text-white"
           style={{ fontSize: "clamp(1rem, 2.2vw, 1.75rem)" }}
         >
           Next<span className="text-accent">Gen</span> Computer

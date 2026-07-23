@@ -22,7 +22,7 @@ export const shopMegaMenu: NavColumn[] = [
     links: [
       { label: "All Gaming PCs", href: "/gaming-pcs" },
       { label: "Build Your Own", href: "/configurator" },
-      { label: "Corsair ONE PCs", href: "/gaming-pcs?brand=Corsair" },
+      { label: "Corsair ONE PCs", href: "/shop?brand=Corsair" },
     ],
   },
   {
@@ -31,10 +31,10 @@ export const shopMegaMenu: NavColumn[] = [
     photo: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89",
     links: [
       { label: "All Laptops", href: "/laptops" },
-      { label: "Dell", href: "/laptops?brand=Dell" },
-      { label: "HP", href: "/laptops?brand=HP" },
-      { label: "Lenovo", href: "/laptops?brand=Lenovo" },
-      { label: "Apple", href: "/laptops?brand=Apple" },
+      { label: "Dell", href: "/shop?brand=Dell" },
+      { label: "HP", href: "/shop?brand=HP" },
+      { label: "Lenovo", href: "/shop?brand=Lenovo" },
+      { label: "Apple", href: "/shop?brand=Apple" },
     ],
   },
   {
@@ -43,11 +43,11 @@ export const shopMegaMenu: NavColumn[] = [
     photo: "https://images.unsplash.com/photo-1766656533864-2314b462d439",
     links: [
       { label: "All Accessories", href: "/accessories" },
-      { label: "Keyboards", href: "/accessories?q=keyboard" },
-      { label: "Mice", href: "/accessories?q=mouse" },
-      { label: "Monitors", href: "/accessories?q=monitor" },
-      { label: "Cooling", href: "/accessories?q=cooling" },
-      { label: "Headsets", href: "/accessories?q=headset" },
+      { label: "Keyboards", href: "/shop?q=keyboard" },
+      { label: "Mice", href: "/shop?q=mouse" },
+      { label: "Monitors", href: "/shop?q=monitor" },
+      { label: "Cooling", href: "/shop?q=cooling" },
+      { label: "Headsets", href: "/shop?q=headset" },
     ],
   },
   {
