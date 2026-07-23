@@ -31,27 +31,14 @@ const POSITIONS = [
   "items-center justify-end pr-6 sm:pr-16",
 ];
 
-// Puzzle-tile cover instead of a flat fade: tiles peel away on entry (top-left first)
-// and re-assemble on exit, so the transition is always visibly *doing* something
-// rather than sitting at a dead half-opacity for a stretch of scroll.
-const TILE_COLS = 8;
-const TILE_ROWS = 5;
-const TILE_COUNT = TILE_COLS * TILE_ROWS;
-const ENTRY_WINDOW = 0.1;
-const EXIT_WINDOW = 0.1;
-const TILE_SPREAD = 0.75;
-
-function coverFor(reveal: number, order: number) {
-  const start = order * TILE_SPREAD;
-  const end = start + (1 - TILE_SPREAD);
-  const local = Math.min(1, Math.max(0, (reveal - start) / (end - start)));
-  return 1 - local;
-}
+// Only fades out at the very end, right before the section releases into whatever
+// follows — no entry effect, the reel is just there the moment you reach it.
+const EXIT_WINDOW = 0.08;
 
 export function ScrollReel() {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
-  const tileRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [ready, setReady] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeIndexRef = useRef(0);
@@ -107,16 +94,9 @@ export function ScrollReel() {
             setActiveIndex(index);
           }
 
-          const entryReveal = Math.min(1, progress / ENTRY_WINDOW);
-          const exitReveal = Math.min(1, (1 - progress) / EXIT_WINDOW);
-          for (let i = 0; i < TILE_COUNT; i++) {
-            const tile = tileRefs.current[i];
-            if (!tile) continue;
-            const col = i % TILE_COLS;
-            const row = Math.floor(i / TILE_COLS);
-            const order = (col + row) / (TILE_COLS - 1 + TILE_ROWS - 1);
-            const cover = Math.max(coverFor(entryReveal, order), coverFor(exitReveal, order));
-            tile.style.opacity = String(cover);
+          if (stageRef.current) {
+            const exitFade = Math.min(1, (1 - progress) / EXIT_WINDOW);
+            stageRef.current.style.opacity = String(exitFade);
           }
         },
       });
@@ -128,7 +108,7 @@ export function ScrollReel() {
 
   return (
     <div ref={wrapperRef} className="relative h-[520vh]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
+      <div ref={stageRef} className="sticky top-0 h-screen w-full overflow-hidden bg-black">
         {/* eslint-disable-next-line @next/next/no-img-element -- src is swapped imperatively per scroll frame; next/image can't do that */}
         <img
           ref={imgRef}
@@ -139,18 +119,6 @@ export function ScrollReel() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/40" />
         {/* Constant vignette over the source footage's burned-in watermark corner */}
         <div className="absolute right-0 top-0 h-40 w-56 bg-gradient-to-bl from-black/80 to-transparent" />
-
-        <div className="pointer-events-none absolute inset-0 grid grid-cols-8 grid-rows-5">
-          {Array.from({ length: TILE_COUNT }).map((_, i) => (
-            <div
-              key={i}
-              ref={(el) => {
-                tileRefs.current[i] = el;
-              }}
-              className="border border-white/[0.04] bg-black"
-            />
-          ))}
-        </div>
 
         <div className={clsx("pointer-events-none absolute inset-0 flex", POSITIONS[activeIndex % POSITIONS.length])}>
           <AnimatePresence mode="wait">

@@ -46,9 +46,9 @@ export default function AboutPage() {
     <>
       <Section className="pt-10">
         <div className="relative overflow-hidden rounded-3xl border border-border">
-          <div className="relative aspect-[4/5] sm:aspect-[16/9]">
+          <div className="relative aspect-[4/5] sm:aspect-[7/6]">
             <Image
-              src="/owner.jpg"
+              src="/owner-wide.jpg"
               alt="Founder of Next Gen Computer at the Dak Bunglow Road store"
               fill
               priority
