@@ -13,7 +13,7 @@ import { heroContent } from "@/data/hero-content";
 // floating over the shared build reel, which starts assembling right here.
 export function SceneHero() {
   return (
-    <PinnedScene>
+    <PinnedScene heightVh={150}>
       {() => (
         <Container>
           <motion.div
@@ -27,7 +27,7 @@ export function SceneHero() {
               {heroContent.eyebrow}
             </p>
 
-            <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            <h1 className="font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
               {heroContent.headline}
             </h1>
 

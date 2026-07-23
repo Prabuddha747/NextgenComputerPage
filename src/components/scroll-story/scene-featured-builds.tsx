@@ -12,7 +12,7 @@ export function SceneFeaturedBuilds() {
   const pcs = getProductsByCategory("gaming-pc");
 
   return (
-    <PinnedScene heightVh={160}>
+    <PinnedScene heightVh={140}>
       {(progress) => (
         <Container>
           <SectionHeading eyebrow="Ready to game" title="Featured builds" />

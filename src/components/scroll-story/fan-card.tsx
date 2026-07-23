@@ -10,6 +10,7 @@ export function FanCard({
   count,
   maxAngle,
   spacing,
+  enterOffset,
   className,
   children,
 }: {
@@ -19,12 +20,15 @@ export function FanCard({
    * settle nearly flat for legibility, unlike the owner/review decks. */
   maxAngle?: number;
   spacing?: number;
+  /** Transient px kick this card enters from (negative = from the left, positive
+   * = from the right) — decays to 0 at rest, unlike `spacing`'s permanent offset. */
+  enterOffset?: number;
   className?: string;
   children: ReactNode;
 }) {
   const { progress, variant } = useFanDeckContext();
   const reduceMotion = useReducedMotion();
-  const overrides = { maxAngle, spacing };
+  const overrides = { maxAngle, spacing, enterOffset };
 
   const x = useTransform(progress, (p) =>
     reduceMotion ? 0 : getCardTransform(p, index, count, variant, overrides).x

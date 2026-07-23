@@ -17,43 +17,49 @@ const proofPoints = [
 
 export function SceneOwner() {
   return (
-    <PinnedScene>
+    <PinnedScene heightVh={150}>
       {(progress) => (
         <Container>
-          {/* Single column, kept to the left half — the video's center (where the
-              build assembles) stays clear rather than being covered by a portrait. */}
-          <div className="max-w-lg">
-            <div className="flex items-center gap-3">
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-accent/60">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Behind the counter</p>
+              <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl">
+                {business.founderName} has been building, repairing, and arguing over spec sheets on{" "}
+                {business.address.line1} for {business.yearsExperience} years.
+              </h2>
+              <p className="mt-6 font-serif text-xl italic leading-snug text-foreground/90 sm:text-2xl">
+                &ldquo;Every build that leaves this store, I&apos;d put in my own home.&rdquo;
+              </p>
+              <Button href={buildWhatsAppLink("Hi, I'd like to know more about Next Gen Computer.")} className="mt-8">
+                WhatsApp Us
+              </Button>
+
+              <FanDeck progress={progress} className="mt-12 grid grid-cols-2 gap-4">
+                {proofPoints.map((point, i) => (
+                  <FanCard key={point.label} index={i} count={proofPoints.length} className="glass-card p-6">
+                    <p className="font-serif text-2xl font-semibold text-foreground">{point.label}</p>
+                    <p className="mt-1.5 text-sm text-muted">{point.sub}</p>
+                  </FanCard>
+                ))}
+              </FanDeck>
+            </div>
+
+            {/* Real photo, framed as a card rather than a small circle — a soft
+                multi-color glow ring stands in for "RGB" lighting without clashing
+                with the rest of the (mostly teal) palette. */}
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-xs">
+              <div className="absolute -inset-[3px] rounded-[2rem] bg-gradient-to-br from-accent via-[#a78bfa] to-[#c9a15a] opacity-70 blur-[3px]" />
+              <div className="relative h-full w-full overflow-hidden rounded-[1.75rem] border border-black/40">
                 <Image
                   src="/owner-studio.jpg"
                   alt={`${business.founderName}, founder of Next Gen Computer`}
                   fill
-                  sizes="56px"
-                  className="object-cover grayscale-[0.2]"
+                  sizes="(min-width: 1024px) 30vw, 80vw"
+                  className="object-cover grayscale-[0.2] contrast-[1.05]"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               </div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Behind the counter</p>
             </div>
-            <h2 className="mt-5 font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
-              {business.founderName} has been building, repairing, and arguing over spec sheets on{" "}
-              {business.address.line1} for {business.yearsExperience} years.
-            </h2>
-            <p className="mt-6 font-serif text-xl italic leading-snug text-foreground/90 sm:text-2xl">
-              &ldquo;Every build that leaves this store, I&apos;d put in my own home.&rdquo;
-            </p>
-            <Button href={buildWhatsAppLink("Hi, I'd like to know more about Next Gen Computer.")} className="mt-8">
-              WhatsApp Us
-            </Button>
-
-            <FanDeck progress={progress} className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {proofPoints.map((point, i) => (
-                <FanCard key={point.label} index={i} count={proofPoints.length} className="glass-card p-5">
-                  <p className="font-display text-lg font-bold text-foreground">{point.label}</p>
-                  <p className="mt-1 text-xs text-muted">{point.sub}</p>
-                </FanCard>
-              ))}
-            </FanDeck>
           </div>
         </Container>
       )}

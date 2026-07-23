@@ -17,7 +17,7 @@ function initials(name: string) {
 
 export function SceneReviews() {
   return (
-    <PinnedScene heightVh={170}>
+    <PinnedScene heightVh={140}>
       {(progress) => (
         <Container>
           <SectionHeading
@@ -34,6 +34,8 @@ export function SceneReviews() {
                 index={i}
                 count={testimonials.length}
                 maxAngle={5}
+                spacing={0}
+                enterOffset={i % 2 === 0 ? -140 : 140}
                 className="glass-card relative mb-5 break-inside-avoid p-6"
               >
                 <Quote className="absolute -right-2 -top-2 h-16 w-16 text-foreground/[0.04]" strokeWidth={1} />

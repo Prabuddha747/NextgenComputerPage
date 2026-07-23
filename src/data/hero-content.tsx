@@ -6,8 +6,8 @@ export const heroContent = {
   eyebrow: `${business.yearsExperience}+ Years in Patna`,
   headline: (
     <>
-      Built for gamers. <br />
-      Trusted by <span className="text-accent">Patna</span>.
+      <span className="text-accent">Bihar&apos;s No. 1</span> <br />
+      gaming brand.
     </>
   ),
   copy: "Laptops, custom gaming PCs, repair, CCTV and networking — from Dell to Apple, sold and serviced from Dak Bunglow Road.",

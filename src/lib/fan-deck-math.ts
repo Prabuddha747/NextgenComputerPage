@@ -48,11 +48,15 @@ export function getCardTransform(
   index: number,
   count: number,
   variant: FanVariant = "desktop",
-  overrides?: { maxAngle?: number; spacing?: number }
+  overrides?: { maxAngle?: number; spacing?: number; enterOffset?: number }
 ): FanCardTransform {
   const base = VARIANT_CONFIG[variant];
   const maxAngle = overrides?.maxAngle ?? base.maxAngle;
   const spacing = overrides?.spacing ?? base.spacing;
+  // Transient-only horizontal kick (e.g. alternating left/right per card in a
+  // masonry grid) that decays to 0 as the card settles — unlike `spread`, it
+  // never becomes a permanent resting offset.
+  const enterOffset = overrides?.enterOffset ?? 0;
 
   // Staggered start: card i begins animating slightly after card i-1.
   const startOffset = index / (count + 2);
@@ -67,7 +71,7 @@ export function getCardTransform(
   return {
     // Cards start at a small inward offset (15% of their resting spread) and
     // travel outward to it — never start at 0 the same as every other card.
-    x: spread * (0.15 + 0.85 * eased),
+    x: spread * (0.15 + 0.85 * eased) + enterOffset * (1 - eased),
     y: mobileRise * (1 - eased),
     // Rotation settles into its resting angle rather than spinning past it.
     rotate: angle * (0.3 + 0.7 * eased),
