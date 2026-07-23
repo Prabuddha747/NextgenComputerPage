@@ -18,7 +18,7 @@ export const shopMegaMenu: NavColumn[] = [
     links: [
       { label: "All Gaming PCs", href: "/gaming-pcs" },
       { label: "Build Your Own", href: "/configurator" },
-      { label: "Corsair ONE PCs", href: "/gaming-pcs" },
+      { label: "Corsair ONE PCs", href: "/gaming-pcs?brand=Corsair" },
     ],
   },
   {
@@ -36,11 +36,12 @@ export const shopMegaMenu: NavColumn[] = [
     title: "Accessories",
     icon: "keyboard",
     links: [
-      { label: "Keyboards", href: "/accessories" },
-      { label: "Mice", href: "/accessories" },
-      { label: "Monitors", href: "/accessories" },
-      { label: "Cooling", href: "/accessories" },
-      { label: "Headsets", href: "/accessories" },
+      { label: "All Accessories", href: "/accessories" },
+      { label: "Keyboards", href: "/accessories?q=keyboard" },
+      { label: "Mice", href: "/accessories?q=mouse" },
+      { label: "Monitors", href: "/accessories?q=monitor" },
+      { label: "Cooling", href: "/accessories?q=cooling" },
+      { label: "Headsets", href: "/accessories?q=headset" },
     ],
   },
   {

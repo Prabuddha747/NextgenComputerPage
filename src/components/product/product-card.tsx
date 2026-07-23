@@ -77,25 +77,35 @@ export function ProductCard({
       </Link>
 
       <div className="flex flex-1 flex-col p-5">
-        <p className="text-xs font-medium uppercase tracking-wider text-muted">{product.brand}</p>
+        <p className={clsx("text-xs font-medium uppercase tracking-wider", dark ? "text-white/60" : "text-muted")}>
+          {product.brand}
+        </p>
         <Link href={`/product/${product.slug}`}>
-          <h3 className="mt-1.5 font-display text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-[var(--card-accent)]">
+          <h3
+            className={clsx(
+              "mt-1.5 font-display text-xl font-bold tracking-tight transition-colors group-hover:text-[var(--card-accent)]",
+              dark ? "text-white" : "text-foreground"
+            )}
+          >
             {product.name}
           </h3>
         </Link>
-        <p className="mt-1 text-sm text-muted">{product.tagline}</p>
+        <p className={clsx("mt-1 text-sm", dark ? "text-white/60" : "text-muted")}>{product.tagline}</p>
 
-        <ul className="mt-4 space-y-1 text-xs text-foreground/80">
+        <ul className={clsx("mt-4 space-y-1 text-xs", dark ? "text-white/80" : "text-foreground/80")}>
           {product.specs.slice(0, 2).map((spec) => (
-            <li key={spec.label} className="flex justify-between border-b border-border/60 py-1.5">
-              <span className="text-muted">{spec.label}</span>
+            <li
+              key={spec.label}
+              className={clsx("flex justify-between border-b py-1.5", dark ? "border-white/15" : "border-border/60")}
+            >
+              <span className={dark ? "text-white/60" : "text-muted"}>{spec.label}</span>
               <span className="font-mono font-medium">{spec.value}</span>
             </li>
           ))}
         </ul>
 
         <div className="mt-5 flex items-center justify-between gap-3">
-          <p className="font-mono text-2xl font-bold text-foreground">
+          <p className={clsx("font-mono text-2xl font-bold", dark ? "text-white" : "text-foreground")}>
             {formatINR(product.price)}
           </p>
           <div className="flex items-center gap-2">
