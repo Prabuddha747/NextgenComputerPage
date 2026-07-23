@@ -26,13 +26,13 @@ export function TrustBar() {
         <p className="mb-4 text-center text-xs font-semibold uppercase tracking-wider text-muted">
           Authorized to sell &amp; service
         </p>
-        <div className="flex w-max gap-16 animate-marquee">
-          {[...business.brands, ...business.brands].map((brand, i) => (
-            <span
-              key={`${brand}-${i}`}
-              className="font-display text-2xl font-semibold text-muted/70 sm:text-3xl"
-            >
-              {brand}
+        <div className="flex w-max items-center gap-16 animate-marquee">
+          {[...business.brands, ...business.brands, ...business.brands].map((brand, i) => (
+            <span key={`${brand}-${i}`} className="flex shrink-0 items-center gap-16">
+              <span className="font-display text-2xl font-semibold text-muted/70 sm:text-3xl">
+                {brand}
+              </span>
+              <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent/40" />
             </span>
           ))}
         </div>
