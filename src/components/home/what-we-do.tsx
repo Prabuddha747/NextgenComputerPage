@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Section, SectionHeading } from "@/components/ui/section";
+import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { ScrollReel } from "@/components/home/scroll-reel";
 import { buildWhatsAppLink } from "@/data/business";
@@ -10,13 +11,13 @@ import { repairSteps } from "@/data/repair-steps";
 export function WhatWeDo() {
   return (
     <div>
-      <Section className="pb-10">
+      <Container className="pt-20 pb-6 sm:pt-28">
         <SectionHeading
           eyebrow="What we do"
           title="Sales, service, and everything in between"
           description="From a single laptop repair to a fully custom gaming build — sales and service, under one roof. Scroll on."
         />
-      </Section>
+      </Container>
 
       <ScrollReel />
 

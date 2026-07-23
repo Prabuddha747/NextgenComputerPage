@@ -21,6 +21,16 @@ const DIRECTIONS = [
   { x: 220, y: 180 },
 ];
 
+// ...and lands in a different corner each time, instead of always dead-center.
+const POSITIONS = [
+  "items-start justify-start pt-28 pl-6 sm:pl-16",
+  "items-start justify-end pt-28 pr-6 sm:pr-16",
+  "items-end justify-start pb-28 pl-6 sm:pl-16",
+  "items-end justify-end pb-28 pr-6 sm:pr-16",
+  "items-center justify-start pl-6 sm:pl-16",
+  "items-center justify-end pr-6 sm:pr-16",
+];
+
 // Puzzle-tile cover instead of a flat fade: tiles peel away on entry (top-left first)
 // and re-assemble on exit, so the transition is always visibly *doing* something
 // rather than sitting at a dead half-opacity for a stretch of scroll.
@@ -137,25 +147,27 @@ export function ScrollReel() {
               ref={(el) => {
                 tileRefs.current[i] = el;
               }}
-              style={{ background: "var(--background)" }}
+              className="border border-white/[0.04] bg-black"
             />
           ))}
         </div>
 
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-6">
+        <div className={clsx("pointer-events-none absolute inset-0 flex", POSITIONS[activeIndex % POSITIONS.length])}>
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
-              initial={{ opacity: 0, x: dir.x, y: dir.y, scale: 0.85, rotate: activeIndex % 2 === 0 ? -8 : 8 }}
+              initial={{ opacity: 0, x: dir.x, y: dir.y, scale: 0.85, rotate: activeIndex % 2 === 0 ? -6 : 6 }}
               animate={{ opacity: 1, x: 0, y: 0, scale: 1, rotate: 0 }}
               exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.25 } }}
               transition={{ type: "spring", stiffness: 240, damping: 24 }}
-              className="max-w-lg rounded-3xl border border-white/15 bg-black/40 px-7 py-6 text-center shadow-2xl backdrop-blur-md sm:px-12 sm:py-9"
+              className="max-w-lg rounded-lg border-2 border-accent/50 bg-black/60 px-7 py-6 text-left shadow-2xl backdrop-blur-sm sm:px-10 sm:py-8"
             >
-              <p className="font-display text-2xl font-bold text-white sm:text-4xl">
+              <p className="font-display text-3xl font-black uppercase leading-[1.05] tracking-tight text-white sm:text-5xl">
                 {services[activeIndex].title}
               </p>
-              <p className="mt-2.5 text-sm text-white/75 sm:text-base">{services[activeIndex].description}</p>
+              <p className="mt-3 max-w-sm text-sm text-white/70 sm:text-base">
+                {services[activeIndex].description}
+              </p>
             </motion.div>
           </AnimatePresence>
         </div>
