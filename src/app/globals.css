@@ -81,9 +81,9 @@ body {
   pointer-events: none;
   background:
     radial-gradient(50% 40% at 15% 10%, rgba(255, 180, 120, 0.045), transparent 65%),
-    radial-gradient(45% 40% at 88% 15%, rgba(0, 210, 255, 0.06), transparent 65%),
+    radial-gradient(45% 40% at 88% 15%, rgba(62, 216, 195, 0.06), transparent 65%),
     radial-gradient(55% 45% at 22% 92%, rgba(140, 90, 255, 0.05), transparent 65%),
-    radial-gradient(50% 45% at 90% 88%, rgba(0, 210, 255, 0.045), transparent 65%),
+    radial-gradient(50% 45% at 90% 88%, rgba(62, 216, 195, 0.045), transparent 65%),
     radial-gradient(80% 60% at 50% 50%, #0b0c10, #050505 100%);
 }
 
