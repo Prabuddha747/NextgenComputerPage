@@ -35,23 +35,16 @@ export const shopMegaMenu: NavColumn[] = [
   {
     title: "Accessories",
     icon: "keyboard",
-    links: [
-      { label: "All Accessories", href: "/accessories" },
-      { label: "Keyboards", href: "/accessories?q=keyboard" },
-      { label: "Mice", href: "/accessories?q=mouse" },
-      { label: "Monitors", href: "/accessories?q=monitor" },
-      { label: "Cooling", href: "/accessories?q=cooling" },
-      { label: "Headsets", href: "/accessories?q=headset" },
-    ],
+    links: [{ label: "All Accessories", href: "/accessories" }],
   },
   {
-    title: "Services",
-    icon: "router",
+    title: "Gaming Essentials",
+    icon: "cpu",
     links: [
-      { label: "Laptop & Desktop Repair", href: "/repair" },
-      { label: "CCTV Installation", href: "/services#cctv" },
-      { label: "Networking", href: "/services#networking" },
-      { label: "Enterprise Solutions", href: "/services#enterprise" },
+      { label: "Vengeance i7 Strike", href: "/product/vengeance-i7-strike" },
+      { label: "Aurora TKL Mechanical Keyboard", href: "/product/rgb-mechanical-keyboard" },
+      { label: "Curve 27 QHD 165Hz Monitor", href: "/product/curved-gaming-monitor" },
+      { label: "Racer Pro Gaming Chair", href: "/product/racer-pro-gaming-chair" },
     ],
   },
 ];
