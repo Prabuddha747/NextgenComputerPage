@@ -1,11 +1,11 @@
-import { Camera, Router, Building2 } from "lucide-react";
+import { Camera, Router, Server } from "lucide-react";
 
 export const serviceDetails = [
   {
     slug: "cctv",
-    title: "CCTV Installation",
+    category: "Surveillance solutions",
+    title: "CCTV Infrastructure",
     icon: Camera,
-    photo: "https://images.unsplash.com/photo-1643123182527-3bd30840e7ed",
     description:
       "Site survey, camera selection, and professional installation for homes, shops, and offices — with remote viewing set up on your phone before we leave.",
     points: [
@@ -17,9 +17,9 @@ export const serviceDetails = [
   },
   {
     slug: "networking",
-    title: "Networking",
+    category: "Network solutions",
+    title: "Enterprise Networking",
     icon: Router,
-    photo: "https://images.unsplash.com/photo-1750710583720-8b3bdd0f658a",
     description:
       "Wired and Wi-Fi networking for homes, offices, and campuses — from a single router to structured cabling across a building.",
     points: [
@@ -31,9 +31,9 @@ export const serviceDetails = [
   },
   {
     slug: "enterprise",
-    title: "Enterprise Solutions",
-    icon: Building2,
-    photo: "https://images.unsplash.com/photo-1758873268745-dd2cf0d677b5",
+    category: "Enterprise solutions",
+    title: "IT Infrastructure Solutions",
+    icon: Server,
     description:
       "Bulk procurement and ongoing IT support for schools, colleges, government offices, and corporate clients.",
     points: [
