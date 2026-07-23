@@ -7,6 +7,7 @@ import { MessageCircle } from "lucide-react";
 import type { Product } from "@/data/products";
 import { ProductArt } from "@/components/product/product-art";
 import { Badge } from "@/components/ui/badge";
+import { AddToBasketButton } from "@/components/basket/add-to-basket-button";
 import { formatINR } from "@/lib/format";
 import { buildWhatsAppLink } from "@/data/business";
 
@@ -82,15 +83,21 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           <p className="font-display text-2xl font-bold text-foreground">
             {formatINR(product.price)}
           </p>
-          <a
-            href={buildWhatsAppLink(`Hi, I'm interested in the ${product.name}. Could you share more details?`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 rounded-full bg-accent px-3.5 py-2 text-xs font-semibold text-accent-foreground transition-transform hover:scale-105"
-          >
-            <MessageCircle className="h-3.5 w-3.5" />
-            Enquire
-          </a>
+          <div className="flex items-center gap-2">
+            <AddToBasketButton
+              item={{ slug: product.slug, name: product.name, price: product.price }}
+              className="h-9 w-9"
+            />
+            <a
+              href={buildWhatsAppLink(`Hi, I'm interested in the ${product.name}. Could you share more details?`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 rounded-full bg-accent px-3.5 py-2 text-xs font-semibold text-accent-foreground transition-transform hover:scale-105"
+            >
+              <MessageCircle className="h-3.5 w-3.5" />
+              Enquire
+            </a>
+          </div>
         </div>
       </div>
     </motion.div>

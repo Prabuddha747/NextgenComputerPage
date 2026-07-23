@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence } from "framer-motion";
-import { ChevronDown, Menu } from "lucide-react";
+import { ChevronDown, Menu, ShoppingBag } from "lucide-react";
 import { primaryNav } from "@/data/nav";
 import { MegaMenu } from "@/components/layout/mega-menu";
 import { MobileDrawer } from "@/components/layout/mobile-drawer";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { useBasket } from "@/components/basket/basket-context";
+import { BasketPanel } from "@/components/basket/basket-panel";
 import { Button } from "@/components/ui/button";
 import { business, buildWhatsAppLink } from "@/data/business";
 import { clsx } from "clsx";
@@ -16,6 +18,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [basketOpen, setBasketOpen] = useState(false);
+  const { items } = useBasket();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -71,6 +75,18 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <button
+              aria-label="Open enquiry basket"
+              onClick={() => setBasketOpen(true)}
+              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border hover:border-accent/60"
+            >
+              <ShoppingBag className="h-4.5 w-4.5" />
+              {items.length > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
+                  {items.length}
+                </span>
+              )}
+            </button>
             <ThemeToggle />
             <Button
               href={buildWhatsAppLink("Hi, I'd like to know more about your products/services.")}
@@ -93,6 +109,7 @@ export function Navbar() {
       </header>
 
       <MobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <BasketPanel open={basketOpen} onClose={() => setBasketOpen(false)} />
     </>
   );
 }

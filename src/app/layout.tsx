@@ -6,6 +6,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppFab } from "@/components/layout/whatsapp-fab";
 import { PageLoader } from "@/components/layout/page-loader";
+import { BasketProvider } from "@/components/basket/basket-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,13 +58,15 @@ export default function RootLayout({
           enableSystem={false}
           themes={["dark", "light"]}
         >
-          <div className="atmosphere" aria-hidden />
-          <div className="grain" aria-hidden />
-          <PageLoader />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <WhatsAppFab />
+          <BasketProvider>
+            <div className="atmosphere" aria-hidden />
+            <div className="grain" aria-hidden />
+            <PageLoader />
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <WhatsAppFab />
+          </BasketProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { ProductArt } from "@/components/product/product-art";
 import { SpecSelector } from "@/components/product/spec-selector";
+import { AddToBasketButton } from "@/components/basket/add-to-basket-button";
 import { formatINR } from "@/lib/format";
 import { buildTelLink, buildWhatsAppLink } from "@/data/business";
 import { getProductBySlug, products } from "@/data/products";
@@ -94,6 +95,10 @@ export default async function ProductPage({
                 <Phone className="h-4 w-4" />
                 Call to Ask
               </a>
+              <AddToBasketButton
+                item={{ slug: product.slug, name: product.name, price: product.price }}
+                className="h-12 w-12"
+              />
             </div>
           )}
 
