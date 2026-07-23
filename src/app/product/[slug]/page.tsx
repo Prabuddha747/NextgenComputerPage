@@ -61,7 +61,7 @@ export default async function ProductPage({
             </div>
           )}
 
-          <p className="mt-6 font-display text-3xl font-bold text-foreground">
+          <p className="mt-6 font-mono text-3xl font-bold text-foreground">
             {formatINR(product.price)}
           </p>
           <p className="mt-1 text-xs text-muted">Estimated store price — confirm final pricing on WhatsApp.</p>
@@ -70,7 +70,7 @@ export default async function ProductPage({
             {product.specs.map((spec) => (
               <li key={spec.label} className="flex justify-between px-4 py-3 text-sm">
                 <span className="text-muted">{spec.label}</span>
-                <span className="font-medium text-foreground">{spec.value}</span>
+                <span className="font-mono font-medium text-foreground">{spec.value}</span>
               </li>
             ))}
           </ul>

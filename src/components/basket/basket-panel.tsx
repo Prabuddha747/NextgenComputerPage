@@ -68,7 +68,7 @@ export function BasketPanel({ open, onClose }: { open: boolean; onClose: () => v
                     >
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium text-foreground">{item.name}</p>
-                        <p className="text-xs text-muted">{formatINR(item.price)}</p>
+                        <p className="font-mono text-xs text-muted">{formatINR(item.price)}</p>
                       </div>
                       <button
                         aria-label={`Remove ${item.name}`}
@@ -84,7 +84,7 @@ export function BasketPanel({ open, onClose }: { open: boolean; onClose: () => v
                 <div className="mt-6 border-t border-border pt-5">
                   <div className="mb-4 flex items-center justify-between text-sm">
                     <span className="text-muted">Estimated total</span>
-                    <span className="font-display text-lg font-bold text-foreground">{formatINR(total)}</span>
+                    <span className="font-mono text-lg font-bold text-foreground">{formatINR(total)}</span>
                   </div>
                   <Button onClick={sendEnquiry} className="w-full">
                     Send Enquiry on WhatsApp

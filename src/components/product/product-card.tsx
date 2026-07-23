@@ -74,13 +74,13 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           {product.specs.slice(0, 2).map((spec) => (
             <li key={spec.label} className="flex justify-between border-b border-border/60 py-1.5">
               <span className="text-muted">{spec.label}</span>
-              <span className="font-medium">{spec.value}</span>
+              <span className="font-mono font-medium">{spec.value}</span>
             </li>
           ))}
         </ul>
 
         <div className="mt-5 flex items-center justify-between gap-3">
-          <p className="font-display text-2xl font-bold text-foreground">
+          <p className="font-mono text-2xl font-bold text-foreground">
             {formatINR(product.price)}
           </p>
           <div className="flex items-center gap-2">

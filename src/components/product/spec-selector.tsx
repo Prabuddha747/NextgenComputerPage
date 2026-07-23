@@ -70,7 +70,7 @@ export function SpecSelector({
                       </span>
                     </span>
                     {option.priceDelta > 0 && (
-                      <span className="shrink-0 text-xs font-semibold text-muted">
+                      <span className="shrink-0 font-mono text-xs font-semibold text-muted">
                         +{formatINR(option.priceDelta)}
                       </span>
                     )}
@@ -92,7 +92,7 @@ export function SpecSelector({
             key={total}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-2xl font-bold text-foreground"
+            className="font-mono text-2xl font-bold text-foreground"
           >
             {formatINR(total)}
           </motion.p>
