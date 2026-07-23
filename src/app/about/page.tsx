@@ -15,7 +15,11 @@ export const metadata: Metadata = {
     "26+ years of selling, building, and repairing computers in Patna — the story behind Next Gen Computer.",
 };
 
-const satisfactionScore = Math.round((business.rating / 5) * 100);
+// A 98%-full ring (rating/5) reads as visually "done" — not much of a story.
+// Years toward a round 30-year milestone is just as real, and actually shows
+// a ring with room left in it, which is a better hook for a 26-year business.
+const yearsMilestone = 30;
+const yearsProgress = Math.round((business.yearsExperience / yearsMilestone) * 100);
 
 // Real Unsplash photos (license-free stock, site's usual sourcing convention) —
 // CCTV/Networking/Enterprise reuse the exact same photos as the Services page
@@ -96,18 +100,18 @@ export default function AboutPage() {
 
           <div className="rounded-3xl border border-border bg-surface p-8">
             <RadialProgress
-              value={satisfactionScore}
-              sublabel={`${business.rating}★ from ${business.reviewCount.toLocaleString()}+ reviews`}
+              value={yearsProgress}
+              sublabel={`${business.yearsExperience}+ years in Patna — headed to 30`}
             />
           </div>
 
-          <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border lg:aspect-auto">
+          <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border bg-white lg:aspect-auto">
             <Image
-              src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89"
-              alt="A laptop ready for sale at Next Gen Computer"
+              src="/nextgen-logo.png"
+              alt="Next Gen Computer logo"
               fill
               sizes="(min-width: 1024px) 33vw, 100vw"
-              className="object-cover"
+              className="object-contain p-8"
             />
           </div>
         </div>

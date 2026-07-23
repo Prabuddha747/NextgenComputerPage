@@ -41,8 +41,8 @@ export default function RepairPage() {
               <span className="h-px w-10 bg-accent/40" />
             </p>
             <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              Laptop & Desktop <br />
-              Repair, Done Right<span className="text-accent">.</span>
+              Diagnosed in an hour. <br />
+              Fixed without the drama<span className="text-accent">.</span>
             </h1>
           </div>
           <div className="max-w-xs border-l-2 border-accent/50 pl-4 text-sm text-muted lg:mb-2">

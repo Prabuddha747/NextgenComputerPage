@@ -14,7 +14,11 @@ export default function ContactPage() {
   return (
     <>
       <Section className="pb-0 pt-14">
-        <SectionHeading eyebrow="Contact" title="Get in touch" description="Send a message and we'll reply on WhatsApp." />
+        <SectionHeading
+          eyebrow="Contact"
+          title="A real person replies — not a bot."
+          description="Send a message and we'll reply on WhatsApp, directly from the store."
+        />
         <div className="mx-auto max-w-xl">
           <WhatsAppEnquiryForm
             intro="Hi, I have a question."

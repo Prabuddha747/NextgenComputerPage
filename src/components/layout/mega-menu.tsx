@@ -10,7 +10,7 @@ import { products } from "@/data/products";
 
 const featured = products.find((p) => p.slug === "vengeance-i7-strike")!;
 
-export function MegaMenu() {
+export function MegaMenu({ onNavigate }: { onNavigate: () => void }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -35,6 +35,7 @@ export function MegaMenu() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      onClick={onNavigate}
                       className="group/link flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
                     >
                       <Icon className="h-3.5 w-3.5 shrink-0 text-muted/60 group-hover/link:text-foreground" strokeWidth={1.5} />
@@ -47,7 +48,7 @@ export function MegaMenu() {
           );
         })}
 
-        <Link href={`/product/${featured.slug}`} className="group block">
+        <Link href={`/product/${featured.slug}`} onClick={onNavigate} className="group block">
           <ProductArt product={featured} className="aspect-square w-full" />
           <p className="mt-3 flex items-center gap-1 text-sm font-medium text-foreground">
             Explore the Configurator

@@ -10,7 +10,7 @@ export const heroContent = {
       gaming brand.
     </>
   ),
-  copy: "Laptops, custom gaming PCs, repair, CCTV and networking — from Dell to Apple, sold and serviced from Dak Bunglow Road.",
+  copy: "Every gaming PC benchmarked in-store before it leaves — Dell to Apple laptops, repair, CCTV and networking, all sold and serviced right here on Dak Bunglow Road for 26+ years.",
   primary: { label: "Explore Gaming PCs", href: "/gaming-pcs" },
   secondary: {
     label: "WhatsApp Us",

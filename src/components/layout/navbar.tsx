@@ -152,7 +152,7 @@ export function Navbar() {
           </div>
         </div>
 
-        <AnimatePresence>{shopOpen && <MegaMenu />}</AnimatePresence>
+        <AnimatePresence>{shopOpen && <MegaMenu onNavigate={() => setShopOpen(false)} />}</AnimatePresence>
 
         <AnimatePresence>
           {searchOpen && (
