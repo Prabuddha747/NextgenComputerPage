@@ -57,6 +57,8 @@ export default function RootLayout({
           enableSystem={false}
           themes={["dark", "light"]}
         >
+          <div className="atmosphere" aria-hidden />
+          <div className="grain" aria-hidden />
           <PageLoader />
           <Navbar />
           <main className="flex-1">{children}</main>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import { Star, Sparkles } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,6 +11,17 @@ import { heroSlides } from "@/data/hero-slides";
 import { clsx } from "clsx";
 
 const SLIDE_DURATION = 6500;
+
+// Cheap cinematic depth layer: a handful of soft glow orbs drifting slowly.
+// transform-only animation (see .float-particle in globals.css) so it's GPU
+// composited and doesn't touch layout.
+const PARTICLES = [
+  { top: "15%", left: "12%", size: 6, color: "var(--accent)", duration: "10s", driftX: "18px", driftY: "-24px" },
+  { top: "70%", left: "22%", size: 4, color: "#a78bfa", duration: "13s", driftX: "-14px", driftY: "16px" },
+  { top: "30%", left: "78%", size: 5, color: "var(--accent)", duration: "11s", driftX: "-20px", driftY: "14px" },
+  { top: "80%", left: "68%", size: 3, color: "#fbbf24", duration: "8s", driftX: "12px", driftY: "-16px" },
+  { top: "50%", left: "50%", size: 4, color: "#a78bfa", duration: "14s", driftX: "-16px", driftY: "-20px" },
+];
 
 export function Hero() {
   const [index, setIndex] = useState(0);
@@ -59,6 +70,29 @@ export function Hero() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10" />
         </motion.div>
       </AnimatePresence>
+
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block">
+        {PARTICLES.map((p, i) => (
+          <span
+            key={i}
+            className="float-particle absolute rounded-full blur-[2px]"
+            style={
+              {
+                top: p.top,
+                left: p.left,
+                width: p.size * 4,
+                height: p.size * 4,
+                background: p.color,
+                opacity: 0.5,
+                boxShadow: `0 0 ${p.size * 6}px ${p.color}`,
+                "--drift-duration": p.duration,
+                "--drift-x": p.driftX,
+                "--drift-y": p.driftY,
+              } as CSSProperties
+            }
+          />
+        ))}
+      </div>
 
       <div className="relative flex min-h-screen flex-col justify-center px-6 py-24 sm:px-14">
         <div className="max-w-xl">

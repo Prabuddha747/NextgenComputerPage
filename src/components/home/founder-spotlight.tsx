@@ -31,18 +31,19 @@ export function FounderSpotlight() {
         className="overflow-hidden rounded-3xl border border-border bg-surface"
       >
         <div className="grid lg:grid-cols-2">
-          <div className="relative aspect-[4/5] lg:aspect-auto">
-            <Image
-              src="/owner.jpg"
-              alt="Founder of Next Gen Computer at the Dak Bunglow Road store"
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
-            <div className="absolute inset-x-6 bottom-6">
-              <p className="font-display text-xl font-bold text-white">Founder, Next Gen Computer</p>
-              <p className="mt-1.5 text-sm text-white/75">
+          <div className="flex flex-col items-center justify-center gap-5 p-8 text-center sm:p-12">
+            <div className="relative h-36 w-36 shrink-0 overflow-hidden rounded-full border-4 border-accent/25 shadow-xl sm:h-44 sm:w-44">
+              <Image
+                src="/owner-circle.jpg"
+                alt="Founder of Next Gen Computer at the Dak Bunglow Road store"
+                fill
+                sizes="176px"
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="font-display text-xl font-bold text-foreground">Founder, Next Gen Computer</p>
+              <p className="mx-auto mt-1.5 max-w-xs text-sm text-muted">
                 &ldquo;Every build that leaves this store, I&apos;d put in my own home.&rdquo;
               </p>
             </div>

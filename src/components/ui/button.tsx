@@ -12,9 +12,9 @@ type Size = "md" | "lg";
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-accent text-accent-foreground shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_8px_24px_-8px_var(--accent)] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_10px_32px_-6px_var(--accent)]",
+    "btn-sweep bg-gradient-to-br from-accent to-accent/75 text-accent-foreground shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_8px_24px_-8px_var(--accent)] hover:shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_10px_36px_-6px_var(--accent)]",
   secondary:
-    "bg-surface text-foreground border border-border hover:border-accent/60",
+    "border border-[var(--glass-border)] bg-[var(--glass-bg)] text-foreground backdrop-blur-md hover:border-accent/60 hover:shadow-[0_0_28px_-6px_var(--accent)]",
   onImage: "border border-white/25 bg-white/10 text-white backdrop-blur hover:border-accent/60",
 };
 
@@ -45,7 +45,7 @@ export function Button({
   children,
 }: ButtonProps) {
   const classes = clsx(
-    "inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap transition-shadow duration-200",
+    "inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap transition-shadow duration-700 ease-[cubic-bezier(.19,1,.22,1)]",
     variantClasses[variant],
     sizeClasses[size],
     className

@@ -33,9 +33,9 @@ export function Navbar() {
       <header
         onMouseLeave={() => setShopOpen(false)}
         className={clsx(
-          "sticky top-0 z-30 w-full border-b transition-colors duration-300 relative",
+          "sticky top-0 z-30 w-full border-b transition-colors duration-500 relative",
           scrolled
-            ? "border-border bg-background/85 backdrop-blur-md"
+            ? "border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-xl"
             : "border-transparent bg-background"
         )}
       >
