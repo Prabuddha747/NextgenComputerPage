@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { shopMegaMenu } from "@/data/nav";
@@ -23,8 +24,8 @@ export function MegaMenu() {
           const Icon = productIcons[column.icon];
           return (
             <div key={column.title}>
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-foreground/10 text-foreground">
-                <Icon className="h-5 w-5" strokeWidth={1.5} />
+              <div className="relative mb-4 h-14 w-14 overflow-hidden rounded-xl border border-border">
+                <Image src={column.photo} alt="" fill sizes="56px" className="object-cover" />
               </div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-foreground">
                 {column.title}

@@ -46,12 +46,23 @@ export function Navbar() {
           flat bg-background before the user scrolled 12px, which read as an
           inconsistent navbar depending on how tall/short the page was. Active/
           hover states use brightness (foreground vs foreground/60), not a hue —
-          no teal, no purple, just a shade of white, per direct request. */}
+          no teal, no purple text, per direct request — but the violet glow bloom
+          behind the bar (seen naturally on the homepage's video) is now baked in
+          here directly, so every page gets the same glass+glow look, not just
+          whichever page happens to have colorful content behind it. */}
       <header
         onMouseLeave={() => setShopOpen(false)}
         className="sticky top-0 z-30 relative w-full border-b border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-xl"
       >
-        <div className="mx-auto flex h-18 max-w-[1680px] items-center justify-between px-4 sm:px-6 lg:px-10">
+        {/* overflow-hidden scoped to just this glow+row wrapper — the mega-menu
+            and search panel below render as siblings of it, not descendants, so
+            clipping the glow's blur bleed doesn't clip them too. */}
+        <div className="relative overflow-hidden">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -left-16 -top-24 h-56 w-96 rounded-full bg-accent/35 blur-3xl"
+          />
+          <div className="relative mx-auto flex h-18 max-w-[1680px] items-center justify-between px-4 sm:px-6 lg:px-10">
           <Link href="/" className="font-display text-lg font-bold tracking-tight text-foreground">
             Next<span className="text-foreground/70">Gen</span> Computer
           </Link>
@@ -137,6 +148,7 @@ export function Navbar() {
             >
               <Menu className="h-5 w-5" />
             </button>
+          </div>
           </div>
         </div>
 
