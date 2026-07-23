@@ -20,40 +20,40 @@ export function SceneOwner() {
     <PinnedScene>
       {(progress) => (
         <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-            <div>
+          {/* Single column, kept to the left half — the video's center (where the
+              build assembles) stays clear rather than being covered by a portrait. */}
+          <div className="max-w-lg">
+            <div className="flex items-center gap-3">
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-accent/60">
+                <Image
+                  src="/owner-studio.jpg"
+                  alt={`${business.founderName}, founder of Next Gen Computer`}
+                  fill
+                  sizes="56px"
+                  className="object-cover grayscale-[0.2]"
+                />
+              </div>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Behind the counter</p>
-              <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
-                {business.founderName} has been building, repairing, and arguing over spec sheets on{" "}
-                {business.address.line1} for {business.yearsExperience} years.
-              </h2>
-              <p className="mt-6 font-serif text-xl italic leading-snug text-foreground/90 sm:text-2xl">
-                &ldquo;Every build that leaves this store, I&apos;d put in my own home.&rdquo;
-              </p>
-              <Button href={buildWhatsAppLink("Hi, I'd like to know more about Next Gen Computer.")} className="mt-8">
-                WhatsApp Us
-              </Button>
-
-              <FanDeck progress={progress} className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                {proofPoints.map((point, i) => (
-                  <FanCard key={point.label} index={i} count={proofPoints.length} className="glass-card p-5">
-                    <p className="font-display text-lg font-bold text-foreground">{point.label}</p>
-                    <p className="mt-1 text-xs text-muted">{point.sub}</p>
-                  </FanCard>
-                ))}
-              </FanDeck>
             </div>
+            <h2 className="mt-5 font-display text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl">
+              {business.founderName} has been building, repairing, and arguing over spec sheets on{" "}
+              {business.address.line1} for {business.yearsExperience} years.
+            </h2>
+            <p className="mt-6 font-serif text-xl italic leading-snug text-foreground/90 sm:text-2xl">
+              &ldquo;Every build that leaves this store, I&apos;d put in my own home.&rdquo;
+            </p>
+            <Button href={buildWhatsAppLink("Hi, I'd like to know more about Next Gen Computer.")} className="mt-8">
+              WhatsApp Us
+            </Button>
 
-            <div className="relative mx-auto aspect-[3/5] w-full max-w-sm overflow-hidden rounded-3xl border border-border">
-              <Image
-                src="/owner-studio.jpg"
-                alt={`${business.founderName}, founder of Next Gen Computer`}
-                fill
-                sizes="(min-width: 1024px) 40vw, 90vw"
-                className="object-cover grayscale-[0.3] contrast-[1.05]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
-            </div>
+            <FanDeck progress={progress} className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {proofPoints.map((point, i) => (
+                <FanCard key={point.label} index={i} count={proofPoints.length} className="glass-card p-5">
+                  <p className="font-display text-lg font-bold text-foreground">{point.label}</p>
+                  <p className="mt-1 text-xs text-muted">{point.sub}</p>
+                </FanCard>
+              ))}
+            </FanDeck>
           </div>
         </Container>
       )}
