@@ -43,14 +43,24 @@ export function BuildReelBackground({ progress }: { progress: MotionValue<number
         }}
       />
       {/* The enhanced source clip carries a third-party watermark burned into the
-          top-left corner of every frame. Covered with our own wordmark rather than
-          re-extracting from the original (lower-quality) source. */}
+          top-left corner of every frame. Covered with our own wordmark instead of
+          re-extracting from the original (lower-quality) source. Sized in vw/clamp,
+          not fixed Tailwind spacing — the video scales with viewport width via
+          object-cover, so a fixed-px badge falls behind on larger screens exactly
+          the way the first attempt did. */}
       <div
         aria-hidden
-        className="absolute left-4 top-4 flex items-center rounded-lg bg-background px-3 py-1.5 sm:left-6 sm:top-6"
+        className="absolute left-0 top-0 flex items-center justify-center rounded-br-xl bg-background"
+        style={{
+          width: "clamp(160px, 18vw, 320px)",
+          height: "clamp(56px, 7vw, 110px)",
+        }}
       >
-        <span className="font-display text-sm font-bold tracking-tight text-foreground">
-          Next<span className="text-accent">Gen</span>
+        <span
+          className="font-display font-bold tracking-tight text-foreground"
+          style={{ fontSize: "clamp(1rem, 2.2vw, 1.75rem)" }}
+        >
+          Next<span className="text-accent">Gen</span> Computer
         </span>
       </div>
     </div>
