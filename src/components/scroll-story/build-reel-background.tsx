@@ -42,6 +42,17 @@ export function BuildReelBackground({ progress }: { progress: MotionValue<number
             "radial-gradient(60% 60% at 50% 45%, transparent 40%, rgba(10,10,12,0.55) 76%, rgba(10,10,12,0.92) 100%)",
         }}
       />
+      {/* The enhanced source clip carries a third-party watermark burned into the
+          top-left corner of every frame. Covered with our own wordmark rather than
+          re-extracting from the original (lower-quality) source. */}
+      <div
+        aria-hidden
+        className="absolute left-4 top-4 flex items-center rounded-lg bg-background px-3 py-1.5 sm:left-6 sm:top-6"
+      >
+        <span className="font-display text-sm font-bold tracking-tight text-foreground">
+          Next<span className="text-accent">Gen</span>
+        </span>
+      </div>
     </div>
   );
 }
