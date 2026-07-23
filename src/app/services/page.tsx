@@ -21,8 +21,18 @@ const trustPoints = [
 export default function ServicesPage() {
   return (
     <>
-      <Section className="pb-0 pt-14">
-        <div className="flex flex-col gap-8 border-b border-border pb-10 lg:flex-row lg:items-end lg:justify-between">
+      <Section className="relative overflow-hidden pb-0 pt-14">
+        {/* Page-local glow, not a change to the shared .atmosphere layer — same
+            teal/violet language as the homepage, scoped to this hero only. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-1/4 -top-1/3 hidden h-[140%] w-[70%] dark:block"
+          style={{
+            background:
+              "radial-gradient(50% 50% at 50% 50%, rgba(167,139,250,0.16), rgba(62,216,195,0.08) 55%, transparent 75%)",
+          }}
+        />
+        <div className="relative flex flex-col gap-8 border-b border-border pb-10 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
               Services <span className="h-1 w-1 rounded-full bg-accent" />
@@ -49,7 +59,7 @@ export default function ServicesPage() {
         <div className="border-t border-border pt-14 text-center">
           <p className="mb-3 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-accent">
             <span className="h-px w-8 bg-accent/40" />
-            Ready to get started?
+            Ready to build?
             <span className="h-px w-8 bg-accent/40" />
           </p>
           <h2 className="mx-auto max-w-xl font-serif text-3xl italic leading-tight text-foreground sm:text-4xl">

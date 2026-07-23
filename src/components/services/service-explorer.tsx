@@ -1,33 +1,33 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, type LucideIcon } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { buildWhatsAppLink } from "@/data/business";
 import { serviceDetails } from "@/data/services-detail";
 import { clsx } from "clsx";
 
-// Same teal glow the rest of the site uses (atmosphere blobs, the RGB owner-photo
-// ring) — not a photo, since these three rows are service *categories*, not a
-// specific installed job. A glow-lit outline icon reads as honest here in a way
-// a stock photo pretending to be "our CCTV job" wouldn't.
-function ServiceVisual({ icon: Icon }: { icon: LucideIcon }) {
+// Real Unsplash photos (site's usual license-free-stock convention), tinted
+// teal/violet — the same glow language as the atmosphere blobs and the RGB
+// owner-photo ring — rather than a literal custom illustration we can't produce.
+const GLOW_TINTS = [
+  "rgba(62,216,195,0.4)", // teal — CCTV
+  "rgba(62,216,195,0.4)", // teal — networking
+  "rgba(167,139,250,0.4)", // violet — enterprise/IT
+];
+
+function ServiceVisual({ photo, glow }: { photo: string; glow: string }) {
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-surface to-black">
+    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border">
+      <Image src={photo} alt="" fill sizes="(min-width: 1024px) 40vw, 90vw" className="object-cover grayscale contrast-[1.1]" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/50" />
       <div
         aria-hidden
         className="absolute inset-x-0 bottom-0 h-2/3"
-        style={{
-          background: "radial-gradient(60% 100% at 50% 100%, rgba(62,216,195,0.35), transparent 70%)",
-        }}
+        style={{ background: `radial-gradient(60% 100% at 50% 100%, ${glow}, transparent 70%)` }}
       />
-      <div className="relative flex h-full items-center justify-center">
-        <Icon
-          className="h-20 w-20 text-foreground/85 drop-shadow-[0_0_24px_rgba(62,216,195,0.4)] sm:h-24 sm:w-24"
-          strokeWidth={1}
-        />
-      </div>
     </div>
   );
 }
@@ -58,9 +58,16 @@ export function ServiceExplorer() {
                   <h3 className="mt-3 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                     {service.title}
                   </h3>
-                  <p className="mt-4 max-w-md text-sm leading-relaxed text-muted sm:text-base">
-                    {service.description}
-                  </p>
+
+                  <ul className="mt-4 space-y-1.5">
+                    {service.useCases.map((useCase) => (
+                      <li key={useCase} className="flex items-center gap-2 text-sm text-muted">
+                        <span className="text-accent">—</span>
+                        {useCase}
+                      </li>
+                    ))}
+                  </ul>
+
                   <button
                     onClick={() => setActive(isActive ? -1 : i)}
                     className="group mt-5 flex items-center gap-1.5 text-sm font-semibold text-accent"
@@ -81,6 +88,9 @@ export function ServiceExplorer() {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
+                        <p className="mt-6 max-w-md text-sm leading-relaxed text-muted sm:text-base">
+                          {service.description}
+                        </p>
                         <ul className="mt-6 space-y-3">
                           {service.points.map((point) => (
                             <li key={point} className="flex items-start gap-2.5 text-sm text-foreground/90">
@@ -100,7 +110,7 @@ export function ServiceExplorer() {
                   </AnimatePresence>
                 </div>
 
-                <ServiceVisual icon={service.icon} />
+                <ServiceVisual photo={service.photo} glow={GLOW_TINTS[i % GLOW_TINTS.length]} />
               </div>
             </div>
           </div>

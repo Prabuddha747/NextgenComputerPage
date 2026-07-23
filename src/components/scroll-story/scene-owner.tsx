@@ -25,7 +25,7 @@ export function SceneOwner() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
                 Behind the counter
               </p>
-              <h2 className="mt-4 font-serif text-3xl font-bold leading-tight tracking-tight text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.7)] sm:text-4xl">
+              <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.7)] sm:text-4xl">
                 {business.founderName} has been building, repairing, and arguing over spec sheets on{" "}
                 {business.address.line1} for {business.yearsExperience} years.
               </h2>
@@ -39,7 +39,7 @@ export function SceneOwner() {
               <FanDeck progress={progress} className="mt-12 grid grid-cols-2 gap-4">
                 {proofPoints.map((point, i) => (
                   <FanCard key={point.label} index={i} count={proofPoints.length} className="glass-card p-6">
-                    <p className="font-serif text-2xl font-bold text-white">{point.label}</p>
+                    <p className="font-display text-2xl font-bold text-white">{point.label}</p>
                     <p className="mt-1.5 text-sm text-white/70">{point.sub}</p>
                   </FanCard>
                 ))}

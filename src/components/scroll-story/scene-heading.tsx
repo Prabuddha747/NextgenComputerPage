@@ -20,7 +20,7 @@ export function SceneHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className="font-serif text-3xl font-bold tracking-tight text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.7)] sm:text-4xl">
+      <h2 className="font-display text-3xl font-bold tracking-tight text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.7)] sm:text-4xl">
         {title}
       </h2>
       {description && (
