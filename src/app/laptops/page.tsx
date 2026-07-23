@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 export default async function LaptopsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ brand?: string }>;
+  searchParams: Promise<{ brand?: string; price?: string; sort?: string }>;
 }) {
-  const { brand } = await searchParams;
+  const { brand, price, sort } = await searchParams;
   const laptops = getProductsByCategory("laptop");
 
   return (
@@ -24,7 +24,13 @@ export default async function LaptopsPage({
         title="Every major brand, one showroom"
         description="From a lightweight student laptop to a workstation-grade creator machine — every laptop here is demoed in-store before you buy, with genuine after-sales support behind it. Filter by brand or message us for a personalised recommendation."
       />
-      <CatalogView products={laptops} activeCategory="/laptops" initialBrand={brand} />
+      <CatalogView
+        products={laptops}
+        activeCategory="/laptops"
+        initialBrand={brand}
+        initialBands={price}
+        initialSort={sort}
+      />
     </Section>
   );
 }

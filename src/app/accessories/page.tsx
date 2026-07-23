@@ -9,7 +9,12 @@ export const metadata: Metadata = {
     "RGB keyboards, mice, monitors, CPU coolers, and gaming chairs — accessories to complete your gaming or work setup.",
 };
 
-export default function AccessoriesPage() {
+export default async function AccessoriesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ brand?: string; price?: string; sort?: string }>;
+}) {
+  const { brand, price, sort } = await searchParams;
   const accessories = getProductsByCategory("accessory");
 
   return (
@@ -19,7 +24,13 @@ export default function AccessoriesPage() {
         title="Complete the setup"
         description="Keyboards, mice, monitors, cooling, and seating — the finishing touches for any build, all available to see and try in-store."
       />
-      <CatalogView products={accessories} activeCategory="/accessories" />
+      <CatalogView
+        products={accessories}
+        activeCategory="/accessories"
+        initialBrand={brand}
+        initialBands={price}
+        initialSort={sort}
+      />
     </Section>
   );
 }

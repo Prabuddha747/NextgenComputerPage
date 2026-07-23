@@ -11,7 +11,12 @@ export const metadata: Metadata = {
     "Custom and prebuilt gaming PCs in Patna, benchmarked in-store with up to 3-year on-site warranty. Filter by brand and budget, or build your own from scratch.",
 };
 
-export default function GamingPcsPage() {
+export default async function GamingPcsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ brand?: string; price?: string; sort?: string }>;
+}) {
+  const { brand, price, sort } = await searchParams;
   const pcs = getProductsByCategory("gaming-pc");
 
   return (
@@ -30,7 +35,13 @@ export default function GamingPcsPage() {
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
-      <CatalogView products={pcs} activeCategory="/gaming-pcs" />
+      <CatalogView
+        products={pcs}
+        activeCategory="/gaming-pcs"
+        initialBrand={brand}
+        initialBands={price}
+        initialSort={sort}
+      />
     </Section>
   );
 }

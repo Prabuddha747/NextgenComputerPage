@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 export default async function ShopAllPage({
   searchParams,
 }: {
-  searchParams: Promise<{ brand?: string }>;
+  searchParams: Promise<{ brand?: string; category?: string; price?: string; sort?: string }>;
 }) {
-  const { brand } = await searchParams;
+  const { brand, category, price, sort } = await searchParams;
 
   return (
     <Section className="pt-14">
@@ -23,7 +23,14 @@ export default async function ShopAllPage({
         title="Everything we sell, in one place"
         description="Gaming PCs, laptops, and accessories — filter by category, brand, or budget to find what you need."
       />
-      <CatalogView products={products} activeCategory="/shop" initialBrand={brand} />
+      <CatalogView
+        products={products}
+        activeCategory="/shop"
+        initialBrand={brand}
+        initialCategories={category}
+        initialBands={price}
+        initialSort={sort}
+      />
     </Section>
   );
 }

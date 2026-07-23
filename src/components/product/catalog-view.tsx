@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { SlidersHorizontal, X } from "lucide-react";
 import type { Product } from "@/data/products";
@@ -21,38 +22,116 @@ const CATEGORY_LABELS: Record<Product["category"], string> = {
   accessory: "Accessories",
 };
 
+const SORT_OPTIONS = [
+  { value: "featured", label: "Featured" },
+  { value: "newest", label: "Newest" },
+  { value: "price-asc", label: "Price: Low to High" },
+  { value: "price-desc", label: "Price: High to Low" },
+] as const;
+type SortValue = (typeof SORT_OPTIONS)[number]["value"];
+
+function parseList(param?: string) {
+  return param ? param.split("|").filter(Boolean) : [];
+}
+
+function parseIndexList(param?: string) {
+  return parseList(param)
+    .map((v) => Number(v))
+    .filter((n) => Number.isInteger(n) && n >= 0 && n < priceBands.length);
+}
+
 export function CatalogView({
   products,
   activeCategory,
   initialBrand,
+  initialCategories,
+  initialBands,
+  initialSort,
 }: {
   products: Product[];
   activeCategory: string;
   initialBrand?: string;
+  initialCategories?: string;
+  initialBands?: string;
+  initialSort?: string;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const brands = useMemo(() => Array.from(new Set(products.map((p) => p.brand))).sort(), [products]);
   const categories = useMemo(() => Array.from(new Set(products.map((p) => p.category))), [products]);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>(
-    initialBrand && brands.includes(initialBrand) ? [initialBrand] : []
+
+  const [selectedBrands, setSelectedBrands] = useState<string[]>(() =>
+    parseList(initialBrand).filter((b) => brands.includes(b))
   );
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedBands, setSelectedBands] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(() =>
+    parseList(initialCategories).filter((c) => categories.includes(c as Product["category"]))
+  );
+  const [selectedBandIndexes, setSelectedBandIndexes] = useState<number[]>(() => parseIndexList(initialBands));
+  const [sort, setSort] = useState<SortValue>(() =>
+    SORT_OPTIONS.some((o) => o.value === initialSort) ? (initialSort as SortValue) : "featured"
+  );
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  const toggle = (list: string[], value: string, setList: (v: string[]) => void) => {
-    setList(list.includes(value) ? list.filter((v) => v !== value) : [...list, value]);
+  // Filters are shareable/bookmarkable — every change replaces the URL query string
+  // (no scroll, no history entry per click) alongside the local state that drives the grid.
+  const syncUrl = (next: { brands: string[]; categories: string[]; bandIndexes: number[]; sort: SortValue }) => {
+    const params = new URLSearchParams();
+    if (next.brands.length) params.set("brand", next.brands.join("|"));
+    if (next.categories.length) params.set("category", next.categories.join("|"));
+    if (next.bandIndexes.length) params.set("price", next.bandIndexes.join("|"));
+    if (next.sort !== "featured") params.set("sort", next.sort);
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
   };
 
-  const filtered = products.filter((p) => {
-    const brandOk = selectedBrands.length === 0 || selectedBrands.includes(p.brand);
-    const categoryOk = selectedCategories.length === 0 || selectedCategories.includes(p.category);
-    const bandOk =
-      selectedBands.length === 0 ||
-      priceBands.some((band) => selectedBands.includes(band.label) && band.test(p.price));
-    return brandOk && categoryOk && bandOk;
-  });
+  const toggleBrand = (value: string) => {
+    const next = selectedBrands.includes(value) ? selectedBrands.filter((v) => v !== value) : [...selectedBrands, value];
+    setSelectedBrands(next);
+    syncUrl({ brands: next, categories: selectedCategories, bandIndexes: selectedBandIndexes, sort });
+  };
 
-  const activeFilterCount = selectedBrands.length + selectedCategories.length + selectedBands.length;
+  const toggleCategory = (value: string) => {
+    const next = selectedCategories.includes(value)
+      ? selectedCategories.filter((v) => v !== value)
+      : [...selectedCategories, value];
+    setSelectedCategories(next);
+    syncUrl({ brands: selectedBrands, categories: next, bandIndexes: selectedBandIndexes, sort });
+  };
+
+  const toggleBand = (index: number) => {
+    const next = selectedBandIndexes.includes(index)
+      ? selectedBandIndexes.filter((v) => v !== index)
+      : [...selectedBandIndexes, index];
+    setSelectedBandIndexes(next);
+    syncUrl({ brands: selectedBrands, categories: selectedCategories, bandIndexes: next, sort });
+  };
+
+  const changeSort = (value: SortValue) => {
+    setSort(value);
+    syncUrl({ brands: selectedBrands, categories: selectedCategories, bandIndexes: selectedBandIndexes, sort: value });
+  };
+
+  const filtered = useMemo(() => {
+    const result = products.filter((p) => {
+      const brandOk = selectedBrands.length === 0 || selectedBrands.includes(p.brand);
+      const categoryOk = selectedCategories.length === 0 || selectedCategories.includes(p.category);
+      const bandOk =
+        selectedBandIndexes.length === 0 || selectedBandIndexes.some((i) => priceBands[i].test(p.price));
+      return brandOk && categoryOk && bandOk;
+    });
+
+    if (sort === "price-asc") return [...result].sort((a, b) => a.price - b.price);
+    if (sort === "price-desc") return [...result].sort((a, b) => b.price - a.price);
+    if (sort === "newest") {
+      // "Newest" uses the real NEW badge rather than a fabricated release date —
+      // NEW-tagged products float to the top, stable order preserved otherwise.
+      return [...result].sort((a, b) => Number(b.badges?.includes("NEW")) - Number(a.badges?.includes("NEW")));
+    }
+    return result;
+  }, [products, selectedBrands, selectedCategories, selectedBandIndexes, sort]);
+
+  const activeFilterCount = selectedBrands.length + selectedCategories.length + selectedBandIndexes.length;
 
   const sidebarContent = (
     <div className="space-y-8">
@@ -85,7 +164,7 @@ export function CatalogView({
                   <input
                     type="checkbox"
                     checked={selectedCategories.includes(category)}
-                    onChange={() => toggle(selectedCategories, category, setSelectedCategories)}
+                    onChange={() => toggleCategory(category)}
                     className="h-4 w-4 rounded border-border accent-[var(--accent)]"
                   />
                   {CATEGORY_LABELS[category]}
@@ -106,7 +185,7 @@ export function CatalogView({
                   <input
                     type="checkbox"
                     checked={selectedBrands.includes(brand)}
-                    onChange={() => toggle(selectedBrands, brand, setSelectedBrands)}
+                    onChange={() => toggleBrand(brand)}
                     className="h-4 w-4 rounded border-border accent-[var(--accent)]"
                   />
                   {brand}
@@ -120,13 +199,13 @@ export function CatalogView({
       <div>
         <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">Price range</p>
         <ul className="space-y-2.5">
-          {priceBands.map((band) => (
+          {priceBands.map((band, i) => (
             <li key={band.label}>
               <label className="flex items-center gap-2.5 text-sm text-foreground/90">
                 <input
                   type="checkbox"
-                  checked={selectedBands.includes(band.label)}
-                  onChange={() => toggle(selectedBands, band.label, setSelectedBands)}
+                  checked={selectedBandIndexes.includes(i)}
+                  onChange={() => toggleBand(i)}
                   className="h-4 w-4 rounded border-border accent-[var(--accent)]"
                 />
                 {band.label}
@@ -143,7 +222,7 @@ export function CatalogView({
       <aside className="hidden lg:block">{sidebarContent}</aside>
 
       <div>
-        <div className="mb-6 flex items-center justify-between lg:justify-end">
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <button
             onClick={() => setMobileFiltersOpen(true)}
             className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium lg:hidden"
@@ -152,10 +231,25 @@ export function CatalogView({
             Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
           </button>
           <p className="hidden text-sm text-muted lg:block">{filtered.length} products</p>
+
+          <label className="ml-auto flex items-center gap-2 text-sm text-muted">
+            Sort by
+            <select
+              value={sort}
+              onChange={(e) => changeSort(e.target.value as SortValue)}
+              className="rounded-full border border-border bg-surface px-3 py-1.5 text-sm font-medium text-foreground"
+            >
+              {SORT_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
 
         <motion.div
-          key={`${selectedBrands.join()}-${selectedCategories.join()}-${selectedBands.join()}`}
+          key={`${selectedBrands.join()}-${selectedCategories.join()}-${selectedBandIndexes.join()}-${sort}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.25 }}
