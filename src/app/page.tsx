@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/hero";
+import { ScrollReel } from "@/components/home/scroll-reel";
 import { TrustBar } from "@/components/home/trust-bar";
 import { WhatWeDo } from "@/components/home/what-we-do";
 import { FeaturedPcs } from "@/components/home/featured-pcs";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <ScrollReel />
       <TrustBar />
       <WhatWeDo />
       <FeaturedPcs />
